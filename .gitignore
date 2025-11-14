@@ -106,3 +106,5 @@ Desktop.ini
 # Personal notes
 notes/
 scratch/
+eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)".pub
