@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-xFusionCorp Industries is planning to host two static websites on their infra in Stratos Datacenter. The development of these websites is still in-progress, but we want to get the servers ready. Please perform the following steps to accomplish the task:
+xFusionCorp Industries is planning to host two static websites on their infra within the Stratos DC. The development of these websites is still in-progress, but we want to get the servers ready. Please perform the following steps to accomplish the task:
 
 - Install `httpd` package and dependencies on `app server 3`.
 - `Apache` should serve on port `6400`.

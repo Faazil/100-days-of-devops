@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-Create a user with non-interactive shell for your organization on a specific server. This is essential for service accounts and automated processes that don't require interactive login capabilities.
+Set up a system user without login shell access for the company on the designated server. This configuration is required for system accounts and automation workflows which operate without direct user access capabilities.
 
 > **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 

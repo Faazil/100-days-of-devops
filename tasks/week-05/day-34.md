@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The Nautilus application development team was working on a git repository /opt/demo.git which is cloned under /usr/src/kodekloudrepos directory present on Storage server in Stratos DC. The team want to setup a hook on this repository, please find below more details:
+Nautilus dev team members was working on a git repository /opt/demo.git which is cloned under /usr/src/kodekloudrepos directory present on Storage server in Stratos DC. The team want to setup a hook on this repository, please find below more details:
 
 - Merge the feature branch into the master branch`, but before pushing your changes complete below point.
 

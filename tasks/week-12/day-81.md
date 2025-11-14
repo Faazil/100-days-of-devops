@@ -8,7 +8,7 @@ Click on the Jenkins button on the top bar to access the Jenkins UI. Login using
 
 Similarly, click on the Gitea button on the top bar to access the Gitea UI. Login using username sarah and password Sarah_pass123.
 
-There is a repository named sarah/web in Gitea that is already cloned on Storage server under `/var/www/html` directory.
+A repository named sarah/web in Gitea that is already cloned on Storage server under `/var/www/html` directory.
 
  1. Update the content of the file index.html under the same repository to **`Welcome to xFusionCorp Industries`** and push the changes to the origin into the master branch.
 

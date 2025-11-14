@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-As per recent requirements shared by the Nautilus application development team, they need custom images created for one of their projects. Several of the initial testing requirements are already been shared with DevOps team. Therefore, create a docker file `/opt/docker/Dockerfile` (please keep D capital of Dockerfile) on `App server 2` in Stratos DC and configure to build an image with the following requirements:
+As per recent requirements shared by Nautilus dev team members, they need custom images created for one of their projects. Several of the initial testing requirements are already been shared with DevOps team. Therefore, create a docker file `/opt/docker/Dockerfile` (please keep D capital of Dockerfile) on `App server 2` in Stratos DC and configure to build an image with the following requirements:
 
 - Use `ubuntu:24.04` as the base image.
 

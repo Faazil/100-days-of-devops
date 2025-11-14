@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-There is a critical issue with the Nautilus application in Stratos DC. The production support team identified that the application cannot connect to the database. After investigating, the team found that the mariadb service is down on the database server.
+A critical problem exists with the Nautilus application in Stratos DC. The production support team discovered that the application cannot connect to the database. After investigating, it was determined that the mariadb service has stopped on the database server.
 
 Your task is to troubleshoot and fix the MariaDB service so the application can reconnect to the database.
 

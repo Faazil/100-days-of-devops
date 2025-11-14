@@ -2,9 +2,9 @@
 
 ## Task Overview
 
-The Nautilus Application development team recently finished development of one of the apps that they want to deploy on a containerized platform. The Nautilus Application development and DevOps teams met to discuss some of the basic pre-requisites and requirements to complete the deployment. The team wants to test the deployment on one of the app servers before going live and set up a complete containerized stack using a docker compose fie. Below are the details of the task:
+Nautilus dev team members have completed development of one of the apps that they want to deploy on a containerized platform. The Nautilus Application development and DevOps teams met to discuss some of the basic pre-requisites and requirements to complete the deployment. The team wants to test the deployment on one of the app servers before going live and set up a complete containerized stack using a docker compose fie. Below are the details of the task:
 
-- On App Server 2 in Stratos Datacenter create a docker compose file `/opt/itadmin/docker-compose.yml` (should be named exactly).
+- On App Server 2 within the Stratos DC create a docker compose file `/opt/itadmin/docker-compose.yml` (should be named exactly).
 
 - The compose should deploy two services (web and DB), and each service should deploy a container as per details below:
 

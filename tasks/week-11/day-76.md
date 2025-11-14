@@ -6,7 +6,7 @@ The xFusionCorp Industries has recruited some new developers. There are already 
 
 Click on the Jenkins button on the top bar to access the Jenkins UI. Login using username admin and password Adm!n321.
 
-1. There is an existing Jenkins job named `Packages`, there are also two existing Jenkins users named `sam` with password `sam@pass12345` and `rohan` with password `rohan@pass12345`.
+1. An existing Jenkins job named `Packages`, there are also two existing Jenkins users named `sam` with password `sam@pass12345` and `rohan` with password `rohan@pass12345`.
 
 2. Grant permissions to these users to access Packages job as per details mentioned below:
 

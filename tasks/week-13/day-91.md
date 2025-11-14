@@ -19,7 +19,7 @@ We already have an inventory file under `/home/thor/ansible directory` on jump h
     <h1> Welcome to xFusionCorp Industries!</h1>
     ```
 
-    Also make sure this new line is added at the top of the file.
+    Additionally, verify that this new line is added at the top of the file.
 
 4. The `/var/www/html/index.html` file's `user` and `group` owner should be `apache` on all app servers.
 

@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The Nautilus Application development team wanted to test some applications on app servers in Stratos Datacenter. They shared some pre-requisites with the DevOps team, and packages need to be installed on app servers. Since we are already using Ansible for automating such tasks, please perform this task using Ansible as per details mentioned below:
+Nautilus dev team members wanted to test some applications on app servers within the Stratos DC. They shared some pre-requisites with the DevOps team, and packages need to be installed on app servers. Since we are already using Ansible for automating such tasks, please perform this task using Ansible as per details mentioned below:
 
 - Create an inventory file `/home/thor/playbook/inventory` on jump host and add all app servers in it.
 

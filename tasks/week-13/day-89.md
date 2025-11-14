@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-Developers are looking for dependencies to be installed and run on Nautilus app servers in Stratos DC. They have shared some requirements with the DevOps team. Because we are now managing packages installation and services management using Ansible, some playbooks need to be created and tested. As per details mentioned below please complete the task:
+Developers are looking for dependencies to be installed and run on Nautilus app servers in Stratos DC. They have shared some requirements with the DevOps team. Because we are now managing packages installation and services management using Ansible, some playbooks need to be created and tested. As per details mentioned below please fulfill this objective:
 
 a. On jump host create an Ansible playbook `/home/thor/ansible/playbook.yml` and configure it to install `httpd` on all app servers.
 

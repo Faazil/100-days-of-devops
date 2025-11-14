@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is planning to host an application on a nginx-based container. There are number of tickets already been created for similar tasks. One of the tickets has been assigned to set up a nginx container on Application Server 2 in Stratos Datacenter. Please perform the task as per details mentioned below:
+The Nautilus DevOps team is planning to host an application on a nginx-based container. There are number of tickets already been created for similar tasks. One of the tickets has been assigned to set up a nginx container on Application Server 2 within the Stratos DC. Please perform the task as per details mentioned below:
 
 - Pull `nginx:stable` docker image on Application Server 2.
 

@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-There is an iron gallery app that the Nautilus DevOps team was developing. They have recently customized the app and are going to deploy the same on the Kubernetes cluster. Below you can find more details:
+An iron gallery app that the Nautilus DevOps team was developing. They have recently customized the app and are going to deploy the same on the Kubernetes cluster. Below you can find more details:
 
 - Create a namespace `iron-namespace-xfusion`
 

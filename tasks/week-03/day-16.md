@@ -6,7 +6,7 @@ Day by day traffic is increasing on one of the websites managed by the Nautilus 
 
 - Install `nginx` on `LBR` server
 - Configure load-balancing with the an http context making use of all App Servers. Ensure that you update only the main `Nginx` configuration file located at `/etc/nginx/nginx.conf`
-- Ensure you do not update the apache port that is already defined in the apache configuration on all app servers, also make sure apache server is up and running on all app servers
+- Ensure you do not update the apache port that is already defined in the apache configuration on all app servers, Additionally, verify that apache server is up and running on all app servers
 - Once done, you can access the website using StaticApp button on the top bar
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)

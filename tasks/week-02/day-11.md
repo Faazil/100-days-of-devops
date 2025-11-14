@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-The Nautilus application development team recently finished the beta version of one of their Java-based applications, which they are planning to deploy on one of the app servers in Stratos DC. After an internal team meeting, they have decided to use the Tomcat application server.
+Nautilus dev team members have completed a beta release of their Java application, scheduled for deployment on one of the app servers in Stratos DC. Following team discussions, the decision was made to utilize the Tomcat application server.
 
 **Requirements:**
-- Install Tomcat server on App Server 1
-- Configure it to run on port 8086
+- Deploy Tomcat on App Server 1
+- Set it to listen on port 8086
 - Deploy the `ROOT.war` file from Jump host at location `/tmp`
-- Ensure the webpage works directly on base URL: `curl http://stapp01:8086`
+- Ensure the webpage works at the root URL: `curl http://stapp01:8086`
 
 > **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 

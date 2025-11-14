@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is expanding their AWS infrastructure and requires the setup of a private Virtual Private Cloud (VPC) along with a subnet. This VPC and subnet configuration will ensure that resources deployed within them remain isolated from external networks and can only communicate within the VPC. Additionally, the team needs to provision an EC2 instance under the newly created private VPC. This instance should be accessible only from within the VPC, allowing for secure communication and resource management within the AWS environment.
+The Nautilus DevOps team is growing its AWS infrastructure and needs to configure a private Virtual Private Cloud (VPC) and a subnet. This setup ensures that resources deployed within them stay separate from outside networks and communicate exclusively in the VPC. Additionally, provisioning is required for an EC2 instance in the new private VPC. This instance accessible exclusively from within the VPC, enabling secure communication and managing resources in AWS.
 
 1. Create a VPC named `datacenter-priv-vpc` with the CIDR block `10.0.0.0/16`.
 

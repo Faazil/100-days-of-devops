@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The DevOps team was looking for a solution where they want to restart Apache service on all app servers if the deployment goes fine on these servers in Stratos Datacenter. After having a discussion, they came up with a solution to use Jenkins chained builds so that they can use a downstream job for services which should only be triggered by the deployment job. So as per the requirements mentioned below configure the required Jenkins jobs.
+The DevOps team was looking for a solution where they want to restart Apache service on all app servers if the deployment goes fine on these servers within the Stratos DC. After having a discussion, they came up with a solution to use Jenkins chained builds so that they can use a downstream job for services which should only be triggered by the deployment job. So as per the requirements mentioned below configure the required Jenkins jobs.
 
 Click on the Jenkins button on the top bar to access the Jenkins UI. Login using username admin and Adm!n321 password.
 

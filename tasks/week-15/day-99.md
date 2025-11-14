@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The DevOps team has been tasked with creating a secure DynamoDB table and enforcing fine-grained access control using IAM. This setup will allow secure and restricted access to the table from trusted AWS services only.
+The DevOps team needs to creating a secure DynamoDB table and enforcing fine-grained access control using IAM. This setup will allow secure and restricted access to the table from trusted AWS services only.
 
 As a member of the Nautilus DevOps Team, your task is to perform the following using Terraform:
 

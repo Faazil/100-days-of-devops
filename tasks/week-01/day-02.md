@@ -2,9 +2,9 @@
 
 ## Task Overview
 
-As part of the temporary assignment to the Nautilus project, a developer named yousuf requires access for a limited duration. To ensure smooth access management, a temporary user account with an expiry date is needed.
+As part of the temporary assignment to the Nautilus project, a developer named yousuf requires access for a limited duration. To guarantee smooth access management, a temporary user account with an expiry date is needed.
 
-> Create a user named `yousuf` on `App Server 1` in Stratos Datacenter. Set the expiry date to `2024-01-28`, ensuring the user is created in lowercase as per standard protocol.
+> Create a user named `yousuf` on `App Server 1` within the Stratos DC. Set the expiry date to `2024-01-28`, ensuring the user is created in lowercase as per standard protocol.
 
 > **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 

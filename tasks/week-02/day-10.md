@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The production support team of xFusionCorp Industries is working on developing bash scripts to automate different day-to-day tasks. One task is to create a bash script for taking website backups. They have a static website running on App Server 3 in Stratos Datacenter, and they need to create a bash script named `beta_backup.sh` which should accomplish the following tasks. (Remember to place the script under `/scripts` directory on App Server 3).
+The operations team at xFusionCorp Industries is creating shell scripts for automating different day-to-day tasks. One task is to create a bash script to perform website backups. A static site is hosted on App Server 3 within the Stratos DC, requiring development of a bash script named `beta_backup.sh` that must complete these requirements. (Remember to place the script under `/scripts` directory on App Server 3).
 
 **Requirements:**
 - Create a zip archive named `xfusioncorp_beta.zip` of `/var/www/html/beta` directory

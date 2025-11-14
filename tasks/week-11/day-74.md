@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-There is a requirement to create a Jenkins job to automate the database backup. Below you can find more details to accomplish this task:
+A requirement to create a Jenkins job to automate the database backup. Below you can find more details to accomplish this task:
 
 Click on the Jenkins button on the top bar to access the Jenkins UI. Login using username admin and password Adm!n321.
 

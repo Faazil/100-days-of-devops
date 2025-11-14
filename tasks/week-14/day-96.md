@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is strategizing the migration of a portion of their infrastructure to the AWS cloud. Recognizing the scale of this undertaking, they have opted to approach the migration in incremental steps rather than as a single massive transition. To achieve this, they have segmented large tasks into smaller, more manageable units.
+The Nautilus operations team is planning infrastructure migration components to AWS. Understanding the project scope, the approach chosen is phased migration instead of one large transition. To achieve this, tasks are divided into manageable pieces.
 
 For this task, create an EC2 instance using Terraform with the following requirements:
 

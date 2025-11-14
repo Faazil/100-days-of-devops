@@ -2,7 +2,7 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is working on to setup some pre-requisites for an application that will send the greetings to different users. There is a sample deployment, that needs to be tested. Below is a scenario which needs to be configured on Kubernetes cluster. Please find below more details about it.
+The Nautilus DevOps team is working on to setup some pre-requisites for an application that will send the greetings to different users. A sample deployment, that needs to be tested. Below is a scenario which needs to be configured on Kubernetes cluster. Please find below more details about it.
 
 - Create a pod named `print-envars-greeting`.
 

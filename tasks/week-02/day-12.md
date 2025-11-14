@@ -2,11 +2,11 @@
 
 ## Task Overview
 
-Our monitoring tool has reported an issue in Stratos Datacenter. One of our app servers has an issue, as its Apache service is not reachable on port 3000 (which is the Apache port). The service itself could be down, the firewall could be at fault, or something else could be causing the issue.
+The monitoring system detected an issue within the Stratos DC. An application server is experiencing problems, as its Apache service cannot be accessed on port 3000 (which is the Apache port). Either the service stopped running, firewall rules are blocking access, or another factor is preventing connectivity.
 
-- Use tools like telnet, netstat, etc. to find and fix the issue. Also make sure Apache is reachable from the jump host without compromising any security settings.
+- Utilize commands such as telnet, netstat, etc. for troubleshooting and resolution. Additionally, verify that Apache is reachable from the jump host while maintaining security configurations.
 
-- Once fixed, you can test the same using command `curl http://stapp01:3000` command from jump host.
+- After resolving, validate the same using command `curl http://stapp01:3000` command executed from the jump server.
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
