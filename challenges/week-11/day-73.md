@@ -1,0 +1,205 @@
+# Challenge 73: Jenkins Scheduled Jobs
+
+## 📊 Metadata
+- **Day**: 73
+- **Week**: 11
+- **Day in Week**: 3/7
+- **Category**: Jenkins
+- **Difficulty**: ⭐⭐⭐ Advanced
+- **Estimated Time**: 20-30 minutes
+
+---
+
+## 🎯 Challenge Description
+
+The devops team of xFusionCorp Industries is working on to setup centralised logging management system to maintain and analyse server logs easily. Since it will take some time to implement, they wanted to gather some server logs on a regular basis. At least one of the app servers is having issues with the Apache server. The team needs Apache logs so that they can identify and troubleshoot the issues easily if they arise. So they decided to create a Jenkins job to collect logs from the server. Please create/configure a Jenkins job as per details mentioned below:
+
+Click on the Jenkins button on the top bar to access the Jenkins UI. Login using username `admin` and password `Adm!n321`
+
+1. Create a Jenkins jobs named `copy-logs`.
+
+2. Configure it to periodically build `every 7 minutes` to copy the Apache logs (both access_log and error_logs) from App Server 2 (from default logs location) to location `/usr/src/itadmin` on Storage Server.
+
+Note:
+
+1. You might need to install some plugins and restart Jenkins service. So, we recommend clicking on Restart Jenkins when installation is complete and no jobs are running on plugin installation/update page i.e update centre. Also, Jenkins UI sometimes gets stuck when Jenkins service restarts in the back end. In this case please make sure to refresh the UI page.
+
+2. Please make sure to define you cron expression like this `*/10 * * * *` (this is just an example to run job every 10 minutes).
+
+3. For these kind of scenarios requiring changes to be done in a web UI, please take screenshots so that you can share it with us for review in case your task is marked incomplete. You may also consider using a screen recording software such as loom.com to record and share your work.
+
+
+## 📋 Prerequisites
+
+> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
+
+**What KodeKloud Provides:**
+- ✅ Pre-configured lab environment
+- ✅ Jenkins server with admin access
+- ✅ Necessary access and permissions
+- ✅ Automated validation of your solution
+
+**What You Need to Know:**
+- **Key Concepts**:
+  - Jenkins UI navigation
+  - Job configuration (Freestyle, Pipeline)
+  - Plugin installation and management
+  - Build triggers and scheduling
+- **Environment**: Access to Jenkins server
+- **Access**: Jenkins admin credentials
+
+**Foundation from Earlier Challenges:**
+- Day 69: Install Jenkins Plugins (recommended)
+- Day 71: Configure Jenkins Job for Package Installation (recommended)
+- Day 72: Jenkins Parameterized Builds (recommended)
+
+**Required Skills:**
+- ✅ Create and configure Jenkins jobs
+- ✅ Install and configure plugins
+- ✅ Manage credentials securely
+- ✅ Configure build parameters
+- ✅ Set up build triggers
+
+---
+
+**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+
+## Steps
+
+0. Login Jenkins, Update Plugins, and Restart
+
+1. Install required plugins
+
+    - SSH
+    - SSH Credentials
+
+2. Add app and storage credentials: Manage Jenkins > Credentials > Global > system > Add credentials
+
+3. Add SSH sites in Manage Jenkins > System > SSH Sites
+
+4. Create a free-style job `copy-logs`
+
+5. From Triggers > Build periodically > Add cronjob `H/7 * * * *`
+6. Add Build Steps > Execute shell script on remote host using ssh > add below lines:
+
+    ```sh
+    echo "app-1-pass" | sudo -S yum install -y sshpass
+    echo "app-1-pass" | sudo -S sshpass -p "storage-server-pass" scp -o StrictHostKeyChecking=no -r /var/log/httpd/* natasha@ststor01:/usr/src/itadmin
+    ```
+
+## Good to Know?
+
+### Scheduled Jobs
+
+- **Cron Syntax**: Use Unix cron format for scheduling
+- **Build Triggers**: Automatic job execution at specified times
+- **Distributed Builds**: Schedule across multiple build agents
+- **Resource Management**: Avoid peak hours for heavy jobs
+
+### Cron Expression Format
+
+- **Fields**: `minute hour day month weekday`
+- **Special Characters**: `*` (any), `H` (hash), `/` (step), `,` (list)
+- **Examples**: `H/7 * * * *` (every 7 minutes), `0 2 * * 1` (Monday 2 AM)
+- **Hash Symbol**: Distributes load across time range
+
+### Log Management
+
+- **Centralized Logging**: Collect logs from multiple servers
+- **Log Rotation**: Prevent disk space issues
+- **Real-time Monitoring**: Monitor application health
+- **Compliance**: Meet audit and compliance requirements
+
+### Automation Benefits
+
+- **Consistency**: Regular, automated log collection
+- **Reliability**: No manual intervention required
+- **Scalability**: Handle multiple servers efficiently
+- **Monitoring**: Early detection of issues
+
+---
+
+## ✅ Verification
+
+After completing the challenge, verify your solution by:
+
+1. **Testing the implementation**
+   - Run all commands from the solution
+   - Check for any error messages
+
+2. **Validating the results**
+   - Ensure all requirements are met
+   - Test edge cases if applicable
+
+3. **Clean up (if needed)**
+   - Remove temporary files
+   - Reset any test configurations
+
+---
+
+## 📚 Learning Notes
+
+### Key Concepts
+
+This challenge covers the following concepts:
+- Practical application of Jenkins skills
+- Real-world DevOps scenarios
+- Best practices for production environments
+
+### Common Pitfalls
+
+- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
+- ⚠️ **Syntax**: Double-check command syntax and flags
+- ⚠️ **Environment**: Verify you're working in the correct environment/server
+
+### Best Practices
+
+- ✅ Always verify changes before marking as complete
+- ✅ Test your solution in a safe environment first
+- ✅ Document any deviations from the standard approach
+- ✅ Keep security in mind for all configurations
+
+---
+
+## 🔗 Related Challenges
+
+- **← Previous**: [Day 72 - Jenkins Parameterized Builds](./day-72.md)
+- **Next →**: [Day 74 - Jenkins Database Backup Job](../week-11/day-74.md)
+
+### Similar Challenges (Jenkins)
+- [Day 69 - Install Jenkins Plugins](../week-10/day-69.md)
+- [Day 71 - Configure Jenkins Job for Package Installation](../week-11/day-71.md)
+- [Day 72 - Jenkins Parameterized Builds](../week-11/day-72.md)
+
+---
+
+## 📖 Additional Resources
+
+- [KodeKloud Official Documentation](https://kodekloud.com)
+- [Official Technology Documentation](#)
+- [Community Discussions](#)
+
+---
+
+## 🎓 Knowledge Check
+
+After completing this challenge, you should be able to:
+- [ ] Understand the problem statement clearly
+- [ ] Implement the solution independently
+- [ ] Verify the solution works correctly
+- [ ] Explain the concepts to others
+- [ ] Apply these skills to similar problems
+
+---
+
+**Challenge Source**: KodeKloud 100 Days of DevOps
+**Difficulty**: {get_difficulty_emoji(day)}
+**Category**: {task_info['category']}
+
+---
+
+**Track your progress**: After completing this challenge, mark it as done:
+```bash
+python3 ../../tools/progress.py --complete {day}
+```
+
