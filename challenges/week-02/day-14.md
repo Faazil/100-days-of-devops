@@ -14,7 +14,7 @@
 
 The production support team of xFusionCorp Industries has deployed some of the latest monitoring tools to keep an eye on every service, application, etc. running on the systems. One of the monitoring systems reported about Apache service unavailability on one of the app servers in Stratos DC.
 
-> Identify the faulty app host and fix the issue. Make sure Apache service is up and running on all app hosts. They might not have hosted any code yet on these servers, so you don’t need to worry if Apache isn’t serving any pages. Just make sure the service is up and running. Also, make sure Apache is running on port ***`3004`*** on all app servers.
+> Identify the faulty app host and fix the issue. Ensure Apache service is up and running on all app hosts. They might not have hosted any code yet on these servers, so you don’t need to worry if Apache isn’t serving any pages. Just make sure the service is up and running. Also, make sure Apache is running on port ***`3004`*** on all app servers.
 
 
 ## 📋 Prerequisites
@@ -52,7 +52,7 @@ The production support team of xFusionCorp Industries has deployed some of the l
 
 ## Steps
 
-1. Login into App server
+1. Access App server
 2. Check httpd status
 
     ```sh
@@ -86,7 +86,7 @@ The production support team of xFusionCorp Industries has deployed some of the l
     Aug 08 05:04:33 stapp01.stratos.xfusioncorp.com httpd[1003]: no listening sockets available, sh...n
     ```
 
-3. Lets check the port status
+3. Verify the port status
 
     ```sh
     sudo netstat -tlnup

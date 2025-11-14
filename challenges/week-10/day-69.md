@@ -57,7 +57,7 @@ Note:
 
 ## Steps
 
-1. Login into Jenkins UI
+1. Access Jenkins UI
 2. Manage Jenkins
 3. Plugins in System Configuration > Update plugins > Select plugins that required to update > restart jenkins
 4. Manage Jenkins > Plugins > Available Plugins > Search Git, and GitLab and select them

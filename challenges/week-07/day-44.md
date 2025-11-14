@@ -59,8 +59,8 @@ The Nautilus application development team shared static website content that nee
 
 ## Steps
 
-1. Login into App Server 3
-2. Make sure docker is running and accessible, you can check simply runing:
+1. Access App Server 3
+2. Ensure docker is running and accessible, you can check simply runing:
 
     ```sh
     docker ps

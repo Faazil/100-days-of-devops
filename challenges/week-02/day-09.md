@@ -43,7 +43,7 @@ Your task is to troubleshoot and fix the MariaDB service so the application can 
 - ✅ Analyze service logs
 - ✅ Identify configuration issues
 - ✅ Restart system services
-- ✅ Verify service status
+- ✅ Verify service state
 
 ---
 
@@ -65,7 +65,7 @@ Database services can fail for many reasons:
 **The Debugging Process:**
 
 Good troubleshooting follows a pattern:
-1. **Check service status** - Is it running or stopped?
+1. **Check service state** - Is it running or stopped?
 2. **Read the logs** - What error messages appear?
 3. **Examine configuration** - Are settings correct?
 4. **Fix the problem** - Address the root cause
@@ -114,7 +114,7 @@ The key line is `Active: inactive (dead)` - the service is stopped.
 
 ### Step 3: Examine the Logs
 
-Check the MariaDB error log to find out WHY it stopped:
+Review the MariaDB error log to find out WHY it stopped:
 
 ```bash
 sudo tail -30 /var/log/mariadb/mariadb.log
@@ -157,7 +157,7 @@ The `-l` flag shows full error messages without truncation.
 
 ---
 
-### Step 5: Check the Configuration
+### Step 5: Review the Configuration
 
 Examine the MariaDB configuration file:
 

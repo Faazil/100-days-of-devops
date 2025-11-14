@@ -159,7 +159,7 @@ Note: Please note that once you click on FINISH button all existing images, the 
     ERROR: failed to build: failed to solve: process "/bin/sh -c cp certs/server.crt /usr/local/apache2/conf/server.crt" did not complete successfully: exit code: 1
     ```
 
-    > Now, we are getting certs file path issues. It's because the Dockerfile is trying to copy files from relative paths, but those files need to be in the Docker build context. We need to use the COPY instruction instead of RUN cp with absolute paths.
+    > Now, we are getting certs file path issues. It's because the Dockerfile is trying to copy files from relative paths, but those files need to be in the Docker build context. Next, use the COPY instruction instead of RUN cp with absolute paths.
 
     ```dockerfile
     FROM httpd:2.4.43

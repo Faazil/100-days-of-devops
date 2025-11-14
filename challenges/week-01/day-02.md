@@ -164,7 +164,7 @@ Before marking this challenge complete:
 - Check Account expires line in output
 
 **Permission denied:**
-- Make sure you're using `sudo` before `useradd`
+- Ensure you're using `sudo` before `useradd`
 
 ---
 

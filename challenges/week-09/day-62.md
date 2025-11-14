@@ -90,7 +90,7 @@ The Nautilus DevOps team is working to deploy some tools in Kubernetes cluster. 
     kubectl exec -it secret-devops -c secret-container-devops -- cat /opt/cluster
     ```
 
-    > You can see secret data, running pods and execute the command to verify the secret is placed inside the container
+    > You may see secret data, running pods and execute the command to verify the secret is placed inside the container
 
 ## Good to Know?
 

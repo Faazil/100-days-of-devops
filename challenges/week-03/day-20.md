@@ -54,7 +54,7 @@ The Nautilus application development team is planning to launch a new PHP-based 
 
 ## Steps
 
-1. Login into App Server and run the following commands:
+1. Access App Server and run the following commands:
 
     ```sh
     sudo dnf update -y

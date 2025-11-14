@@ -55,7 +55,7 @@ The Nautilus DevOps team needs to set up several docker environments for differe
 
 ## Steps
 
-Login into app server 2 and run the following command:
+Access app server 2 and run the following command:
 
 ```sh
 docker network create blog -d macvlan --ip-range 10.10.1.0/24 --subnet 10.10.1.0/24

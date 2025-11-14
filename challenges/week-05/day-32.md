@@ -54,7 +54,7 @@ The Nautilus application development team has been working on a project reposito
 
 ## Steps
 
-1. Login into storage server and move into repository
+1. Access storage server and move into repository
 
     ```sh
     sudo -i

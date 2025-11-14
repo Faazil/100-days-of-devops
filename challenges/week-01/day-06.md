@@ -237,7 +237,7 @@ Before marking this challenge complete:
 - Check cron syntax is correct
 - Verify crond service is running
 - Check system logs: `sudo tail -f /var/log/cron`
-- Make sure you used `sudo crontab -e` (for root's crontab)
+- Ensure you used `sudo crontab -e` (for root's crontab)
 
 **File not created:**
 - Wait full 5 minutes after adding cron

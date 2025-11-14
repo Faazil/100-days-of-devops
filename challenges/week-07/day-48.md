@@ -54,7 +54,7 @@ The Nautilus DevOps team is diving into Kubernetes for application management. O
 ## Steps
 
 - Create a `k3s-pod.yml` file inside the jump host with this [contents](../files/k3s-pod.yml)
-- Run the following command to create pod in kubernetes cluster:
+- Execute command to create pod in kubernetes cluster:
 
     ```sh
     kubectl apply -f k3s-pod.yml

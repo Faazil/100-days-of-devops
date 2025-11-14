@@ -18,7 +18,7 @@ The Nautilus Application development team wanted to test some applications on ap
 
 - Create an Ansible playbook `/home/thor/playbook/playbook.yml` to install `samba package` on all  app servers using `Ansible yum module`.
 
-- Make sure user `thor` should be able to run the playbook on jump host.
+- Ensure user `thor` should be able to run the playbook on jump host.
 
 > Note: Validation will try to run playbook using command `ansible-playbook -i inventory playbook.yml` so please make sure playbook works this way, without passing any extra arguments.
 

@@ -153,7 +153,7 @@ Before marking this challenge complete, verify:
 ## 🔧 Troubleshooting
 
 **"Permission denied" error:**
-- Make sure you're using `sudo` before the `useradd` command
+- Ensure you're using `sudo` before the `useradd` command
 
 **"User already exists" error:**
 - Check if user exists: `id <username>`
@@ -164,7 +164,7 @@ Before marking this challenge complete, verify:
 - Verify the path exists: `ls -la /usr/sbin/nologin`
 
 **No home directory created:**
-- Make sure you included the `-m` flag in the useradd command
+- Ensure you included the `-m` flag in the useradd command
 
 ---
 

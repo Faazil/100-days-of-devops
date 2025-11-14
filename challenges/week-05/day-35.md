@@ -49,7 +49,7 @@ The Nautilus DevOps team aims to containerize various applications following a r
 
 ## Steps
 
-1. Login into App server 2 and find out the linux distros
+1. Access App server 2 and find out the linux distros
 
     ```sh
     cat /etc/os-release
@@ -79,7 +79,7 @@ The Nautilus DevOps team aims to containerize various applications following a r
 
 2. Available Methods
 
-    You can install docker in many ways, like using RPM repository, downloading the docker package, or using a bash script. I would recommended to install using rpm repository, or using one script solution.
+    You may install docker in many ways, like using RPM repository, downloading the docker package, or using a bash script. I would recommended to install using rpm repository, or using one script solution.
 
 3. Install Using BASH Script
 

@@ -161,7 +161,7 @@ Before marking this challenge complete:
 - Check if file exists: `ls /tmp/xfusioncorp.sh`
 
 **Still can't execute script:**
-- Make sure script has proper shebang line (`#!/bin/bash`)
+- Ensure script has proper shebang line (`#!/bin/bash`)
 - Check script syntax errors
 
 **Wrong permissions showing:**

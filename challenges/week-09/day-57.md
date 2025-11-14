@@ -28,7 +28,7 @@ The Nautilus DevOps team is working on to setup some pre-requisites for an appli
 
 - Use command ["/bin/sh", "-c", 'echo "$(GREETING) $(COMPANY) $(GROUP)"'] (please use this exact command), also set its restartPolicy policy to Never to avoid crash loop back.
 
-- You can check the output using kubectl logs -f print-envars-greeting command.
+- You may check the output using kubectl logs -f print-envars-greeting command.
 
 > Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
 

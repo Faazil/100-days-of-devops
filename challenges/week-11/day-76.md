@@ -20,7 +20,7 @@ Click on the Jenkins button on the top bar to access the Jenkins UI. Login using
 
 2. Grant permissions to these users to access Packages job as per details mentioned below:
 
-   - Make sure to select `Inherit permissions from parent ACL` under inheritance strategy for granting permissions to these users.
+   - Ensure to select `Inherit permissions from parent ACL` under inheritance strategy for granting permissions to these users.
 
    - Grant mentioned permissions to sam user : `build, configure and read`.
 

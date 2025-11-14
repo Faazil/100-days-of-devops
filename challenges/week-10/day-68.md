@@ -58,7 +58,7 @@ Note:
 
 ## Steps
 
-1. Login into jenkins server and find operating system
+1. Access jenkins server and find operating system
 
     ```bash
     ssh root@jenkins
@@ -84,7 +84,7 @@ Note:
 
     > We can see its' centos 9 os based server
 
-2. Run the following command to update packages:
+2. Execute command to update packages:
 
     ```sh
     yum update -y
@@ -116,7 +116,7 @@ Note:
     cat /var/lib/jenkins/secrets/initialAdminPassword
     ```
 
-6. Login into Jenkins UI and Setup Jenkins
+6. Access Jenkins UI and Setup Jenkins
 
     - Paste the initial password
     - Install suggested plugins (it will take some time)

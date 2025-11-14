@@ -14,7 +14,7 @@
 
 During the weekly meeting, the Nautilus DevOps team discussed automation and configuration management solutions. After considering several options, the team decided to go with Ansible due to its simple setup and minimal prerequisites. They want to start testing using Ansible, with the jump host as an Ansible controller to test different tasks on the other servers.
 
-Install ansible version 4.8.0 on Jump host using pip3 only. Make sure Ansible binary is available globally on this system, so all users can run Ansible commands.
+Install ansible version 4.8.0 on Jump host using pip3 only. Ensure Ansible binary is available globally on this system, so all users can run Ansible commands.
 
 > **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 
@@ -179,7 +179,7 @@ Before marking this challenge complete, verify:
 ## 🔧 Troubleshooting
 
 **"Permission denied" error:**
-- Make sure you're using `sudo` before the pip3 command
+- Ensure you're using `sudo` before the pip3 command
 - Check that you have sudo privileges: `sudo -v`
 
 **"pip3: command not found":**

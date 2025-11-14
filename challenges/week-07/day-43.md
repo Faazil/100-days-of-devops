@@ -57,7 +57,7 @@ The Nautilus DevOps team is planning to host an application on a nginx-based con
 
 ## Steps
 
-1. Login into App Server 2
+1. Access App Server 2
 2. Pull the docker image
 
     ```sh
@@ -70,7 +70,7 @@ The Nautilus DevOps team is planning to host an application on a nginx-based con
     docker run -d --name cluster -p 5002:80 nginx:stable
     ```
 
-4. Make sure container is running
+4. Ensure container is running
 
     ```sh
     docker ps

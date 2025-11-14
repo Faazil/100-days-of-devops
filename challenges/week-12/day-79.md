@@ -18,7 +18,7 @@ Click on the Jenkins button on the top bar to access the Jenkins UI. Login using
 
 Similarly, you can access the Gitea UI using Gitea button, username and password for Git is `sarah` and `Sarah_pass123` respectively. Under user sarah you will find a repository named web that is already cloned on the Storage server under sarah's home. sarah is a developer who is working on this repository.
 
-1. Install `httpd` (whatever version is available in the yum repo by default) and configure it to serve on port `8080` on All app servers. You can make it part of your Jenkins job or you can do this step manually on all app servers.
+1. Install `httpd` (whatever version is available in the yum repo by default) and configure it to serve on port `8080` on All app servers. You may make it part of your Jenkins job or you can do this step manually on all app servers.
 
 2. Create a Jenkins job named `nautilus-app-deployment` and configure it in a way so that if anyone pushes any new change to the origin repository in master branch, the job should auto build and deploy the latest code on the `Storage server` under `/var/www/html` directory. Since `/var/www/html` on Storage server is shared among all apps. Before deployment, ensure that the ownership of the `/var/www/html` directory is set to user `sarah`, so that Jenkins can successfully deploy files to that directory.
 
@@ -30,7 +30,7 @@ Note:
 
 1. You might need to install some plugins and restart Jenkins service. So, we recommend clicking on Restart Jenkins when installation is complete and no jobs are running on plugin installation/update page i.e update centre. Also some times Jenkins UI gets stuck when Jenkins service restarts in the back end so in such case please make sure to refresh the UI page.
 
-2. Make sure Jenkins job passes even on repetitive runs as validation may try to build the job multiple times.
+2. Ensure Jenkins job passes even on repetitive runs as validation may try to build the job multiple times.
 
 3. Deployment related tasks should be done by sudo user on the destination server to avoid any permission issues so make sure to configure your Jenkins job accordingly.
 
@@ -113,14 +113,14 @@ Note:
         sshpass -p "storage-server-pass" scp -r -o StrictHostKeyChecking=no ./* natasha@ststor01:/var/www/html
         ```
 
-7. Login into gitea
+7. Access gitea
 
     - Repo > Settings > webhooks:
     - Target URL: `https://admin:api-token@jenkins-url/job/nautilus-app-deployment/build?token=kodekloud`
     - Example: `https://admin:11a3bafd516952ecf4b9103a02348f653c@8080-port-3c6aqh4fy2nkx3vf.labs.kodekloud.com/job/nautilus-app-deployment/build?token=kodekloud`
     - Save and Test Delivery
     ![gitea](../screenshots/jenkins-gitea-webhook.png)
-8. Login into storage server:
+8. Access storage server:
     - Give permission to natasha:
 
     ```sh

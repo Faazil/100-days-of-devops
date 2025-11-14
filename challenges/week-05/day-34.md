@@ -16,7 +16,7 @@ The Nautilus application development team was working on a git repository /opt/d
 
 - Merge the feature branch into the master branch`, but before pushing your changes complete below point.
 
-- Create a post-update hook in this git repository so that whenever any changes are pushed to the master branch, it creates a release tag with name release-2023-06-15, where 2023-06-15 is supposed to be the current date. For example if today is 20th June, 2023 then the release tag must be release-2023-06-20. Make sure you test the hook at least once and create a release tag for today's release.
+- Create a post-update hook in this git repository so that whenever any changes are pushed to the master branch, it creates a release tag with name release-2023-06-15, where 2023-06-15 is supposed to be the current date. For example if today is 20th June, 2023 then the release tag must be release-2023-06-20. Ensure you test the hook at least once and create a release tag for today's release.
 
 - Finally remember to push your changes.
 
@@ -56,7 +56,7 @@ The Nautilus application development team was working on a git repository /opt/d
 
 ## Steps
 
-1. Login into storage server and move into directory
+1. Access storage server and move into directory
 
     ```sh
     sudo -i

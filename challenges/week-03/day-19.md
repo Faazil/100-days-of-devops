@@ -53,7 +53,7 @@ xFusionCorp Industries is planning to host two static websites on their infra in
 
 ## Steps
 
-1. Login into App Server 3 and Install httpd
+1. Access App Server 3 and Install httpd
 
     ```sh
     sudo yum install -y httpd

@@ -18,7 +18,7 @@ One of the Nautilus DevOps team members was working to configure services on a k
 
 - Configure `Apache` to listen on port `6000` instead of default http port. Do not bind it to listen on specific IP or hostname only, i.e it should listen on localhost, 127.0.0.1, container ip, etc.
 
-- Make sure Apache service is up and running inside the container. Keep the container in running state at the end.
+- Ensure Apache service is up and running inside the container. Keep the container in running state at the end.
 
 
 ## 📋 Prerequisites
@@ -57,8 +57,8 @@ One of the Nautilus DevOps team members was working to configure services on a k
 
 ## Steps
 
-1. Login into App Server using SSH
-2. Let's check the running containers
+1. Access App Server using SSH
+2. Review the running containers
 
     ```sh
     docker ps

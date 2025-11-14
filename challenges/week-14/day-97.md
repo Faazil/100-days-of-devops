@@ -95,7 +95,7 @@ The Terraform working directory is `/home/bob/terraform`. Create the `main.tf` f
     }
     ```
 
-    > Make sure you have changed the value here according to your task description
+    > Ensure you have changed the value here according to your task description
 
 3. Run the terraform commands:
 

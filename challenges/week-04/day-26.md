@@ -54,7 +54,7 @@ The xFusionCorp development team added updates to the project that is maintained
 
 ## Steps
 
-1. Login into storage server
+1. Access storage server
 2. move into repo directory
 
     ```sh

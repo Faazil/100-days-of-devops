@@ -16,7 +16,7 @@ Day by day traffic is increasing on one of the websites managed by the Nautilus 
 
 - Install `nginx` on `LBR` server
 - Configure load-balancing with the an http context making use of all App Servers. Ensure that you update only the main `Nginx` configuration file located at `/etc/nginx/nginx.conf`
-- Make sure you do not update the apache port that is already defined in the apache configuration on all app servers, also make sure apache server is up and running on all app servers
+- Ensure you do not update the apache port that is already defined in the apache configuration on all app servers, also make sure apache server is up and running on all app servers
 - Once done, you can access the website using StaticApp button on the top bar
 
 
@@ -53,7 +53,7 @@ Day by day traffic is increasing on one of the websites managed by the Nautilus 
 
 ## Steps
 
-1. Login into each app server and make sure httpd service is running. We have to find in which port they are running:
+1. Access each app server and make sure httpd service is running. We have to find in which port they are running:
 
     ```sh
     sudo ss -tlnup
@@ -70,7 +70,7 @@ Day by day traffic is increasing on one of the websites managed by the Nautilus 
 
     > Apache service is running on port: `5001`
 
-2. Login into lbr server and install nginx
+2. Access lbr server and install nginx
 
     ```sh
     sudo yum install nginx -y

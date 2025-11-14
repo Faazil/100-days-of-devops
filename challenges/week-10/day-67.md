@@ -96,7 +96,7 @@ Create a service named `frontend`. Its type should be `NodePort`, port should be
 
 Finally, you can check the guestbook app by clicking on App button.
 
-You can use any labels as per your choice.
+You may use any labels as per your choice.
 
 > Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
 

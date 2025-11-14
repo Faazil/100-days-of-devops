@@ -61,7 +61,7 @@ The Nautilus application development team was working on a git repository `/usr/
     cd /usr/src/kodekloudrepos/ecommerce
     ```
 
-2. Let's check commits history
+2. Check commits history
 
     ```sh
     git log --oneline

@@ -52,7 +52,7 @@ The Nautilus application development team has been working on a project reposito
 
 ## Steps
 
-1. Login into Storage Server
+1. Access Storage Server
 
 2. Move into cloned repository
 

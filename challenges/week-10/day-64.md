@@ -109,7 +109,7 @@ One of the DevOps engineers was trying to deploy a python app on Kubernetes clus
 
     > try to access app, but its not working.
 
-5. Now let's check the service status
+5. Now let's check the service state
 
     ```sh
     kubectl get svc

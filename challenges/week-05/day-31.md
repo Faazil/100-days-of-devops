@@ -52,14 +52,14 @@ The Nautilus application development team was working on a git repository `/usr/
 
 ## Steps
 
-1. Login into storage server and move into repository
+1. Access storage server and move into repository
 
     ```sh
     sudo -i
     cd /usr/src/kodekloudrepos/ecommerce
     ```
 
-2. Let's check the stash list:
+2. Review the stash list:
 
     ```sh
     git stash list

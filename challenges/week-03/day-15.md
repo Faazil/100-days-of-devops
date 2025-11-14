@@ -87,7 +87,7 @@ The system admins team of xFusionCorp Industries needs to deploy a new applicati
 
     We have to be cautious here, otherwise nginx could be broken.
 
-    We need to add this line inside `server:80` just after `server_name`.
+    Next, add this line inside `server:80` just after `server_name`.
 
     ```shell
     return 301 https://$host$request_uri;

@@ -54,8 +54,8 @@ Our monitoring tool has reported an issue in Stratos Datacenter. One of our app 
 
 ## Steps
 
-1. Login into app server.
-2. Check `httpd/apache/nginx` service status
+1. Access app server.
+2. Check `httpd/apache/nginx` service state
 
     ```shell
     tony@stapp01 ~]$ sudo systemctl status httpd
@@ -77,7 +77,7 @@ Our monitoring tool has reported an issue in Stratos Datacenter. One of our app 
     top -
     ```
 
-3. Lets check the network port status
+3. Verify the port usage
 
     ```sh
     sudo netstat -tlnup
@@ -93,9 +93,9 @@ Our monitoring tool has reported an issue in Stratos Datacenter. One of our app 
     udp        0      0 127.0.0.11:56145        0.0.0.0:*                           -                   
     ```
 
-    > It's clearly visible that the '3000' port is already being used by `sendmail`
+    > You'll observe that the '3000' port is already being used by `sendmail`
 
-4. So Either we need to change port 3000 on sendmail or we can run httpd on different port. Since target is to run apache on 3000, we have to change sendmail port.
+4. Choose one: we need to change port 3000 on sendmail or we can run httpd on different port. Since target is to run apache on 3000, we have to change sendmail port.
 
 5. Changing sendmail port
 
@@ -105,7 +105,7 @@ Our monitoring tool has reported an issue in Stratos Datacenter. One of our app 
     vi sendmail.mc
     ```
 
-    Find the following line and change port with some other value (i,e; `1234`):
+    Locate this line and change port with some other value (i,e; `1234`):
 
     ```sh
     DAEMON_OPTIONS(`Port=3000,Addr=127.0.0.1, Name=MTA')dnl
@@ -169,7 +169,7 @@ Our monitoring tool has reported an issue in Stratos Datacenter. One of our app 
 
     That `FORWARD` rule is blocking the connection.
 
-    Run the following command:
+    Execute command:
 
     ```sh
     sudo iptables -I INPUT 4 -p tcp --dport 3000 -j ACCEPT

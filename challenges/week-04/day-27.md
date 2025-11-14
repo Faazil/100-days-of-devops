@@ -53,7 +53,7 @@ The Nautilus application development team was working on a git repository /usr/s
 
 ## Steps
 
-1. Login into storage server
+1. Access storage server
 2. Move into repository directory
 
     ```sh

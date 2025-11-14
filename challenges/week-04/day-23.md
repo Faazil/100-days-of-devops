@@ -56,7 +56,7 @@ There is a Git server utilized by the Nautilus project teams. Recently, a new de
 
 Pretty simple and straight forward.
 
-1. Login into UI with given user password
+1. Access UI with given user password
 2. CLick on the repository (at right sidebar)
 3. Click on the fork option (top right)
 

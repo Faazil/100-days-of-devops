@@ -352,7 +352,7 @@ Before marking this challenge complete, verify:
 
 **"No such file or directory" for /var/www/html/beta:**
 - Verify the directory exists: `ls -la /var/www/html/beta`
-- Check the challenge description for the exact path (it may vary)
+- Review the challenge description for the exact path (it may vary)
 
 **SCP fails with "lost connection":**
 - Test SSH connection first: `ssh clint@stbkp01`

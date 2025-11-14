@@ -66,7 +66,7 @@ A python app needed to be Dockerized, and then it needs to be deployed on App Se
 
 ## Steps
 
-1. Login into App server and move into directory
+1. Access App server and move into directory
 
     ```sh
     sudo -i

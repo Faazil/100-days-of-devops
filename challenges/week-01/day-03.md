@@ -157,7 +157,7 @@ Before marking this challenge complete:
 **Lost SSH access:**
 - Don't close your current session until verified
 - Test from another terminal first
-- Make sure you can still login as regular user
+- Ensure you can still login as regular user
 
 **Still can connect as root:**
 - Ensure you restarted sshd: `sudo systemctl status sshd`

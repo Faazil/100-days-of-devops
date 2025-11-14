@@ -90,9 +90,9 @@ The Terraform working directory is /home/bob/terraform. Create the main.tf file 
     }
     ```
 
-    > Make sure you have updated `prefix` default value according to your task.
+    > Ensure you have updated `prefix` default value according to your task.
 
-3. This is optional. You can create a `outputs.tf` file to display the ec2 instance information. 
+3. This is optional. You may create a `outputs.tf` file to display the ec2 instance information. 
 
     ```hcl
     output "ec2_info" {

@@ -52,7 +52,7 @@ The Nautilus application development team has been working on a project reposito
 
 ## Steps
 
-1, Login into Storage server
+1, Access Storage server
 
     ```sh
     ssh user@storage-server

@@ -26,7 +26,7 @@ Create a playbook /home/thor/ansible/playbook.yml and make sure to use Ansible's
 
 > NOTE:
 
-- You can use `ansible_nodename` variable from gathered facts with when condition. Additionally, please make sure you are running the play for all hosts i.e use - hosts: all.
+- You may use `ansible_nodename` variable from gathered facts with when condition. Additionally, please make sure you are running the play for all hosts i.e use - hosts: all.
 
 - Validation will try to run the playbook using command ansible-playbook -i inventory playbook.yml, so please make sure the playbook works this way without passing any extra arguments.
 
@@ -85,7 +85,7 @@ Create a playbook /home/thor/ansible/playbook.yml and make sure to use Ansible's
 
 2. Update `playbook.yml` with the contents from this [YAML file](../files/ansible_playbook_conditions_093.yml)
 
-    - Make sure you have update `src path` and `mode` based on your task description
+    - Ensure you have update `src path` and `mode` based on your task description
 
 3. Run the playbook
 

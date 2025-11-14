@@ -78,7 +78,7 @@ Note: Once you click on FINISH button, all currently running/stopped containers 
 
 In this daily challenge, we are going to dockerized a 2-tier application. We have to create a docker compose file bundled with frontend and database containers. let's start...
 
-1. Login into App Server 2
+1. Access App Server 2
 2. Create a docker compose file
 
     ```sh

@@ -74,7 +74,7 @@ Note:
 
 ## Steps
 
-0. Login into Storage server and install java
+0. Access Storage server and install java
 
     ```sh
     sudo yum install java-21-openjdk -y

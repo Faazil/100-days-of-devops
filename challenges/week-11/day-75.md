@@ -29,7 +29,7 @@ Click on the Jenkins button on the top bar to access the Jenkins UI. Login using
    - App_server_2 must be `/home/steve/jenkins` and
    - App_server_3 must be `/home/banner/jenkins`.
 
-4. Make sure slave nodes are online and working properly.
+4. Ensure slave nodes are online and working properly.
 
 Note:
 
@@ -84,7 +84,7 @@ Note:
    - password
    - ID
 
-4. Login into each App Server and install java
+4. Access each App Server and install java
 
    ```sh
    sudo yum install java-21-openjdk -y

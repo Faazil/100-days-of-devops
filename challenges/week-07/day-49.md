@@ -81,7 +81,7 @@ spec:
           - containerPort: 80
 ```
 
-- Run the following commands to create the deployment:
+- Execute commands to create the deployment:
 
   ```sh
   kubectl apply -f k3s-deployment.yml

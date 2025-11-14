@@ -53,14 +53,14 @@ Nautilus developers are actively working on one of the project repositories, `/u
 
 ## Steps
 
-1. Login into storage server and run the following commands:
+1. Access storage server and run the following commands:
 
     ```sh
     sudo su
     cd /usr/src/kodekloudrepos/media
     ```
 
-2. Let's check current branch
+2. Check current branch
 
     ```sh
     git branch

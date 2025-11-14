@@ -50,7 +50,7 @@ Some of the Nautilus team developers are developing a static website and they wa
 ## Steps
 
 1. Create a `k3s-deployment.yml` using this [YAML file](../files/k3s-deployment-056.yaml)
-2. Run the following command to create deployment and service:
+2. Execute command to create deployment and service:
 
     ```sh
     kubectl apply -f k3s-deployment.yml

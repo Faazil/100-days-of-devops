@@ -16,7 +16,7 @@ We have one of our websites up and running on our Nautilus infrastructure in Str
 
 1. Install `iptables` and all its dependencies on each app host.
 2. Block incoming port `6200` on all apps for everyone except for `LBR` host.
-3. Make sure the rules remain, even after system reboot.
+3. Ensure the rules remain, even after system reboot.
 
 
 ## 📋 Prerequisites
@@ -51,7 +51,7 @@ We have one of our websites up and running on our Nautilus infrastructure in Str
 
 ## Steps
 
-1. Login into each app server and run the following command:
+1. Access each app server and run the following command:
 
     ```sh
     sudo yum install -y iptables iptables-services

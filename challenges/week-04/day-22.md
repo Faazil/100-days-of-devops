@@ -48,7 +48,7 @@ The DevOps team established a new Git repository last week, which remains unused
 
 ## Steps
 
-1. Login into Storage server and run the following commands
+1. Access Storage server and run the following commands
 
     ```sh
     cd /usr/src/kodekloudrepos

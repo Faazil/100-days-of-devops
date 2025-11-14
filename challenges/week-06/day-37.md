@@ -52,7 +52,7 @@ On Application Server 1 a container named ubuntu_latest is running, you have to 
 
 ## Steps
 
-Login into App Server and run the following command:
+Access App Server and run the following command:
 
 ```sh
 docker cp /tmp/nautilus.txt.gpg ubuntu_latest:/usr/src/

@@ -167,12 +167,12 @@ Before marking this challenge complete:
 - Verify repository configuration
 
 **Can't edit config file:**
-- Make sure you're using `sudo`
+- Ensure you're using `sudo`
 - Try `nano` if not comfortable with `vi`
 - Check file permissions: `ls -l /etc/selinux/config`
 
 **Configuration not saving:**
-- Make sure you saved the file (`:wq` in vi)
+- Ensure you saved the file (`:wq` in vi)
 - Verify with: `cat /etc/selinux/config`
 - Check disk space: `df -h`
 

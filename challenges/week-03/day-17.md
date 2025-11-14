@@ -55,7 +55,7 @@ PostgreSQL database server is already installed on the Nautilus database server.
 
 ## Steps
 
-1. Login into Database server
+1. Access Database server
 
     ```sh
     ssh user@db_host
