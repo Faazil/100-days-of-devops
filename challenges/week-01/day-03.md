@@ -10,10 +10,13 @@
 
 ---
 
-## 🎯 Challenge Description
+## 🎯 Challenge Scenario
 
 Disable all app server SSH root access.
 
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -26,143 +29,193 @@ Disable all app server SSH root access.
 - ✅ Automated validation of your solution
 
 **What You Need to Know:**
-- **Command Line Tools**: `ssh`, `sudo`, `useradd`, `cat`, `grep`
+- **Command Line Tools**: `ssh`, `sudo`, `sed`, `systemctl`
 - **Key Concepts**:
-  - SSH remote access
-  - User and group management
-  - File permissions and ownership
-  - Linux file system hierarchy
-
-**Foundation from Earlier Challenges:**
-- Day 1: Linux User Setup with Non-interactive Shell (recommended)
-- Day 2: Temporary User Setup with Expiry Date (recommended)
+  - SSH security configuration
+  - Service management
+  - Text file editing
 
 **Required Skills:**
-- ✅ Execute commands with sudo privileges
-- ✅ Navigate Linux file system
-- ✅ Manage users and groups
-- ✅ Understand file permissions
+- ✅ Edit configuration files
+- ✅ Restart system services
+- ✅ Verify security settings
 
 ---
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## Steps
+---
 
-1. Login into each app server ([this way](./001.md))
-2. Modify `sshd_config` and restart sshd `service`
+## 💡 Understanding the Task
 
-    ```sh
-    sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-    sudo systemctl restart sshd
-    ```
+**Why Disable Root SSH Login?**
 
-## Good to Know?
+Allowing direct root SSH access is one of the biggest security risks. If attackers gain root credentials, they have complete control over your system.
 
-### SSH Security Best Practices
+**Security Benefits:**
+- Forces users to log in with personal accounts first
+- Creates an audit trail (who did what)
+- Enables sudo logging for all admin actions
+- Prevents automated brute-force attacks on root account
 
-- **Root Access**: Disable direct root login for security
-- **Alternative**: Use sudo for administrative tasks
-- **Key-based Auth**: Prefer SSH keys over passwords
-- **Port Changes**: Consider changing default SSH port (22)
-
-### SSH Configuration Options
-
-- `PermitRootLogin no`: Disable root login
-- `PasswordAuthentication no`: Disable password auth
-- `PubkeyAuthentication yes`: Enable key-based auth
-- `Port 2222`: Change default port
-
-### Security Benefits
-
-- **Audit Trail**: sudo logs all administrative actions
-- **Principle of Least Privilege**: Users get minimal required access
-- **Attack Surface**: Reduces brute force attack targets
-- **Accountability**: Individual user accountability vs shared root
+**Best Practice:** Never allow direct root SSH login. Always require users to connect as themselves, then use `sudo` for admin tasks.
 
 ---
 
-## ✅ Verification
+## 📝 Solution
 
-After completing the challenge, verify your solution by:
+### Step 1: Connect to App Server
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+SSH into each app server that needs to be secured:
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
-
----
-
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Linux skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 2 - Temporary User Setup with Expiry Date](./day-02.md)
-- **Next →**: [Day 4 - Script Execute Permissions](../week-01/day-04.md)
-
-### Similar Challenges (Linux)
-- [Day 1 - Linux User Setup with Non-interactive Shell](../week-01/day-01.md)
-- [Day 2 - Temporary User Setup with Expiry Date](../week-01/day-02.md)
-- [Day 5 - Install and Configuration Selinux](../week-01/day-05.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
 ```bash
-python3 ../../tools/progress.py --complete {day}
+ssh <your-username>@<server-name>
 ```
 
+💡 **Example:** `ssh tony@stapp01`
+
+**Note:** Repeat this process for all app servers in your environment.
+
+---
+
+### Step 2: Modify SSH Configuration
+
+Update the SSH server configuration to disable root login:
+
+```bash
+sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+```
+
+💡 **Example:** `sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config`
+
+**What this command does:**
+- `sudo` - Run with admin privileges
+- `sed -i` - Edit the file in-place (directly modify the file)
+- `'s/PermitRootLogin yes/PermitRootLogin no/g'` - Find "PermitRootLogin yes" and replace with "PermitRootLogin no"
+- `/etc/ssh/sshd_config` - SSH daemon configuration file
+
+**Expected result:** Command completes silently (no output = success).
+
+---
+
+### Step 3: Restart SSH Service
+
+Apply the configuration changes by restarting the SSH daemon:
+
+```bash
+sudo systemctl restart sshd
+```
+
+💡 **Example:** `sudo systemctl restart sshd`
+
+**Note:** Your current SSH connection will stay active. New connections will use the updated settings.
+
+---
+
+### Step 4: Verify the Change
+
+Confirm that root login is now disabled:
+
+```bash
+grep PermitRootLogin /etc/ssh/sshd_config
+```
+
+💡 **Example:** `grep PermitRootLogin /etc/ssh/sshd_config`
+
+**Expected output:**
+```
+PermitRootLogin no
+```
+
+The setting should now show "no" instead of "yes".
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete:
+
+- [ ] SSH config file shows `PermitRootLogin no`
+- [ ] SSH service restarted without errors
+- [ ] Configuration persists (check with `grep` command)
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**SSH service won't restart:**
+- Check configuration syntax: `sudo sshd -t`
+- Look for error messages in output
+- Verify you have correct permissions
+
+**Configuration didn't change:**
+- Check file permissions: `ls -l /etc/ssh/sshd_config`
+- Ensure you used `sudo` with sed command
+- Verify the exact text "PermitRootLogin yes" exists in file
+
+**Lost SSH access:**
+- Don't close your current session until verified
+- Test from another terminal first
+- Make sure you can still login as regular user
+
+**Still can connect as root:**
+- Ensure you restarted sshd: `sudo systemctl status sshd`
+- Check if there are multiple PermitRootLogin lines in config
+- Verify you're testing from a new SSH connection
+
+---
+
+## 💡 Good to Know
+
+**Manual Configuration Method:**
+```bash
+# Edit file manually if you prefer
+sudo vi /etc/ssh/sshd_config
+
+# Find this line:
+#PermitRootLogin yes
+
+# Change to:
+PermitRootLogin no
+
+# Save and exit, then test config
+sudo sshd -t
+
+# If no errors, restart
+sudo systemctl restart sshd
+```
+
+**Additional SSH Security:**
+```bash
+# Disable password authentication (use keys only)
+PasswordAuthentication no
+
+# Change default SSH port
+Port 2222
+
+# Limit users who can SSH
+AllowUsers user1 user2
+
+# Enable key-based authentication only
+PubkeyAuthentication yes
+```
+
+**Why This Matters:**
+- Root brute-force attacks are extremely common
+- Every server on the internet gets scanned constantly
+- Disabling root SSH is security 101
+- Required by most compliance standards (PCI-DSS, SOC 2)
+
+---
+
+## 📚 Navigation
+
+- **← Previous**: [Day 2 - Temporary User Setup with Expiry Date](./day-02.md)
+- **Next →**: [Day 4 - Script Execute Permissions](./day-04.md)
+
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+
+---
+
+*Security first - protect your root account!*

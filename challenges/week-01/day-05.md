@@ -10,15 +10,18 @@
 
 ---
 
-## 🎯 Challenge Description
+## 🎯 Challenge Scenario
 
 Following a security audit, the xFusionCorp Industries security team has opted to enhance application and server security with SELinux. To initiate testing, the following requirements have been established for App server 2 in the Stratos Datacenter:
 
-- Install the required SELinux packages.
-- Permanently disable SELinux for the time being; it will be re-enabled after necessary configuration changes.
-- No need to reboot the server, as a scheduled maintenance reboot is already planned for tonight.
-- Disregard the current status of SELinux via the command line; the final status after the reboot should be disabled.
+- Install the required SELinux packages
+- Permanently disable SELinux for the time being (it will be re-enabled after necessary configuration changes)
+- No need to reboot the server (a scheduled maintenance reboot is planned for tonight)
+- Disregard the current status via command line; the final status after reboot should be disabled
 
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -31,159 +34,199 @@ Following a security audit, the xFusionCorp Industries security team has opted t
 - ✅ Automated validation of your solution
 
 **What You Need to Know:**
-- **Command Line Tools**: `ssh`, `sudo`, `useradd`, `cat`, `grep`
+- **Command Line Tools**: `ssh`, `sudo`, `dnf/yum`, `vi/nano`
 - **Key Concepts**:
-  - SSH remote access
-  - User and group management
-  - File permissions and ownership
-  - Linux file system hierarchy
-
-**Foundation from Earlier Challenges:**
-- Day 1: Linux User Setup with Non-interactive Shell (recommended)
-- Day 2: Temporary User Setup with Expiry Date (recommended)
-- Day 3: Secure SSH Root Access (recommended)
+  - SELinux security framework
+  - Package management
+  - Configuration file editing
 
 **Required Skills:**
-- ✅ Execute commands with sudo privileges
-- ✅ Navigate Linux file system
-- ✅ Manage users and groups
-- ✅ Understand file permissions
+- ✅ Install packages using dnf/yum
+- ✅ Edit system configuration files
+- ✅ Understand SELinux modes
 
 ---
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## Steps
+---
 
-1. Install selinux packages:
+## 💡 Understanding the Task
 
-    ```sh
-    sudo dnf install selinux-policy selinux-policy-targeted policycoreutils policycoreutils-python-utils
-    ```
+**What is SELinux?**
 
-2. Modify file in `/etc/selinux/config:
+SELinux (Security-Enhanced Linux) is a security framework that provides mandatory access control. It adds an extra layer of security beyond traditional Linux permissions.
 
-    ```sh
-    vi /etc/selinux/config
-    ```
+**SELinux Modes:**
+- **Enforcing** - Policies are active, violations are blocked
+- **Permissive** - Policies logged but not enforced (audit mode)
+- **Disabled** - SELinux is completely off
 
-    add this line:
-
-    ```nano
-    SELINUX=disabled
-    ```
-
-## Good to Know?
-
-### SELinux (Security-Enhanced Linux)
-
-- **Purpose**: Mandatory Access Control (MAC) security framework
-- **Modes**: Enforcing, Permissive, Disabled
-- **Policies**: Targeted (default), Strict, MLS (Multi-Level Security)
-- **Context**: Every file/process has security context (user:role:type:level)
-
-### SELinux States
-
-- **Enforcing**: Policies actively enforced, violations blocked
-- **Permissive**: Policies logged but not enforced (audit mode)
-- **Disabled**: SELinux completely turned off
-
-### Key Commands
-
-- `getenforce`: Check current SELinux mode
-- `setenforce 0/1`: Temporarily set permissive/enforcing
-- `sestatus`: Detailed SELinux status
-- `sealert`: Analyze SELinux denials
-
-### Configuration Files
-
-- `/etc/selinux/config`: Main configuration
-- `/var/log/audit/audit.log`: SELinux violations
-- `/etc/selinux/targeted/`: Policy files
+**Why Disable (Temporarily)?**
+Sometimes applications don't work well with SELinux until properly configured. It's common to disable it initially, configure your apps, then create proper SELinux policies and re-enable.
 
 ---
 
-## ✅ Verification
+## 📝 Solution
 
-After completing the challenge, verify your solution by:
+### Step 1: Connect to App Server
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+SSH to App Server 2:
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
-
----
-
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Linux skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 4 - Script Execute Permissions](./day-04.md)
-- **Next →**: [Day 6 - Setup a Cron Job](../week-01/day-06.md)
-
-### Similar Challenges (Linux)
-- [Day 1 - Linux User Setup with Non-interactive Shell](../week-01/day-01.md)
-- [Day 2 - Temporary User Setup with Expiry Date](../week-01/day-02.md)
-- [Day 3 - Secure SSH Root Access](../week-01/day-03.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
 ```bash
-python3 ../../tools/progress.py --complete {day}
+ssh <your-username>@<server-name>
 ```
 
+💡 **Example:** `ssh steve@stapp02`
+
+---
+
+### Step 2: Install SELinux Packages
+
+Install all required SELinux packages:
+
+```bash
+sudo dnf install selinux-policy selinux-policy-targeted policycoreutils policycoreutils-python-utils -y
+```
+
+💡 **Example:** `sudo dnf install selinux-policy selinux-policy-targeted policycoreutils policycoreutils-python-utils -y`
+
+**What this installs:**
+- `selinux-policy` - Base SELinux policy
+- `selinux-policy-targeted` - Targeted policy (most common)
+- `policycoreutils` - SELinux management tools
+- `policycoreutils-python-utils` - Python utilities for SELinux
+
+**Expected result:** Packages install successfully. You'll see download progress and "Complete!" message.
+
+---
+
+### Step 3: Edit SELinux Configuration
+
+Open the SELinux config file:
+
+```bash
+sudo vi /etc/selinux/config
+```
+
+💡 **Example:** `sudo vi /etc/selinux/config`
+
+**Find the line:**
+```
+SELINUX=enforcing
+```
+
+**Change it to:**
+```
+SELINUX=disabled
+```
+
+**Save and exit:**
+- Press `i` for insert mode
+- Make the change
+- Press `ESC`
+- Type `:wq` and press ENTER
+
+---
+
+### Step 4: Verify Configuration
+
+Check that the configuration was saved correctly:
+
+```bash
+cat /etc/selinux/config | grep SELINUX=
+```
+
+💡 **Example:** `cat /etc/selinux/config | grep SELINUX=`
+
+**Expected output:**
+```
+SELINUX=disabled
+```
+
+**Note:** The change takes effect after the next reboot (scheduled for tonight).
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete:
+
+- [ ] SELinux packages installed successfully
+- [ ] Configuration file shows `SELINUX=disabled`
+- [ ] File saved properly (can view with `cat`)
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**Package installation fails:**
+- Check internet connectivity
+- Try `sudo yum install` if `dnf` not available
+- Verify repository configuration
+
+**Can't edit config file:**
+- Make sure you're using `sudo`
+- Try `nano` if not comfortable with `vi`
+- Check file permissions: `ls -l /etc/selinux/config`
+
+**Configuration not saving:**
+- Make sure you saved the file (`:wq` in vi)
+- Verify with: `cat /etc/selinux/config`
+- Check disk space: `df -h`
+
+**SELinux still showing as enforcing:**
+- Configuration only applies after reboot
+- Current status doesn't matter for this task
+- Check file content, not current status
+
+---
+
+## 💡 Good to Know
+
+**Alternative Editors:**
+```bash
+# Using nano (easier for beginners)
+sudo nano /etc/selinux/config
+
+# Using sed (one-liner)
+sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+```
+
+**Checking SELinux Status:**
+```bash
+# Check current SELinux mode
+getenforce
+
+# Detailed SELinux status
+sestatus
+
+# Temporarily set mode (until reboot)
+sudo setenforce 0  # Permissive
+sudo setenforce 1  # Enforcing
+```
+
+**SELinux Modes Explained:**
+- **Disabled**: SELinux is off (requires reboot to change)
+- **Permissive**: Logs violations but allows them (testing mode)
+- **Enforcing**: Actively blocks policy violations (production mode)
+
+**Why This Matters:**
+- SELinux can prevent applications from running
+- Common in RHEL/CentOS environments
+- Understanding modes helps troubleshooting
+- Proper SELinux configuration is production best practice
+
+---
+
+## 📚 Navigation
+
+- **← Previous**: [Day 4 - Script Execute Permissions](./day-04.md)
+- **Next →**: [Day 6 - Setup a Cron Job](./day-06.md)
+
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+
+---
+
+*SELinux - powerful security when configured correctly!*

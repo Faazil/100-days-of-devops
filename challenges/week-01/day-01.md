@@ -10,13 +10,13 @@
 
 ---
 
-## 🎯 Challenge Description
-
-**Difficulty**: 🟢 Beginner | **Time**: 10 minutes | **Category**: Linux Administration
-
-## 🎯 Objective
+## 🎯 Challenge Scenario
 
 Create a user with non-interactive shell for your organization on a specific server. This is essential for service accounts and automated processes that don't require interactive login capabilities.
+
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -46,191 +46,158 @@ Create a user with non-interactive shell for your organization on a specific ser
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## 🔧 Technologies Used
+---
 
-- Linux user management commands
-- SSH access
-- System administration
+## 💡 Understanding the Task
 
-## Steps
+**What's a Non-Interactive Shell?**
 
-1. First, login into the app server using `SSH`:
+Think of it as a "service account" - the user exists in the system but cannot log in directly. This is perfect for applications and services that need a user account but shouldn't allow human login.
 
-    ```sh
-    ssh user@app-server-ip or ssh user@server-name
-    ```
+**Common Use Cases:**
+- Web server users (nginx, apache)
+- Database service accounts (mysql, postgres)
+- Application runtime users
+- CI/CD automation accounts
 
-    > It will ask for user password, enter the correct password.
+**Why It Matters:** Security best practice - if a service gets compromised, attackers can't use it to log into your server.
 
-2. After login into server, run the following command to create user with non-interactive shell
+---
 
-    ```sh
-    sudo useradd -m -s /usr/sbin/nologin user-name
-    ```
+## 📝 Solution
 
-    `s`: for shell, here we are giving nologin shell
+### Step 1: Connect to Your Server
 
-    `m`: for user home directory, It will create a directory with user-name under /home
-
-3. Verify the result
-
-    ```sh
-    cat /etc/passwd
-    ```
-
-    It should give you a list of users where you will find your created user. It will look like this:
-    `kareem:x:1003:1004::/home/kareem:/usr/sbin/nologin`
-
-    Try to login using:
-
-    ```sh
-    sudo su user-name
-    ```
-
-    Output: `This account is currently not available.`
-
-## Verification & Troubleshooting
-
-### Common Issues
-
-- **Permission denied**: Ensure you have sudo privileges
-- **User already exists**: Check existing users with `cat /etc/passwd | grep username`
-- **Shell not found**: Verify `/usr/sbin/nologin` exists on your system
-
-### Additional Commands
+Access the target server using SSH:
 
 ```bash
+ssh <your-username>@<server-name>
+```
+
+💡 **Example:** `ssh tony@stapp01`
+
+Enter your password when prompted. You should see your server's command prompt after successful login.
+
+---
+
+### Step 2: Create the Non-Interactive User
+
+Execute this command to create a user that cannot log in interactively:
+
+```bash
+sudo useradd -m -s /usr/sbin/nologin <username>
+```
+
+💡 **Example:** `sudo useradd -m -s /usr/sbin/nologin kareem`
+
+**What each part does:**
+- `sudo` - Run with administrator privileges
+- `useradd` - Command to create new user
+- `-m` - Create a home directory for the user
+- `-s /usr/sbin/nologin` - Set shell to nologin (prevents interactive login)
+- `<username>` - The name of the user to create
+
+**Expected result:** Command completes silently (no output = success in Linux!)
+
+---
+
+### Step 3: Verify the User Was Created
+
+Check that the user exists and has the correct shell:
+
+```bash
+cat /etc/passwd | grep <username>
+```
+
+💡 **Example:** `cat /etc/passwd | grep kareem`
+
+**Expected output:**
+```
+kareem:x:1003:1004::/home/kareem:/usr/sbin/nologin
+```
+
+The important part is at the end: `/usr/sbin/nologin` - this confirms the non-interactive shell.
+
+---
+
+### Step 4: Test the Non-Interactive Shell
+
+Try to switch to the new user to verify they cannot log in:
+
+```bash
+sudo su - <username>
+```
+
+💡 **Example:** `sudo su - kareem`
+
+**Expected output:**
+```
+This account is currently not available.
+```
+
+✅ **Perfect!** This message confirms the non-interactive shell is working as intended.
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete, verify:
+
+- [ ] User appears in `/etc/passwd` with `/usr/sbin/nologin` shell
+- [ ] Attempting to switch to the user shows "account not available" message
+- [ ] Home directory was created (`ls -la /home/<username>`)
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**"Permission denied" error:**
+- Make sure you're using `sudo` before the `useradd` command
+
+**"User already exists" error:**
+- Check if user exists: `id <username>`
+- Either use a different username or delete the existing user: `sudo userdel -r <username>`
+
+**Shell path not found:**
+- Try `/bin/false` instead of `/usr/sbin/nologin`
+- Verify the path exists: `ls -la /usr/sbin/nologin`
+
+**No home directory created:**
+- Make sure you included the `-m` flag in the useradd command
+
+---
+
+## 💡 Good to Know
+
+**Alternative Non-Interactive Shells:**
+- `/usr/sbin/nologin` - Modern standard (shows a polite message)
+- `/bin/false` - Older approach (just returns false)
+- `/sbin/nologin` - Alternative path on some systems
+
+**Checking User Details:**
+```bash
+# View user ID and groups
+id <username>
+
 # List all users with nologin shell
 grep nologin /etc/passwd
 
-# Check user details
-id username
-
-# Remove user if needed
-sudo userdel -r username
+# View home directory permissions
+ls -ld /home/<username>
 ```
 
-## Related Topics
-
-- [Day 002: Temporary User Setup with Expiry Date](./002.md)
-- [Day 003: Secure SSH Root Access](./003.md)
-- Linux user management best practices
-
-## Key Takeaways
-
-- Non-interactive shells prevent direct user login
-- Service accounts should use `/usr/sbin/nologin` or `/bin/false`
-- Always verify user creation with multiple methods
-- Understanding user shells is crucial for system security
-
-## Good to Know?
-
-### Linux User Management
-
-- **User Types**: Regular users, system users, service accounts
-- **Shell Types**: `/bin/bash` (interactive), `/usr/sbin/nologin` (non-interactive), `/bin/false` (deny access)
-- **User Database**: `/etc/passwd` stores user information, `/etc/shadow` stores passwords
-
-### useradd Command Options
-
-- `-m`: Create home directory
-- `-s`: Specify shell
-- `-d`: Custom home directory path
-- `-g`: Primary group
-- `-G`: Additional groups
-- `-e`: Account expiry date
-
-### Security Best Practices
-
-- Service accounts should use non-interactive shells
-- Regular users need interactive shells like `/bin/bash`
-- Always verify user creation with multiple commands
-- Use principle of least privilege
-
-**Next Challenge**: [Day 002 - Temporary User Setup](./002.md)
+**Real-World Usage:**
+When you install services like Nginx or PostgreSQL, they typically create users with non-interactive shells automatically. This is the same principle you're practicing here.
 
 ---
 
-## ✅ Verification
+## 📚 Navigation
 
-After completing the challenge, verify your solution by:
+- **Next →**: [Day 2 - Temporary User Setup with Expiry Date](./day-02.md)
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
-
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
 ---
 
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Linux skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **Next →**: [Day 2 - Temporary User Setup with Expiry Date](../week-01/day-02.md)
-
-### Similar Challenges (Linux)
-- [Day 2 - Temporary User Setup with Expiry Date](../week-01/day-02.md)
-- [Day 3 - Secure SSH Root Access](../week-01/day-03.md)
-- [Day 5 - Install and Configuration Selinux](../week-01/day-05.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
-```bash
-python3 ../../tools/progress.py --complete {day}
-```
-
+*Simple, secure user management - the foundation of Linux system administration!*

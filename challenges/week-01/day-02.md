@@ -10,12 +10,15 @@
 
 ---
 
-## 🎯 Challenge Description
+## 🎯 Challenge Scenario
 
-As part of the temporary assignment to the Nautilus project, a developer named yousuf requires access for a limited duration. To ensure smooth access management, a temporary user account with an expiry date is needed. Here's what you need to do:
+As part of the temporary assignment to the Nautilus project, a developer named yousuf requires access for a limited duration. To ensure smooth access management, a temporary user account with an expiry date is needed.
 
 > Create a user named `yousuf` on `App Server 1` in Stratos Datacenter. Set the expiry date to `2024-01-28`, ensuring the user is created in lowercase as per standard protocol.
 
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -28,146 +31,184 @@ As part of the temporary assignment to the Nautilus project, a developer named y
 - ✅ Automated validation of your solution
 
 **What You Need to Know:**
-- **Command Line Tools**: `ssh`, `sudo`, `useradd`, `cat`, `grep`
+- **Command Line Tools**: `ssh`, `sudo`, `useradd`, `chage`
 - **Key Concepts**:
-  - SSH remote access
-  - User and group management
-  - File permissions and ownership
-  - Linux file system hierarchy
-
-**Foundation from Earlier Challenges:**
-- Day 1: Linux User Setup with Non-interactive Shell (recommended)
+  - User account management
+  - Account expiration dates
+  - Date formats (YYYY-MM-DD)
 
 **Required Skills:**
-- ✅ Execute commands with sudo privileges
-- ✅ Navigate Linux file system
-- ✅ Manage users and groups
-- ✅ Understand file permissions
+- ✅ Create users with specific attributes
+- ✅ Set account expiry dates
+- ✅ Verify account properties
 
 ---
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## Steps
+---
 
-1. Follow the [Day 01](./001.md) to connect server and run the following command:
+## 💡 Understanding the Task
 
-    ```sh
-    sudo useradd -m -e 2024-01-28 yousuf
-    ```
+**What's a Temporary User Account?**
 
-2. Verify
+This is an account that automatically becomes unusable after a specified date. The user can log in and work normally until the expiry date, after which the system blocks their access.
 
-    ```sh
-    cat /etc/passwd
-    sudo su yousuf
-    ```
+**Common Use Cases:**
+- Contractors with fixed-term contracts
+- Temporary project team members
+- Intern or trainee accounts
+- Time-limited testing accounts
 
-## Good to Know?
-
-### User Account Expiry
-
-- **Purpose**: Automatically disable accounts after specified date
-- **Format**: YYYY-MM-DD (ISO 8601 standard)
-- **Check Expiry**: `chage -l username` shows account aging info
-- **Extend Expiry**: `sudo chage -E 2024-12-31 username`
-
-### Temporary Account Management
-
-- **Best Practice**: Always set expiry for temporary accounts
-- **Monitoring**: Use `chage -l` to track account status
-- **Cleanup**: Expired accounts remain but cannot login
-- **Removal**: Use `userdel -r username` to completely remove
-
-### Related Commands
-
-- `chage`: Modify user password expiry information
-- `usermod -e`: Modify existing user's expiry date
-- `passwd -S`: Check password status
+**Why It Matters:** Automatic expiration means you don't have to remember to manually disable accounts. It's a security best practice that reduces the risk of forgotten temporary access.
 
 ---
 
-## ✅ Verification
+## 📝 Solution
 
-After completing the challenge, verify your solution by:
+### Step 1: Connect to Your Server
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+Access the target app server:
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
-
----
-
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Linux skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 1 - Linux User Setup with Non-interactive Shell](./day-01.md)
-- **Next →**: [Day 3 - Secure SSH Root Access](../week-01/day-03.md)
-
-### Similar Challenges (Linux)
-- [Day 1 - Linux User Setup with Non-interactive Shell](../week-01/day-01.md)
-- [Day 3 - Secure SSH Root Access](../week-01/day-03.md)
-- [Day 5 - Install and Configuration Selinux](../week-01/day-05.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
 ```bash
-python3 ../../tools/progress.py --complete {day}
+ssh <your-username>@<server-name>
 ```
 
+💡 **Example:** `ssh tony@stapp01`
+
+---
+
+### Step 2: Create User with Expiry Date
+
+Create the user with an automatic expiration date:
+
+```bash
+sudo useradd -m -e 2024-01-28 yousuf
+```
+
+💡 **Example:** `sudo useradd -m -e 2024-01-28 yousuf`
+
+**What each part does:**
+- `sudo` - Run with administrator privileges
+- `useradd` - Create new user
+- `-m` - Create home directory
+- `-e 2024-01-28` - Set expiry date (YYYY-MM-DD format)
+- `yousuf` - Username to create
+
+**Expected result:** Command completes silently. After 2024-01-28, this account will be disabled automatically.
+
+---
+
+### Step 3: Verify User Was Created
+
+Check that the user exists:
+
+```bash
+cat /etc/passwd | grep yousuf
+```
+
+💡 **Example:** `cat /etc/passwd | grep yousuf`
+
+**Expected output:**
+```
+yousuf:x:1002:1002::/home/yousuf:/bin/bash
+```
+
+---
+
+### Step 4: Confirm Expiry Date
+
+Verify the expiration date was set correctly:
+
+```bash
+sudo chage -l yousuf
+```
+
+💡 **Example:** `sudo chage -l yousuf`
+
+**Expected output:**
+```
+...
+Account expires: Jan 28, 2024
+...
+```
+
+The `chage -l` command shows all account aging information, including the expiry date.
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete:
+
+- [ ] User appears in `/etc/passwd`
+- [ ] `chage -l` shows correct expiry date (2024-01-28)
+- [ ] Can switch to user: `sudo su - yousuf` (works before expiry)
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**"Invalid date format" error:**
+- Date must be in YYYY-MM-DD format
+- Example: `2024-01-28` not `01/28/2024`
+
+**"User already exists" error:**
+- Check: `id yousuf`
+- Delete if needed: `sudo userdel -r yousuf`
+- Then recreate with correct expiry date
+
+**Can't see expiry date:**
+- Use `sudo chage -l yousuf` (requires sudo)
+- Check Account expires line in output
+
+**Permission denied:**
+- Make sure you're using `sudo` before `useradd`
+
+---
+
+## 💡 Good to Know
+
+**Managing Account Expiry:**
+```bash
+# View account expiry details
+sudo chage -l <username>
+
+# Change expiry date for existing user
+sudo usermod -e 2024-12-31 <username>
+
+# Remove expiry (set to never expire)
+sudo usermod -e "" <username>
+```
+
+**Date Format:**
+- Always use: YYYY-MM-DD
+- Example: 2024-12-31
+- This is ISO 8601 standard format
+
+**What Happens After Expiry:**
+- User cannot log in
+- Account still exists in system
+- Files and home directory remain
+- Can be reactivated by changing expiry date
+
+**Real-World Usage:**
+Organizations use this for:
+- 30-day contractor access
+- 90-day trial periods
+- Seasonal worker accounts
+- Automatic compliance with termination dates
+
+---
+
+## 📚 Navigation
+
+- **← Previous**: [Day 1 - Linux User Setup with Non-interactive Shell](./day-01.md)
+- **Next →**: [Day 3 - Secure SSH Root Access](./day-03.md)
+
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+
+---
+
+*Automated access management - set it and forget it!*

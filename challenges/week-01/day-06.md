@@ -10,13 +10,16 @@
 
 ---
 
-## 🎯 Challenge Description
+## 🎯 Challenge Scenario
 
-The `Nautilus` system admins team has prepared scripts to automate several day-to-day tasks. They want them to be deployed on all app servers in `Stratos DC` on a set schedule. Before that they need to test similar functionality with a sample cron job. Therefore, perform the steps below:
+The Nautilus system admins team has prepared scripts to automate several day-to-day tasks. They want them to be deployed on all app servers in Stratos DC on a set schedule. Before that they need to test similar functionality with a sample cron job. Therefore, perform the steps below:
 
-- Install `cronie` package on all `Nautilus` app servers and start `crond` service.
-- Add a cron `*/5 * * * * echo hello > /tmp/cron_text` for `root` user.
+- Install `cronie` package on all Nautilus app servers and start `crond` service
+- Add a cron `*/5 * * * * echo hello > /tmp/cron_text` for `root` user
 
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -29,236 +32,274 @@ The `Nautilus` system admins team has prepared scripts to automate several day-t
 - ✅ Automated validation of your solution
 
 **What You Need to Know:**
-- **Command Line Tools**: `ssh`, `sudo`, `useradd`, `cat`, `grep`
+- **Command Line Tools**: `ssh`, `sudo`, `yum`, `systemctl`, `crontab`
 - **Key Concepts**:
-  - SSH remote access
-  - User and group management
-  - File permissions and ownership
-  - Linux file system hierarchy
-
-**Foundation from Earlier Challenges:**
-- Day 2: Temporary User Setup with Expiry Date (recommended)
-- Day 3: Secure SSH Root Access (recommended)
-- Day 5: Install and Configuration Selinux (recommended)
+  - Cron scheduling syntax
+  - Service management
+  - Automated task scheduling
 
 **Required Skills:**
-- ✅ Execute commands with sudo privileges
-- ✅ Navigate Linux file system
-- ✅ Manage users and groups
-- ✅ Understand file permissions
+- ✅ Install packages
+- ✅ Manage system services
+- ✅ Configure cron jobs
+- ✅ Understand cron syntax
 
 ---
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## Steps
+---
 
-1. Login into each server using ssh (check [day01](./001.md))
-2. Install `cronie` package into centos:
+## 💡 Understanding the Task
 
-    ```sh
-    sudo yum install cronie -y
-    ```
+**What is Cron?**
 
-3. Start crond service
+Cron is Linux's task scheduler. It runs commands automatically at specified times - perfect for backups, cleanups, monitoring, and other repetitive tasks.
 
-    ```sh
-    sudo systemctl enable crond
-    sudo systemctl start crond
-    ```
-
-4. Create cron schedule:
-
-    ```sh
-    sudo crontab -e
-    */5 * * * * echo hello > /tmp/cron_text
-    ```
-
-5. Verify crontab:
-
-    ```sh
-    sudo crontab -l
-    ```
-
-    and wait 5 minutes to check cron_text in /tmp/
-
-## Automation Script
-
-```sh
-#!/bin/sh
-
-# setup_cron_job.sh
-# Script to setup cron job on CentOS for Nautilus app servers
-
-set -e  # Exit on any error
-
-echo "=== Setting up Cron Job on CentOS ==="
-
-# Step 1: Install cronie package
-echo "Installing cronie package..."
-if ! rpm -q cronie &>/dev/null; then
-    sudo yum install cronie -y
-    echo "✓ cronie package installed successfully"
-else
-    echo "✓ cronie package already installed"
-fi
-
-# Step 2: Start and enable crond service
-echo "Starting and enabling crond service..."
-sudo systemctl start crond
-sudo systemctl enable crond
-
-# Verify service is running
-if systemctl is-active --quiet crond; then
-    echo "✓ crond service is running"
-else
-    echo "✗ Failed to start crond service"
-    exit 1
-fi
-
-# Step 3: Add cron job for root user
-echo "Adding cron job for root user..."
-
-# Define the cron job
-CRON_JOB="*/5 * * * * echo hello > /tmp/cron_text"
-
-# Check if cron job already exists
-if sudo crontab -l 2>/dev/null | grep -q "echo hello > /tmp/cron_text"; then
-    echo "✓ Cron job already exists"
-else
-    # Add the cron job
-    (sudo crontab -l 2>/dev/null || true; echo "$CRON_JOB") | sudo crontab -
-    echo "✓ Cron job added successfully"
-fi
-
-# Step 4: Verify the setup
-echo "Verifying cron job setup..."
-echo "Current cron jobs for root user:"
-sudo crontab -l
-
-echo ""
-echo "=== Setup Complete ==="
-echo "The cron job will run every 5 minutes and write 'hello' to /tmp/cron_text"
-echo "To monitor: sudo tail -f /var/log/cron"
-echo "To check output: cat /tmp/cron_text (after 5+ minutes)"
-
-# Optional: Show service status
-echo ""
-echo "Crond service status:"
-sudo systemctl status crond --no-pager -l
+**Cron Schedule Format:**
+```
+*/5  *  *  *  *  command
+ |   |  |  |  |
+ |   |  |  |  └─ Day of week (0-7, Sun=0 or 7)
+ |   |  |  └──── Month (1-12)
+ |   |  └─────── Day of month (1-31)
+ |   └────────── Hour (0-23)
+ └────────────── Minute (0-59)
 ```
 
-## Good to Know?
-
-### Cron Job Scheduling
-
-- **Format**: `minute hour day month weekday command`
-- **Ranges**: 0-59 (min), 0-23 (hour), 1-31 (day), 1-12 (month), 0-7 (weekday)
-- **Special Characters**: `*` (any), `,` (list), `-` (range), `/` (step)
-- **Examples**: `0 2 * * *` (daily 2 AM), `*/15 * * * *` (every 15 min)
-
-### Cron Types
-
-- **User Crontab**: `crontab -e` (per-user scheduling)
-- **System Crontab**: `/etc/crontab` (system-wide)
-- **Cron Directories**: `/etc/cron.d/`, `/etc/cron.daily/`
-
-### Best Practices
-
-- **Absolute Paths**: Always use full paths in cron jobs
-- **Environment**: Set PATH, SHELL, MAILTO variables
-- **Logging**: Redirect output to files for debugging
-- **Testing**: Test commands manually before scheduling
-
-### Troubleshooting
-
-- **Logs**: Check `/var/log/cron` for execution history
-- **Environment**: Cron runs with minimal environment
-- **Permissions**: Ensure user has execute permissions
+**Why It Matters:** Automation is at the heart of DevOps. Cron is one of the oldest and most reliable automation tools in Linux.
 
 ---
 
-## ✅ Verification
+## 📝 Solution
 
-After completing the challenge, verify your solution by:
+### Step 1: Connect to App Servers
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+SSH to each app server (repeat for all servers):
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
+```bash
+ssh <your-username>@<server-name>
+```
 
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
+💡 **Example:** `ssh tony@stapp01`
 
 ---
 
-## 📚 Learning Notes
+### Step 2: Install Cronie Package
 
-### Key Concepts
+Install the cron daemon package:
 
-This challenge covers the following concepts:
-- Practical application of Linux skills
-- Real-world DevOps scenarios
-- Best practices for production environments
+```bash
+sudo yum install cronie -y
+```
 
-### Common Pitfalls
+💡 **Example:** `sudo yum install cronie -y`
 
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
+**What this does:**
+- Installs the cron daemon and utilities
+- `-y` automatically answers "yes" to prompts
 
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
+**Expected result:** "Complete!" message after installation.
 
 ---
 
-## 🔗 Related Challenges
+### Step 3: Start and Enable Crond Service
+
+Start the cron service and enable it to start on boot:
+
+```bash
+sudo systemctl enable crond
+sudo systemctl start crond
+```
+
+💡 **Example:** 
+```bash
+sudo systemctl enable crond
+sudo systemctl start crond
+```
+
+**What each command does:**
+- `enable` - Service starts automatically on boot
+- `start` - Start the service now
+
+**Expected result:** Commands complete silently or show "Created symlink..." message.
+
+---
+
+### Step 4: Verify Service is Running
+
+Confirm crond is active:
+
+```bash
+sudo systemctl status crond
+```
+
+💡 **Example:** `sudo systemctl status crond`
+
+**Expected output:**
+```
+● crond.service - Command Scheduler
+   Loaded: loaded...
+   Active: active (running)...
+```
+
+Look for "active (running)" in green.
+
+---
+
+### Step 5: Add Cron Job for Root
+
+Edit root's crontab:
+
+```bash
+sudo crontab -e
+```
+
+💡 **Example:** `sudo crontab -e`
+
+**Add this line:**
+```
+*/5 * * * * echo hello > /tmp/cron_text
+```
+
+**What this means:**
+- `*/5` - Every 5 minutes
+- `* * * *` - Every hour, day, month, day of week
+- `echo hello > /tmp/cron_text` - Write "hello" to file
+
+**Save and exit:**
+- Press `i` for insert mode
+- Paste or type the cron line
+- Press `ESC`
+- Type `:wq` and ENTER
+
+---
+
+### Step 6: Verify Cron Job Added
+
+List root's cron jobs:
+
+```bash
+sudo crontab -l
+```
+
+💡 **Example:** `sudo crontab -l`
+
+**Expected output:**
+```
+*/5 * * * * echo hello > /tmp/cron_text
+```
+
+---
+
+### Step 7: Test the Cron Job
+
+Wait 5 minutes, then check if the file was created:
+
+```bash
+cat /tmp/cron_text
+```
+
+💡 **Example:** `cat /tmp/cron_text`
+
+**Expected output:**
+```
+hello
+```
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete:
+
+- [ ] Cronie package installed on all app servers
+- [ ] Crond service running (`systemctl status crond`)
+- [ ] Cron job appears in `sudo crontab -l`
+- [ ] File `/tmp/cron_text` exists with "hello" after 5 minutes
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**Package not found:**
+- Try `dnf` instead of `yum`
+- Check internet connectivity
+- Verify repo configuration
+
+**Service won't start:**
+- Check logs: `sudo journalctl -u crond`
+- Verify installation: `rpm -q cronie`
+- Try `sudo systemctl restart crond`
+
+**Cron job not running:**
+- Check cron syntax is correct
+- Verify crond service is running
+- Check system logs: `sudo tail -f /var/log/cron`
+- Make sure you used `sudo crontab -e` (for root's crontab)
+
+**File not created:**
+- Wait full 5 minutes after adding cron
+- Check file permissions on /tmp
+- Verify cron job with: `sudo crontab -l`
+
+---
+
+## 💡 Good to Know
+
+**Cron Syntax Examples:**
+```bash
+# Every minute
+* * * * * command
+
+# Every hour
+0 * * * * command
+
+# Every day at 2:30 AM
+30 2 * * * command
+
+# Every Monday at 9 AM
+0 9 * * 1 command
+
+# First day of every month
+0 0 1 * * command
+```
+
+**Useful Cron Commands:**
+```bash
+# Edit user's crontab
+crontab -e
+
+# List user's cron jobs
+crontab -l
+
+# Edit root's crontab
+sudo crontab -e
+
+# Remove all cron jobs
+crontab -r
+
+# View cron logs
+sudo tail -f /var/log/cron
+```
+
+**Common Use Cases:**
+- Automated backups (daily at 2 AM)
+- Log rotation (weekly)
+- System health checks (every 5 minutes)
+- Database cleanups (monthly)
+- Report generation (daily)
+
+---
+
+## 📚 Navigation
 
 - **← Previous**: [Day 5 - Install and Configuration Selinux](./day-05.md)
-- **Next →**: [Day 7 - Linux SSH Automation](../week-01/day-07.md)
+- **Next →**: [Day 7 - Linux SSH Automation](./day-07.md)
 
-### Similar Challenges (Linux)
-- [Day 1 - Linux User Setup with Non-interactive Shell](../week-01/day-01.md)
-- [Day 2 - Temporary User Setup with Expiry Date](../week-01/day-02.md)
-- [Day 3 - Secure SSH Root Access](../week-01/day-03.md)
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
 ---
 
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
-```bash
-python3 ../../tools/progress.py --complete {day}
-```
-
+*Automate everything - let cron do the work!*

@@ -10,12 +10,15 @@
 
 ---
 
-## 🎯 Challenge Description
+## 🎯 Challenge Scenario
 
-The system admins team of xFusionCorp Industries has set up some scripts on jump host that run on regular intervals and perform operations on all app servers in Stratos Datacenter. To make these scripts work properly we need to make sure the thor user on jump host has password-less SSH access to all app servers through their respective sudo users (i.e tony for app server 1). Based on the requirements, perform the following:
+The system admins team of xFusionCorp Industries has set up some scripts on jump host that run on regular intervals and perform operations on all app servers in Stratos Datacenter. To make these scripts work properly we need to make sure the thor user on jump host has password-less SSH access to all app servers through their respective sudo users (i.e tony for app server 1).
 
 Set up a password-less authentication from user thor on jump host to all app servers through their respective sudo users.
 
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -28,170 +31,217 @@ Set up a password-less authentication from user thor on jump host to all app ser
 - ✅ Automated validation of your solution
 
 **What You Need to Know:**
-- **Command Line Tools**: `ssh`, `sudo`, `useradd`, `cat`, `grep`
+- **Command Line Tools**: `ssh-keygen`, `ssh-copy-id`, `ssh`
 - **Key Concepts**:
-  - SSH remote access
-  - User and group management
-  - File permissions and ownership
-  - Linux file system hierarchy
-
-**Foundation from Earlier Challenges:**
-- Day 3: Secure SSH Root Access (recommended)
-- Day 5: Install and Configuration Selinux (recommended)
-- Day 6: Setup a Cron Job (recommended)
+  - SSH key-based authentication
+  - Public/private key pairs
+  - Authorized keys
 
 **Required Skills:**
-- ✅ Execute commands with sudo privileges
-- ✅ Navigate Linux file system
-- ✅ Manage users and groups
-- ✅ Understand file permissions
+- ✅ Generate SSH keys
+- ✅ Copy keys to remote servers
+- ✅ Test password-less authentication
 
 ---
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## Steps
+---
 
-1. On jump server, run the following command:
+## 💡 Understanding the Task
 
-    ```sh
-    ssh-keygen -t rsa -b 2048
-    ```
+**What is Password-less SSH?**
 
-    It will generate an ssh pub key and private key. We are going to share the pub key to all the app server for respective users.
+Instead of typing a password every time you SSH to a server, you use cryptographic keys. The server recognizes your key and lets you in automatically.
 
-2. Login into each app server and run the following command:
+**How It Works:**
+1. Generate a key pair (public + private)
+2. Copy public key to remote server
+3. Server recognizes your private key
+4. Auto-login without password
 
-    ```sh
-    mkdir -p .ssh
-    vi .ssh/authorized_keys
-    ```
+**Why It Matters:**
+- Essential for automation (scripts can't type passwords)
+- More secure than passwords (no brute-force attacks)
+- Required for CI/CD pipelines
+- Standard practice in DevOps
 
-    copy id_rsa.pub key from jump host inside /home/thor/.ssh/ and paste it there
+---
 
-## Optimized Automated Solution
+## 📝 Solution
 
-```sh
-#!/bin/sh
+### Step 1: Generate SSH Key Pair
 
-ssh-copy-id user@host
+On the jump host, generate an SSH key:
+
+```bash
+ssh-keygen -t rsa -b 2048
 ```
 
-It will create .ssh directory for each app server if doesn't exist then copy paste host key to `authorized_keys` file.
+💡 **Example:** `ssh-keygen -t rsa -b 2048`
 
-## Good to Know?
+**What this does:**
+- `-t rsa` - Use RSA algorithm
+- `-b 2048` - 2048-bit key (good security)
 
-### SSH Key Authentication
+**During generation:**
+- Press ENTER to accept default location (`~/.ssh/id_rsa`)
+- Press ENTER for no passphrase (required for automation)
+- Press ENTER again to confirm
 
-- **Key Types**: RSA (2048+ bits), Ed25519 (modern, faster), ECDSA
-- **Components**: Private key (keep secret), Public key (share freely)
-- **Location**: `~/.ssh/id_rsa` (private), `~/.ssh/id_rsa.pub` (public)
-- **Security**: Much stronger than password authentication
-
-### SSH Key Management
-
-- **Generation**: `ssh-keygen -t rsa -b 4096` (strong RSA key)
-- **Copy**: `ssh-copy-id user@host` (automated deployment)
-- **Manual**: Copy public key to `~/.ssh/authorized_keys`
-- **Permissions**: `700` for `.ssh/`, `600` for private keys, `644` for public keys
-
-### Automation Benefits
-
-- **Password-less**: No interactive password prompts
-- **Scripting**: Enables automated deployments and backups
-- **Security**: Eliminates password brute force attacks
-- **Audit**: Key-based access is more traceable
-
-### Best Practices
-
-- **Passphrase**: Protect private keys with passphrases
-- **Agent**: Use `ssh-agent` for passphrase caching
-- **Rotation**: Regularly rotate SSH keys
-- **Monitoring**: Track key usage and access patterns
+**Expected result:**
+```
+Your identification has been saved in /home/thor/.ssh/id_rsa
+Your public key has been saved in /home/thor/.ssh/id_rsa.pub
+```
 
 ---
 
-## ✅ Verification
+### Step 2: Copy Public Key to App Servers
 
-After completing the challenge, verify your solution by:
+Use `ssh-copy-id` to copy your public key to each app server:
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+```bash
+ssh-copy-id <username>@<server-name>
+```
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
+💡 **Examples:**
+```bash
+ssh-copy-id tony@stapp01
+ssh-copy-id steve@stapp02
+ssh-copy-id banner@stapp03
+```
 
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
+**What this does:**
+- Automatically copies your public key
+- Adds it to `~/.ssh/authorized_keys` on the remote server
+- Sets correct permissions
 
----
+**During copy:**
+- Type "yes" to accept server fingerprint
+- Enter the user's password when prompted
 
-## 📚 Learning Notes
+**Expected result:**
+```
+Number of key(s) added: 1
+```
 
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Linux skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
+**Repeat for all app servers** in your environment.
 
 ---
 
-## 🔗 Related Challenges
+### Step 3: Test Password-less Login
+
+Verify you can now SSH without a password:
+
+```bash
+ssh <username>@<server-name>
+```
+
+💡 **Example:** `ssh tony@stapp01`
+
+**Expected result:** You should connect immediately without being asked for a password!
+
+Test all servers to confirm password-less access works.
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete:
+
+- [ ] SSH key pair generated on jump host
+- [ ] Public key exists at `~/.ssh/id_rsa.pub`
+- [ ] Key copied to all app servers
+- [ ] Can SSH to all servers without password
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**ssh-keygen fails:**
+- Check if `.ssh` directory exists: `ls -la ~/.ssh`
+- Create if needed: `mkdir -p ~/.ssh`
+- Verify permissions: `chmod 700 ~/.ssh`
+
+**ssh-copy-id command not found:**
+- Use manual method (see "Good to Know" section)
+- Or install: `sudo yum install openssh-clients`
+
+**Still asking for password:**
+- Verify key was copied: `ssh <user>@<server> "cat ~/.ssh/authorized_keys"`
+- Check file permissions on remote: `~/.ssh` should be `700`, `authorized_keys` should be `600`
+- Ensure using correct username for each server
+
+**Permission denied (publickey):**
+- Key might not be copied correctly
+- Check remote server SSH config allows key authentication
+- Verify private key exists locally: `ls -l ~/.ssh/id_rsa`
+
+---
+
+## 💡 Good to Know
+
+**Manual Key Copy Method:**
+If `ssh-copy-id` isn't available:
+
+```bash
+# 1. View your public key
+cat ~/.ssh/id_rsa.pub
+
+# 2. SSH to remote server (with password)
+ssh user@server
+
+# 3. Create .ssh directory if needed
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+# 4. Add public key to authorized_keys
+nano ~/.ssh/authorized_keys
+# Paste your public key
+chmod 600 ~/.ssh/authorized_keys
+
+# 5. Exit and test
+exit
+ssh user@server  # Should work without password
+```
+
+**Key Types:**
+```bash
+# RSA (traditional, widely supported)
+ssh-keygen -t rsa -b 4096
+
+# Ed25519 (modern, faster, smaller)
+ssh-keygen -t ed25519
+
+# ECDSA (another option)
+ssh-keygen -t ecdsa -b 521
+```
+
+**Security Best Practices:**
+- Use passphrase for keys (except automation)
+- Use 4096-bit RSA for higher security
+- Regularly rotate SSH keys
+- Never share private keys
+- Use separate keys for different purposes
+
+**Automation Use Cases:**
+- CI/CD pipeline deployments
+- Automated backups across servers
+- Configuration management (Ansible)
+- Monitoring and health checks
+- Log collection scripts
+
+---
+
+## 📚 Navigation
 
 - **← Previous**: [Day 6 - Setup a Cron Job](./day-06.md)
-- **Next →**: [Day 8 - Setup Ansible](../week-02/day-08.md)
+- **Next →**: [Week 2 - Day 8](../week-02/day-08.md)
 
-### Similar Challenges (Linux)
-- [Day 1 - Linux User Setup with Non-interactive Shell](../week-01/day-01.md)
-- [Day 2 - Temporary User Setup with Expiry Date](../week-01/day-02.md)
-- [Day 3 - Secure SSH Root Access](../week-01/day-03.md)
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
 ---
 
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
-```bash
-python3 ../../tools/progress.py --complete {day}
-```
-
+*Password-less SSH - automation's best friend!*

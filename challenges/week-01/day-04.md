@@ -10,12 +10,15 @@
 
 ---
 
-## 🎯 Challenge Description
+## 🎯 Challenge Scenario
 
-In a bid to automate backup processes, the `xFusionCorp Industries` sysadmin team has developed a new bash script named `xfusioncorp.sh`. While the script has been distributed to all necessary servers, it lacks executable permissions on `App Server 1` within the Stratos Datacenter.
+In a bid to automate backup processes, the xFusionCorp Industries sysadmin team has developed a new bash script named `xfusioncorp.sh`. While the script has been distributed to all necessary servers, it lacks executable permissions on App Server 1 within the Stratos Datacenter.
 
-Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script on `App Server 1`. Additionally, ensure that all users have the capability to execute it.
+Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script on App Server 1. Additionally, ensure that all users have the capability to execute it.
 
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+
+---
 
 ## 📋 Prerequisites
 
@@ -28,231 +31,193 @@ Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script
 - ✅ Automated validation of your solution
 
 **What You Need to Know:**
+- **Command Line Tools**: `ssh`, `chmod`, `ls`
 - **Key Concepts**:
-  - DevOps workflow and principles
-  - CI/CD pipeline concepts
-  - Automation strategies
-  - Infrastructure management
+  - Linux file permissions
+  - Permission modes (read, write, execute)
+  - Octal permission notation
 
 **Required Skills:**
-- ✅ Understand DevOps methodologies
-- ✅ Integrate multiple tools
-- ✅ Implement automation workflows
+- ✅ Understand Linux permission system
+- ✅ Modify file permissions
+- ✅ Verify permission changes
 
 ---
 
 **🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
 
-## Steps
+---
 
-1. Connect to App server 1
-2. Check the current file permission status:
+## 💡 Understanding the Task
 
-    ```sh
-    ls -la /tmp
-    ```
+**What Are Execute Permissions?**
 
-    ```txt
-    4 ---------- 1 root root   40 Jul 30 02:21 xfusioncorp.sh
-    ```
+In Linux, files need execute permission to run as programs or scripts. Without it, even a perfectly written script won't run.
 
-3. Run the following command to update permissions:
+**Permission Types:**
+- **Read (r)** - Can view file contents
+- **Write (w)** - Can modify file
+- **Execute (x)** - Can run file as program
 
-    ```sh
-    chmod 755 /tmp/xfusioncorp.sh
-    ```
+**Who Gets Permissions:**
+- **User (owner)** - The file's owner
+- **Group** - Users in the file's group
+- **Others** - Everyone else
 
-4. Verify the results:
-
-    ```sh
-    ls -la /tmp
-    ```
-
-    ```txt
-    4 -rwxr-xr-x 1 root root   40 Jul 30 02:21 xfusioncorp.sh
-    ```
-
-## Understanding `chmod` in Linux
-
-The `chmod` command in Linux is used to change the permissions (mode) of a file or directory. File permissions determine who can read, write, or execute a file.
-
-### File Permission Basics
-
-Each file in Linux has three types of permissions:
-
-- Read (r) – Permission to read the file (4)
-- Write (w) – Permission to modify the file (2)
-- Execute (x) – Permission to run the file as a program (1)
-
-Permissions are set for three categories of users:
-
-- User (u) – The owner of the file (usually the one who created it)
-- Group (g) – Users who belong to the same group as the file
-- Others (o) – All other users on the system
-
-Each of these categories can have its own combination of r, w, and x.
-
-Two Ways to Use chmod
-
-1. Symbolic Mode
-    Use letters to set permissions:
-
-    ```sh
-    chmod u=rwx,g=rx,o=r test.sh
-    ```
-
-    This sets:
-
-    - User (u): read, write, execute
-    - Group (g): read, execute
-    - Others (o): read only
-
-    You can also use +, -, or =:
-
-    - `+` adds permission
-    - `-` removes permission
-    - `=` sets exact permission
-
-    Example:
-
-    ```sh
-    chmod g+w test.sh     # Add write permission for group
-    chmod o-r test.sh     # Remove read permission for others
-    ```
-
-2. Numeric (Octal) Mode
-    Each permission is represented by a binary digit:
-    - r = 4
-    - w = 2
-    - x = 1
-
-    You sum them up per category and write a 3-digit number:
-
-    ```sh
-    chmod 754 test.sh
-    ```
-
-    Breakdown:
-
-    - 7 (User): 4+2+1 = rwx
-    - 5 (Group): 4+0+1 = r-x
-    - 4 (Others): 4+0+0 = r--
-
-### Summary Table
-
-| Role | Symbol | Permissions | Value |
-|---|---|---|---|
-|User|u|rwx|7|
-|Group|g|r-x|5|
-|Others|o|r--|4|
-
-This system gives you fine-grained control over who can access your files and how they can interact with them.
-
-## Good to Know?
-
-### File Permission Fundamentals
-
-- **Security Model**: Unix permissions protect system resources
-- **Three Levels**: User (owner), Group, Others
-- **Three Types**: Read (4), Write (2), Execute (1)
-- **Octal System**: Base-8 numbering for permission representation
-
-### Common Permission Patterns
-
-- **755**: Standard executable (rwxr-xr-x)
-- **644**: Standard file (rw-r--r--)
-- **600**: Private file (rw-------)
-- **777**: Full access (dangerous - avoid)
-
-### Security Considerations
-
-- **Principle of Least Privilege**: Grant minimum required permissions
-- **Execute Bit**: Required for scripts and directories
-- **Directory Permissions**: Execute needed to access directory contents
-- **Sticky Bit**: Special permission for shared directories (/tmp)
+**Why It Matters:** Scripts are just text files until you add execute permission. This is a fundamental Linux security feature.
 
 ---
 
-## ✅ Verification
+## 📝 Solution
 
-After completing the challenge, verify your solution by:
+### Step 1: Connect to App Server
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+SSH to App Server 1:
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
-
----
-
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of DevOps skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 3 - Secure SSH Root Access](./day-03.md)
-- **Next →**: [Day 5 - Install and Configuration Selinux](../week-01/day-05.md)
-
-### Similar Challenges (DevOps)
-- [Day 10 - Create a BASH Script](../week-02/day-10.md)
-- [Day 13 - IPtables Installation And Configuration](../week-02/day-13.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
 ```bash
-python3 ../../tools/progress.py --complete {day}
+ssh <your-username>@<server-name>
 ```
 
+💡 **Example:** `ssh tony@stapp01`
+
+---
+
+### Step 2: Check Current Permissions
+
+View the script's current permissions:
+
+```bash
+ls -la /tmp/xfusioncorp.sh
+```
+
+💡 **Example:** `ls -la /tmp/xfusioncorp.sh`
+
+**Expected output:**
+```
+---------- 1 root root 40 Nov 14 10:30 /tmp/xfusioncorp.sh
+```
+
+Notice the `----------` means no permissions at all!
+
+---
+
+### Step 3: Add Execute Permissions
+
+Grant execute permission to everyone:
+
+```bash
+chmod 755 /tmp/xfusioncorp.sh
+```
+
+💡 **Example:** `chmod 755 /tmp/xfusioncorp.sh`
+
+**What this means:**
+- `7` (owner) = read (4) + write (2) + execute (1) = full access
+- `5` (group) = read (4) + execute (1) = read and run
+- `5` (others) = read (4) + execute (1) = read and run
+
+**Expected result:** Command completes silently.
+
+---
+
+### Step 4: Verify Permissions Changed
+
+Confirm the permissions were updated:
+
+```bash
+ls -la /tmp/xfusioncorp.sh
+```
+
+💡 **Example:** `ls -la /tmp/xfusioncorp.sh`
+
+**Expected output:**
+```
+-rwxr-xr-x 1 root root 40 Nov 14 10:30 /tmp/xfusioncorp.sh
+```
+
+The `rwxr-xr-x` confirms execute permissions for all users!
+
+---
+
+## ✅ Verification Checklist
+
+Before marking this challenge complete:
+
+- [ ] File shows `-rwxr-xr-x` permissions
+- [ ] All three groups (owner, group, others) can execute
+- [ ] Script can be run: `/tmp/xfusioncorp.sh`
+- [ ] KodeKloud validation passes
+
+---
+
+## 🔧 Troubleshooting
+
+**Permission denied when running chmod:**
+- Use `sudo chmod 755 /tmp/xfusioncorp.sh` if file is owned by root
+- Check your user permissions
+
+**Permissions didn't change:**
+- Verify correct file path `/tmp/xfusioncorp.sh`
+- Check if file exists: `ls /tmp/xfusioncorp.sh`
+
+**Still can't execute script:**
+- Make sure script has proper shebang line (`#!/bin/bash`)
+- Check script syntax errors
+
+**Wrong permissions showing:**
+- Verify you used `755` not `555` or other values
+- Re-run chmod command
+
+---
+
+## 💡 Good to Know
+
+**Permission Number System:**
+```
+Owner  Group  Others
+ 7      5      5
+rwx    r-x    r-x
+
+Numbers mean:
+4 = read (r)
+2 = write (w)
+1 = execute (x)
+
+Add them up:
+7 = 4+2+1 = rwx (all permissions)
+5 = 4+1 = r-x (read + execute)
+6 = 4+2 = rw- (read + write)
+```
+
+**Common Permission Patterns:**
+```bash
+chmod 755 script.sh   # Standard executable
+chmod 644 file.txt    # Standard file (no execute)
+chmod 600 secret.txt  # Private file (owner only)
+chmod 777 file.sh     # Full access (dangerous!)
+```
+
+**Alternative Method (Symbolic):**
+```bash
+# Add execute for everyone
+chmod +x /tmp/xfusioncorp.sh
+
+# Add execute for owner only
+chmod u+x /tmp/xfusioncorp.sh
+
+# Remove execute from others
+chmod o-x /tmp/xfusioncorp.sh
+```
+
+---
+
+## 📚 Navigation
+
+- **← Previous**: [Day 3 - Secure SSH Root Access](./day-03.md)
+- **Next →**: [Day 5 - Install and Configuration Selinux](./day-05.md)
+
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+
+---
+
+*Understanding permissions - the foundation of Linux security!*
