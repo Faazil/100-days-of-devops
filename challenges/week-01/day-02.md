@@ -16,13 +16,13 @@ As part of the temporary assignment to the Nautilus project, a developer named y
 
 > Create a user named `yousuf` on `App Server 1` in Stratos Datacenter. Set the expiry date to `2024-01-28`, ensuring the user is created in lowercase as per standard protocol.
 
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 
 ---
 
 ## 📋 Prerequisites
 
-> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
+> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://engineer.kodekloud.com/practice)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
 
 **What KodeKloud Provides:**
 - ✅ Pre-configured lab environment
@@ -44,7 +44,7 @@ As part of the temporary assignment to the Nautilus project, a developer named y
 
 ---
 
-**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ---
 
@@ -207,7 +207,7 @@ Organizations use this for:
 - **← Previous**: [Day 1 - Linux User Setup with Non-interactive Shell](./day-01.md)
 - **Next →**: [Day 3 - Secure SSH Root Access](./day-03.md)
 
-**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ---
 

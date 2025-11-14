@@ -17,13 +17,13 @@ The Nautilus system admins team has prepared scripts to automate several day-to-
 - Install `cronie` package on all Nautilus app servers and start `crond` service
 - Add a cron `*/5 * * * * echo hello > /tmp/cron_text` for `root` user
 
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 
 ---
 
 ## 📋 Prerequisites
 
-> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
+> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://engineer.kodekloud.com/practice)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
 
 **What KodeKloud Provides:**
 - ✅ Pre-configured lab environment
@@ -46,7 +46,7 @@ The Nautilus system admins team has prepared scripts to automate several day-to-
 
 ---
 
-**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ---
 
@@ -298,7 +298,7 @@ sudo tail -f /var/log/cron
 - **← Previous**: [Day 5 - Install and Configuration Selinux](./day-05.md)
 - **Next →**: [Day 7 - Linux SSH Automation](./day-07.md)
 
-**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ---
 

@@ -43,7 +43,7 @@ Note:
 
 ## 📋 Prerequisites
 
-> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
+> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://engineer.kodekloud.com/practice)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
 
 **What KodeKloud Provides:**
 - ✅ Pre-configured lab environment
@@ -74,7 +74,7 @@ Note:
 
 ---
 
-**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ## Steps
 
@@ -219,13 +219,12 @@ After completing this challenge, you should be able to:
 ---
 
 **Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: {get_difficulty_emoji(day)}
-**Category**: {task_info['category']}
+**Difficulty**: ⭐
+**Category**: DevOps
 
 ---
 
 **Track your progress**: After completing this challenge, mark it as done:
 ```bash
-python3 ../../tools/progress.py --complete {day}
 ```
 

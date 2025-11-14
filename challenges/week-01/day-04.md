@@ -16,13 +16,13 @@ In a bid to automate backup processes, the xFusionCorp Industries sysadmin team 
 
 Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script on App Server 1. Additionally, ensure that all users have the capability to execute it.
 
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer) platform with pre-configured lab infrastructure.
+> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
 
 ---
 
 ## 📋 Prerequisites
 
-> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://kodekloud.com/kodekloud-engineer)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
+> ⚠️ **Important**: This challenge must be completed on **[KodeKloud Engineer](https://engineer.kodekloud.com/practice)**. You'll need to sign up (free) to access the lab environment with pre-configured servers and infrastructure.
 
 **What KodeKloud Provides:**
 - ✅ Pre-configured lab environment
@@ -44,7 +44,7 @@ Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script
 
 ---
 
-**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Learn More**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ---
 
@@ -216,7 +216,7 @@ chmod o-x /tmp/xfusioncorp.sh
 - **← Previous**: [Day 3 - Secure SSH Root Access](./day-03.md)
 - **Next →**: [Day 5 - Install and Configuration Selinux](./day-05.md)
 
-**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://kodekloud.com/kodekloud-engineer/100-days-of-devops)
+**🔗 Challenge Source**: [KodeKloud 100 Days of DevOps](https://engineer.kodekloud.com/practice/100-days-of-devops)
 
 ---
 
