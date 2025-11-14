@@ -21,7 +21,7 @@ Complete challenges on the platform with real infrastructure and automated valid
 
 ```bash
 git clone https://github.com/yourusername/100-days-of-devops.git
-cd 100-days-of-devops/challenges/week-01
+cd 100-days-of-devops/tasks/week-01
 cat day-01.md
 ```
 
@@ -30,7 +30,7 @@ cat day-01.md
 ## 📂 Structure
 
 ```
-challenges/
+tasks/
 ├── week-01/  # Days 1-7: Linux Basics
 ├── week-02/  # Days 8-14: System Administration
 ├── week-03/  # Days 15-21: Web Servers & Databases
@@ -106,6 +106,6 @@ MIT License - see [LICENSE](LICENSE)
 
 **Ready to start?**
 
-[🚀 Start on KodeKloud](https://engineer.kodekloud.com/practice) • [📚 View Day 1](challenges/week-01/day-01.md)
+[🚀 Start on KodeKloud](https://engineer.kodekloud.com/practice) • [📚 View Day 1](tasks/week-01/day-01.md)
 
 </div>
