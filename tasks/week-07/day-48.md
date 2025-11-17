@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is diving into Kubernetes for application management. One team member has a task to create a pod according to the details below:
+Deploy containerized applications using Kubernetes Deployment resources. Deployments manage replica sets and provide declarative updates for pods and containers.
 
-- Create a pod named pod-httpd using the httpd image with the latest tag. Ensure to specify the tag as httpd:latest.
-
-- Set the app label to httpd_app, and name the container as httpd-container.
-
-> Note: The kubectl utility on jump_host is configured to operate with the Kubernetes cluster.
+**Deployment Specifications:**
+- Create Deployment manifest
+- Define replicas and container specs
+- Configure image and ports
+- Apply to cluster and verify status
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,13 +16,15 @@ The Nautilus DevOps team is diving into Kubernetes for application management. O
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-pod.yml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Verify the resource was created and check its status.
+
+```sh
 kubectl get pods
 ```
 

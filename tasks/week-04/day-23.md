@@ -2,19 +2,21 @@
 
 ## Task Overview
 
-A Git server utilized by the Nautilus project teams. Recently, a new developer named Jon joined the team and needs to begin working on a project. To begin, he must fork an existing Git repository. Follow the steps below:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- Click on the Gitea UI button located on the top bar to access the Gitea page.
-
-- Login to Gitea server using username jon and password Jon_pass123.
-
-- Once logged in, locate the Git repository named sarah/story-blog and fork it under the jon user.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
 ---
 
 ## Solution Steps
+
+**Step 1:** Follow the instructions provided in the lab environment
 
 ---
 

@@ -2,10 +2,13 @@
 
 ## Task Overview
 
-The DevOps team established a new Git repository last week, which remains unused at present. However, Nautilus dev team members now requires a copy of this repository on the Storage Server in the Stratos DC. Follow the provided details to clone the repository
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- The repository to be cloned is located at `/opt/games.git`
-- Clone this Git repository to the `/usr/src/kodekloudrepos` directory. Ensure no modifications are made to the repository during the cloning process.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -13,8 +16,9 @@ The DevOps team established a new Git repository last week, which remains unused
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Clone the Git repository to local machine.
+
+```sh
 cd /usr/src/kodekloudrepos
     git clone /opt/games.git
 ```

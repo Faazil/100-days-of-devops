@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members has been working on a project repository /opt/official.git. This repo is cloned at /usr/src/kodekloudrepos on storage server in Stratos DC. They recently shared the following requirements with the DevOps team:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-> There are two branches in this repository, master and feature. One of the developers is working on the feature branch and their work is still in progress, however they want to merge one of the commits from the feature branch to the master branch, the message for the commit that needs to be merged into master is Update info.txt. Accomplish this task for them, also remember to push your changes eventually.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,24 +16,28 @@ Nautilus dev team members has been working on a project repository /opt/official
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Attempt to switch to the user and verify login is blocked.
+
+```sh
 sudo su
     cd /usr/src/kodekloudrepos/official
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Create or list Git branches.
+
+```sh
 git branch
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 git log
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Push local commits to remote repository.
+
+```sh
 git switch master
     git cherry-pick commit-hash
     git push

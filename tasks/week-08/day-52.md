@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-Earlier today, the Nautilus DevOps team deployed a new release for an application. However, a customer has reported a bug related to this recent release. Consequently, the team aims to revert to the previous version.
+Deploy containerized applications using Kubernetes Deployment resources. Deployments manage replica sets and provide declarative updates for pods and containers.
 
-- There exists a deployment named nginx-deployment; initiate a rollback to the previous revision.
+**Deployment Specifications:**
+- Create Deployment manifest
+- Define replicas and container specs
+- Configure image and ports
+- Apply to cluster and verify status
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,19 +16,22 @@ Earlier today, the Nautilus DevOps team deployed a new release for an applicatio
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Verify the resource was created and check its status.
+
+```sh
 kubectl get deployments.apps
     kubectl get pods
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Get detailed information about the resource.
+
+```sh
 kubectl describe pods pod-name
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 kubectl rollout undo deployments/nginx-deployment
 ```
 

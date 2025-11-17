@@ -2,17 +2,21 @@
 
 ## Task Overview
 
-As per recent requirements shared by Nautilus dev team members, they need custom images created for one of their projects. Several of the initial testing requirements are already been shared with DevOps team. Therefore, create a docker file `/opt/docker/Dockerfile` (please keep D capital of Dockerfile) on `App server 2` in Stratos DC and configure to build an image with the following requirements:
+Build custom Docker images using Dockerfiles to package applications with their dependencies. Images serve as blueprints for creating containers.
 
-- Use `ubuntu:24.04` as the base image.
-
-- Install `apache2` and configure it to work on `5002` port. (do not update any other Apache configuration settings like document root etc).
+**Image Creation:**
+- Write Dockerfile with build instructions
+- Define base image and dependencies
+- Configure application setup
+- Build and verify image
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
 ---
 
 ## Solution Steps
+
+**Step 1:** Follow the instructions provided in the lab environment
 
 ---
 

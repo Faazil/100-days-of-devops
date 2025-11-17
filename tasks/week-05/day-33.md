@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-Sarah and Max were working on writting some stories which they have pushed to the repository. Max has recently added some new changes and is trying to push them to the repository but he is facing some issues. Below you can find more details:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- SSH into storage server using user max and password Max_pass123. Under /home/max you will find the story-blog repository. Try to push the changes to the origin repo and fix the issues. The story-index.txt must have titles for all 4 stories. Additionally, A typo in The Lion and the Mooose line where Mooose should be Mouse.
-
-- Click on the Gitea UI button on the top bar. You should be able to access the Gitea page. You may login to Gitea server from UI using username sarah and password Sarah_pass123 or username max and password Max_pass123.
-
-*Note: For these kind of scenarios requiring changes to be done in a web UI, please take screenshots so that you can share it with us for review in case your task is marked incomplete. You may also consider using a screen recording software such as loom.com to record and share your work.*
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,13 +16,15 @@ Sarah and Max were working on writting some stories which they have pushed to th
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 git fetch origin
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Stage files for commit.
+
+```sh
 git rebase origin/main
 
     git add .
@@ -30,8 +32,9 @@ git rebase origin/main
     git rebase --continue
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Push local commits to remote repository.
+
+```sh
 git push
 ```
 

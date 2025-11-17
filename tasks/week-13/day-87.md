@@ -2,15 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members wanted to test some applications on app servers within the Stratos DC. They shared some pre-requisites with the DevOps team, and packages need to be installed on app servers. Since we are already using Ansible for automating such tasks, please perform this task using Ansible as per details mentioned below:
+Develop Ansible playbooks to automate configuration management tasks. Playbooks define desired system states using YAML syntax.
 
-- Create an inventory file `/home/thor/playbook/inventory` on jump host and add all app servers in it.
-
-- Create an Ansible playbook `/home/thor/playbook/playbook.yml` to install `samba package` on all  app servers using `Ansible yum module`.
-
-- Ensure user `thor` should be able to run the playbook on jump host.
-
-> Note: Validation will try to run playbook using command `ansible-playbook -i inventory playbook.yml` so please make sure playbook works this way, without passing any extra arguments.
+**Playbook Development:**
+- Write playbook with tasks
+- Define hosts and variables
+- Configure modules and parameters
+- Execute and verify playbook
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -18,18 +16,21 @@ Nautilus dev team members wanted to test some applications on app servers within
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cd playbook
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 touch inventory playbook.yml
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Connect to the target server using SSH.
+
+```ini
 [app]
     stapp01 ansible_user=tony ansible_ssh_password=Ir0nM@n
     stapp02 ansible_user=steve ansible_ssh_password=Am3ric@
@@ -39,8 +40,9 @@ touch inventory playbook.yml
     ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the Ansible playbook to configure hosts.
+
+```sh
 ansible-playbook -i inventory playbook.yml
 ```
 

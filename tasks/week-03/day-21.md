@@ -2,10 +2,13 @@
 
 ## Task Overview
 
-The Nautilus development team has provided requirements to the DevOps team for a new application development project, specifically requesting the establishment of a Git repository. Follow the instructions below to create the Git repository on the Storage server in the Stratos DC:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- Utilize yum to install the git package on the Storage Server.
-- Create a bare repository named /opt/demo.git (ensure exact name usage).
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -13,14 +16,16 @@ The Nautilus development team has provided requirements to the DevOps team for a
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Install packages using the package manager.
+
+```sh
 sudo yum update -y
     sudo yum install -y git
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 sudo git init --bare /opt/demo.git
 ```
 

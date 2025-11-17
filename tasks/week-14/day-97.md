@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-When establishing infrastructure on the AWS cloud, Identity and Access Management (IAM) is among the first and most critical services to configure. IAM facilitates the creation and management of user accounts, groups, roles, policies, and other access controls. The Nautilus DevOps team is currently in the process of configuring these resources and has outlined the following requirements.
+Deploy EC2 instances using Terraform infrastructure-as-code. Automate instance provisioning with declarative configuration.
 
-Create an IAM policy named `iampolicy_ravi` in `us-east-1` region using Terraform. It must allow read-only access to the `EC2 console`, i.e., this policy must allow users to view `all instances`, `AMIs`, and `snapshots` in the Amazon EC2 console.
-
-The Terraform working directory is `/home/bob/terraform`. Create the `main.tf` file (do not create a different .tf file) to accomplish this task.
-
-> Note: Right-click under the EXPLORER section in VS Code and select Open in Integrated Terminal to launch the terminal.
+**EC2 Deployment:**
+- Define instance specifications
+- Configure AMI and instance type
+- Set security groups and networking
+- Apply Terraform configuration
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,119 +16,48 @@ The Terraform working directory is `/home/bob/terraform`. Create the `main.tf` f
 
 ## Solution Steps
 
-**Step 1:**
-```bash
-2. Let's define the variable by creating a `variables.tf` file:
+**Step 1:** Define AWS resource configuration in Terraform.
+
+```hcl
+resource "aws_iam_policy" "policy" {
+        name        = var.policy_name
+        path        = "/"
+        description = "My test policy"
+
+        policy = jsonencode({
+            Version = "2012-10-17"
+            Statement = [
+            {
+                Action = [
+                "ec2:Describe*",
+                ]
+                Effect   = "Allow"
+                Resource = "*"
+            },
+            ]
+        })
+
+        tags = {
+            Name = var.policy_name
+        }
+
+    }
 ```
 
-**Step 2:**
-```bash
-> Ensure you have changed the value here according to your task description
+**Step 2:** Define AWS resource configuration in Terraform.
 
-3. Run the terraform commands:
+```hcl
+variable "policy_name" {
+        default = "iampolicy_ravi" 
+    }
 ```
 
-**Step 3:**
-```bash
-## Video
+**Step 3:** Initialize Terraform working directory and download providers.
 
-- Watch youtube video: [https://youtu.be/r0XZxVAGUIg](https://youtu.be/r0XZxVAGUIg)
-
-## Referrence
-
-- [Official Documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy)
-
-## Good To Know
-
-- **IAM Policy Structure**: Uses JSON format with Version, Statement, Effect, Action, and Resource
-- **ec2:Describe*** wildcard covers all EC2 read operations (instances, AMIs, snapshots, volumes, etc.)
-- **Resource "*"** grants access to all EC2 resources across all regions
-- **Effect "Allow"** explicitly permits the specified actions
-- **Policy Attachment**: This policy needs to be attached to users, groups, or roles to take effect
-- **Least Privilege**: Read-only access follows security best practice of minimal permissions
-
----
-
-## ✅ Verification
-
-After completing the challenge, verify your solution by:
-
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
-
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
-
----
-
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Terraform skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 96 - Create EC2 Instance Using Terraform](./day-96.md)
-- **Next →**: [Day 98 - Launch EC2 in Private VPC Subnet Using Terraform](../week-14/day-98.md)
-
-### Similar Challenges (Terraform)
-- [Day 94 - Create VPC Using Terraform](../week-14/day-94.md)
-- [Day 95 - Create Security Group Using Terraform](../week-14/day-95.md)
-- [Day 96 - Create EC2 Instance Using Terraform](../week-14/day-96.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: ⭐
-**Category**: DevOps
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
+```sh
+terraform init
+    terraform plan
+    terraform apply -auto-approve
 ```
 
 ---

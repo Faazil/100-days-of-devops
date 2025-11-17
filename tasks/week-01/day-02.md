@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-As part of the temporary assignment to the Nautilus project, a developer named yousuf requires access for a limited duration. To guarantee smooth access management, a temporary user account with an expiry date is needed.
+Establish a time-limited user account with automatic expiration. This approach supports temporary project assignments by ensuring accounts become inactive after a specified date without manual intervention.
 
-> Create a user named `yousuf` on `App Server 1` within the Stratos DC. Set the expiry date to `2024-01-28`, ensuring the user is created in lowercase as per standard protocol.
-
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
-
----
+**Account Requirements:**
+- Username: specific user (as per task)
+- Expiration date: set to future date (YYYY-MM-DD format)
+- Home directory: standard creation
+- Automatic deactivation: triggered on expiry date
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,48 +16,17 @@ As part of the temporary assignment to the Nautilus project, a developer named y
 
 ## Solution Steps
 
-**Step 1:**
-```bash
-ssh <your-username>@<server-name>
-```
+**Step 1:** Create user account with expiration date set.
 
-**Step 2:**
-```bash
+```sh
 sudo useradd -m -e 2024-01-28 yousuf
 ```
 
-**Step 3:**
-```bash
-cat /etc/passwd | grep yousuf
-```
+**Step 2:** Verify the user was created and check its configuration.
 
-**Step 4:**
-```bash
-yousuf:x:1002:1002::/home/yousuf:/bin/bash
-```
-
-**Step 5:**
-```bash
-sudo chage -l yousuf
-```
-
-**Step 6:**
-```bash
-...
-Account expires: Jan 28, 2024
-...
-```
-
-**Step 7:**
-```bash
-# View account expiry details
-sudo chage -l <username>
-
-# Change expiry date for existing user
-sudo usermod -e 2024-12-31 <username>
-
-# Remove expiry (set to never expire)
-sudo usermod -e "" <username>
+```sh
+cat /etc/passwd
+    sudo su yousuf
 ```
 
 ---

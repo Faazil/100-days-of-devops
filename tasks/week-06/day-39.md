@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-One of the Nautilus developer was working to test new changes on a container. He wants to keep a backup of his changes to the container. A new request has been raised for the DevOps team to create a new image from this container. Below are more details about it:
+Build custom Docker images using Dockerfiles to package applications with their dependencies. Images serve as blueprints for creating containers.
 
-- Create an image `ecommerce:nautilus` on `Application Server 3` from a container `ubuntu_latest` that is running on same server.
+**Image Creation:**
+- Write Dockerfile with build instructions
+- Define base image and dependencies
+- Configure application setup
+- Build and verify image
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,13 +16,15 @@ One of the Nautilus developer was working to test new changes on a container. He
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 docker commit container-name image-repository:tag
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 docker commit ubuntu_latest ecommerce:nautilus
 ```
 

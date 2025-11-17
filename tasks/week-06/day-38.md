@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-Nautilus project developers are planning to start testing on a new project. As per their meeting with the DevOps team, they want to test containerized environment application features. As per details shared with DevOps team, we need to accomplish the following task:
+Build custom Docker images using Dockerfiles to package applications with their dependencies. Images serve as blueprints for creating containers.
 
-a. Pull busybox:musl image on App Server 3 in Stratos DC and re-tag (create new tag) this image as busybox:blog.
+**Image Creation:**
+- Write Dockerfile with build instructions
+- Define base image and dependencies
+- Configure application setup
+- Build and verify image
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,13 +16,15 @@ a. Pull busybox:musl image on App Server 3 in Stratos DC and re-tag (create new 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Download the Docker image from registry.
+
+```sh
 docker pull busybox:musl
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 docker tag busybox:musl busybox:blog
 ```
 

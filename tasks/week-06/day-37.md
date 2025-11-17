@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is conducting application deployment tests on selected application servers. They require completing a task on app server 1.
+Run and manage Docker containers for application deployment. Containers provide isolated runtime environments for applications.
 
-On Application Server 1 a container named ubuntu_latest is running, you have to copy the encrypted file `/tmp/nautilus.tx.gpg` from docker hosts to container folder `/usr/src`.
+**Container Operations:**
+- Pull or build container image
+- Run container with required configuration
+- Configure ports, volumes, and environment
+- Verify container status and functionality
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,8 +16,9 @@ On Application Server 1 a container named ubuntu_latest is running, you have to 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 docker cp /tmp/nautilus.txt.gpg ubuntu_latest:/usr/src/
 ```
 

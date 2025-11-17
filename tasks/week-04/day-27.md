@@ -2,10 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members was working on a git repository /usr/src/kodekloudrepos/demo present on Storage server in Stratos DC. However, they reported an issue with the recent commits being pushed to this repo. They have asked the DevOps team to revert repo HEAD to last commit. Below are more details about the task:
+Execute Git version control operations for source code management. Track changes, collaborate, and maintain project history.
 
-- In /usr/src/kodekloudrepos/demo git repository, revert the latest commit ( HEAD ) to the previous commit (JFYI the previous commit hash should be with initial commit message ).
-- Use revert demo message (please use all small letters for commit message) for the new revert commit.
+**Git Operations:**
+- Configure Git settings
+- Perform repository operations
+- Manage commits and history
+- Collaborate with remotes
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -13,24 +16,28 @@ Nautilus dev team members was working on a git repository /usr/src/kodekloudrepo
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Attempt to switch to the user and verify login is blocked.
+
+```sh
 sudo su
     cd /usr/src/kodekloudrepos/demo
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 git log --oneline
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 git revert HEAD -m "revert demo"
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Push local commits to remote repository.
+
+```sh
 git push
 ```
 

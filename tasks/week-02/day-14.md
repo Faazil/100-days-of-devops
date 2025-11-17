@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-The operations team at xFusionCorp Industries has deployed some of the latest monitoring tools to keep an eye on every service, application, etc. running on the systems. One of the monitoring systems reported about Apache service unavailability on one of the app servers in Stratos DC.
+Install and configure web server software for hosting applications. Set up HTTP service with custom port and configuration.
 
-> Identify the faulty app host and fix the issue. Ensure Apache service is up and running on all app hosts. They might not have hosted any code yet on these servers, so you don’t need to worry if Apache isn’t serving any pages. Just make sure the service is up and running. Also, make sure Apache is running on port ***`3004`*** on all app servers.
+**Web Server Setup:**
+- Install web server package
+- Configure server settings
+- Adjust ports and document root
+- Start and enable service
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,8 +16,9 @@ The operations team at xFusionCorp Industries has deployed some of the latest mo
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Check the service status to verify it's running.
+
+```sh
 root@stapp01 ~]# systemctl status httpd.service
     ● httpd.service - The Apache HTTP Server
     Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
@@ -37,19 +42,22 @@ root@stapp01 ~]# systemctl status httpd.service
     Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```shell
 Aug 08 05:04:33 stapp01.stratos.xfusioncorp.com httpd[1003]: (98)Address already in use: AH0007...4
     Aug 08 05:04:33 stapp01.stratos.xfusioncorp.com httpd[1003]: no listening sockets available, sh...n
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 sudo netstat -tlnup
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```shell
 Active Internet connections (only servers)
     Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
     tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/init              
@@ -65,8 +73,9 @@ Active Internet connections (only servers)
     udp6       0      0 :::1021                 :::*                                424/rpcbind
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Test the web server by making HTTP request.
+
+```sh
 curl http://stapp01:3004 # from jump host
 ```
 

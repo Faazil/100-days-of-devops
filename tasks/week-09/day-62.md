@@ -2,17 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is working to deploy some tools in Kubernetes cluster. Some of the tools are licence based so that licence information needs to be stored securely within Kubernetes cluster. Therefore, the team wants to utilize Kubernetes secrets to store those secrets. Below you can find more details about the requirements:
+Launch pods in a Kubernetes cluster to run containerized workloads. Pods are the smallest deployable units that encapsulate one or more containers.
 
-- We already have a secret key file `media.txt` under `/opt` location on jump host. Create a generic secret named `media`, it should contain the password/license-number present in `media.txt` file.
-
-- Also create a pod named `secret-devops`.
-
-- Configure pod's spec as container name should be `secret-container-devops`, image should be `debian` with latest tag (remember to mention the tag with image). Use sleep command for container so that it remains in running state. Consume the created secret and mount it under `/opt/cluster` within the container.
-
-- To verify you can exec into the container `secret-container-devops`, to check the secret key under the mounted path `/opt/cluster`. Before hitting the Check button please make sure pod/pods are in running state, also validation can take some time to complete so keep patience.
-
-> Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
+**Pod Configuration:**
+- Define pod specifications
+- Configure container images
+- Set labels and metadata
+- Deploy and verify pod status
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -20,23 +16,27 @@ The Nautilus DevOps team is working to deploy some tools in Kubernetes cluster. 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Create the Kubernetes resource.
+
+```sh
 kubectl create secret generic media --from-file=/opt/media.txt
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Get detailed information about the resource.
+
+```sh
 kubectl describe secret media
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-pod.yaml
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Verify the resource was created and check its status.
+
+```sh
 kubectl get secret
     kubectl get pod
     kubectl exec -it secret-devops -c secret-container-devops -- cat /opt/cluster

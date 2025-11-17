@@ -2,12 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members is planning to launch a new PHP-based application, which they want to deploy on Nautilus infra in Stratos DC. The development team had a meeting with the production support team and they have shared some requirements regarding the infrastructure. Below are the requirements they shared:
+Install and configure web server software for hosting applications. Set up HTTP service with custom port and configuration.
 
-- Install `nginx` on `app server 1` , configure it to use port `8093` and its document `root` should be `/var/www/html`.
-- Install `php-fpm` version `8.2` on `app server 1`, it must use the unix socket `/var/run/php-fpm/default.sock` (create the parent directories if don't exist).
-- Configure `php-fpm` and `nginx` to work together.
-- Once configured correctly, you can test the website using `curl http://stapp01:8093/index.php` command executed from the jump server.
+**Web Server Setup:**
+- Install web server package
+- Configure server settings
+- Adjust ports and document root
+- Start and enable service
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -15,31 +16,36 @@ Nautilus dev team members is planning to launch a new PHP-based application, whi
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Install packages using the package manager.
+
+```sh
 sudo dnf update -y
     sudo dnf install nginx -y
     sudo dnf module install php:8.2 -y # change version here if requires
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Edit the configuration file to set required parameters.
+
+```sh
 sudo mkdir -p /var/run/php-fpm
     sudo vi /etc/php-fpm.d/www.conf
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Edit the configuration file to set required parameters.
+
+```sh
 sudo vi /etc/nginx/nginx.conf
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Edit the configuration file to set required parameters.
+
+```sh
 sudo vi /etc/nginx/default.d/php.conf
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Enable service to start automatically on boot.
+
+```sh
 sudo systemctl enable --now nginx
     sudo systemctl enable --now php-fpm
 ```

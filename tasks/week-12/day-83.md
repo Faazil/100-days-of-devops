@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-An Ansible playbook needs completion on the jump host, where a team member left off. Below are the details:
+Develop Ansible playbooks to automate configuration management tasks. Playbooks define desired system states using YAML syntax.
 
-- The inventory file `/home/thor/ansible/inventory` requires adjustments. The playbook must run on App Server 2 in Stratos DC. Update the inventory accordingly.
-
-- Create a playbook `/home/thor/ansible/playbook.yml`. Include a task to create an empty file `/tmp/file.txt` on App Server 2.
-
-> Note: Validation will run the playbook using the command ansible-playbook -i inventory playbook.yml. Ensure the playbook works without any additional arguments.
+**Playbook Development:**
+- Write playbook with tasks
+- Define hosts and variables
+- Configure modules and parameters
+- Execute and verify playbook
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,24 +16,28 @@ An Ansible playbook needs completion on the jump host, where a team member left 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cd ansible
     ls
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Define inventory file with target hosts and connection details.
+
+```ini
 stapp02 ansible_host=172.238.16.204 ansible_user=steve ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Connect to the target server using SSH.
+
+```ini
 stapp02 ansible_host=stapp02 ansible_user=steve ansible_ssh_password=Am3ric@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the Ansible playbook to configure hosts.
+
+```sh
 ansible-playbook -i inventory playbook.yml
 ```
 

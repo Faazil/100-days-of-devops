@@ -2,15 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is testing Ansible playbooks on various servers within their stack. They've placed some playbooks under /home/thor/playbook/ directory on the jump host and now intend to test them on app server 1 in Stratos DC. However, an inventory file needs creation for Ansible to connect to the respective app. Here are the requirements:
+Develop Ansible playbooks to automate configuration management tasks. Playbooks define desired system states using YAML syntax.
 
-a. Create an ini type Ansible inventory file `/home/thor/playbook/inventory` on jump host.
-
-b. Include App Server 1 in this inventory and necessary variables for proper functionality.
-
-c. Ensure the inventory hostname corresponds to the server name as per the wiki, for example stapp01 for app server 1 in Stratos DC.
-
-Note: Validation will execute the playbook using the command ansible-playbook -i inventory playbook.yml. Ensure the playbook functions properly without any extra arguments.
+**Playbook Development:**
+- Write playbook with tasks
+- Define hosts and variables
+- Configure modules and parameters
+- Execute and verify playbook
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -18,14 +16,16 @@ Note: Validation will execute the playbook using the command ansible-playbook -i
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cd playbook
     vi inventory
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Connect to the target server using SSH.
+
+```ini
 [app]
     stapp01
 
@@ -35,8 +35,9 @@ cd playbook
     ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the Ansible playbook to configure hosts.
+
+```sh
 ansible-playbook -i inventory playbook.yml
 ```
 

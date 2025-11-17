@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team needs to set up several docker environments for different applications. One of the team members has been assigned a ticket where he has been asked to create some docker networks to be used later. fulfill this objective based on the following ticket description:
+Establish Docker networks to enable communication between containers. Networks provide isolation and connectivity for containerized services.
 
-- Create a docker network named as `blog` on App Server 2 in Stratos DC.
-- Configure it to use `macvlan` drivers.
-- Set it to use subnet `10.10.1.0/24` and iprange `10.10.1.0/24`.
+**Network Configuration:**
+- Create custom Docker network
+- Define network driver type
+- Connect containers to network
+- Verify network connectivity
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,18 +16,21 @@ The Nautilus DevOps team needs to set up several docker environments for differe
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Create a custom Docker network for container communication.
+
+```sh
 docker network create blog -d macvlan --ip-range 10.10.1.0/24 --subnet 10.10.1.0/24
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 docker network ls
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 docker network --help
 ```
 

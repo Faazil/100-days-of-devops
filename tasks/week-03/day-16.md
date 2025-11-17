@@ -2,12 +2,13 @@
 
 ## Task Overview
 
-Day by day traffic is increasing on one of the websites managed by the Nautilus production support team. Therefore, the team has observed a degradation in website performance. Following discussions about this issue, the team has decided to deploy this application on a high availability stack i.e on Nautilus infra in Stratos DC. They started the migration last month and it is almost done, as only the LBR server configuration is pending. Configure LBR server as per the information given below:
+Configure NGINX as a load balancer to distribute traffic across multiple backend servers. Improve availability and performance through request distribution.
 
-- Install `nginx` on `LBR` server
-- Configure load-balancing with the an http context making use of all App Servers. Ensure that you update only the main `Nginx` configuration file located at `/etc/nginx/nginx.conf`
-- Ensure you do not update the apache port that is already defined in the apache configuration on all app servers, Additionally, verify that apache server is up and running on all app servers
-- Once done, you can access the website using StaticApp button on the top bar
+**Load Balancer Setup:**
+- Install NGINX
+- Configure upstream servers
+- Define load balancing algorithm
+- Test traffic distribution
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -15,13 +16,15 @@ Day by day traffic is increasing on one of the websites managed by the Nautilus 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 sudo ss -tlnup
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```shell
 Netid     State      Recv-Q     Send-Q         Local Address:Port            Peer Address:Port     Process                                                                                            
     udp       UNCONN     0          0                 127.0.0.11:45089                0.0.0.0:*                                                                                                           
     tcp       LISTEN     0          511                  0.0.0.0:5001                 0.0.0.0:*         users:(("httpd",pid=1690,fd=3),("httpd",pid=1689,fd=3),("httpd",pid=1688,fd=3),("httpd",pid=1680,fd=3))
@@ -30,141 +33,158 @@ Netid     State      Recv-Q     Send-Q         Local Address:Port            Pee
     tcp       LISTEN     0          128                     [::]:22                      [::]:*         users:(("sshd",pid=1102,fd=4))
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Install packages using the package manager.
+
+```sh
 sudo yum install nginx -y
     sudo systemctl enable nginx
     sudo systemctl start nginx
 ```
 
-**Step 4:**
-```bash
-- Then redirect call to these server using `proxy_pass`, copy paste following lines inside `server:80`:
+**Step 4:** Execute the command to complete this step.
+
+```conf
+upstream stapp {
+            server stapp01:5001;
+            server stapp02:5001;
+            server stapp03:5001;
+        }
 ```
 
-**Step 5:**
-```bash
-- Done, lets check config is okay and restart nginx server:
+**Step 5:** Execute the command to complete this step.
+
+```conf
+location / {
+            proxy_pass http://stapp;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+
+            proxy_connect_timeout 5s;
+            proxy_read_timeout 60s;
+        }
 ```
 
-**Step 6:**
-```bash
-## Full NGINX LBR Configuration
+**Step 6:** Restart the service to apply changes.
+
+```sh
+sudo nginx -t
+        sudo systemctl restart nginx
 ```
 
-**Step 7:**
-```bash
-## Good to Know?
+**Step 7:** Execute the command to complete this step.
 
-### Load Balancing Fundamentals
+```conf
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
 
-- **Purpose**: Distribute incoming requests across multiple servers
-- **Benefits**: High availability, scalability, fault tolerance
-- **Algorithms**: Round-robin (default), least connections, IP hash
-- **Health Checks**: Monitor backend server availability
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
 
-### NGINX Load Balancing
+# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
 
-- **Upstream Block**: Define backend server pool
-- **Proxy Pass**: Forward requests to upstream servers
-- **Load Methods**: `round_robin`, `least_conn`, `ip_hash`, `random`
-- **Server Weights**: `server backend1:80 weight=3;`
+events {
+    worker_connections 1024;
+}
 
-### Proxy Headers
 
-- **Host**: Preserve original host header
-- **X-Real-IP**: Client's real IP address
-- **X-Forwarded-For**: Chain of proxy IPs
-- **X-Forwarded-Proto**: Original protocol (HTTP/HTTPS)
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
 
-### High Availability Features
+    access_log  /var/log/nginx/access.log  main;
 
-- **Backup Servers**: `server backend4:80 backup;`
-- **Health Checks**: Automatic failure detection
-- **Session Persistence**: Sticky sessions with `ip_hash`
-- **SSL Termination**: Handle SSL at load balancer level
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    keepalive_timeout   65;
+    types_hash_max_size 4096;
 
----
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
 
-## ✅ Verification
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
 
-After completing the challenge, verify your solution by:
+    upstream stapp {
+        server stapp01:5001;
+        server stapp02:5001;
+        server stapp03:5001;
+    }
 
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
+    server {
+        listen       80;
+        listen       [::]:80;
+        server_name  _;
+        #root         /usr/share/nginx/html;
 
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
 
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
+        error_page 404 /404.html;
+        location = /404.html {
+        }
 
----
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
 
-## 📚 Learning Notes
+        location / {
+            proxy_pass http://stapp;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
 
-### Key Concepts
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
 
-This challenge covers the following concepts:
-- Practical application of Web Server skills
-- Real-world DevOps scenarios
-- Best practices for production environments
+            proxy_connect_timeout 5s;
+            proxy_read_timeout 60s;
+        }
+    }
 
-### Common Pitfalls
+# Settings for a TLS enabled server.
+#
+#    server {
+#        listen       443 ssl http2;
+#        listen       [::]:443 ssl http2;
+#        server_name  _;
+#        root         /usr/share/nginx/html;
+#
+#        ssl_certificate "/etc/pki/nginx/server.crt";
+#        ssl_certificate_key "/etc/pki/nginx/private/server.key";
+#        ssl_session_cache shared:SSL:1m;
+#        ssl_session_timeout  10m;
+#        ssl_ciphers PROFILE=SYSTEM;
+#        ssl_prefer_server_ciphers on;
+#
+#        # Load configuration files for the default server block.
+#        include /etc/nginx/default.d/*.conf;
+#
+#        error_page 404 /404.html;
+#            location = /40x.html {
+#        }
+#
+#        error_page 500 502 503 504 /50x.html;
+#            location = /50x.html {
+#        }
+#    }
 
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 15 - Setup SSL for NGINX](./day-15.md)
-- **Next →**: [Day 17 - Install and Configure PostgreSQL](../week-03/day-17.md)
-
-### Similar Challenges (Web Server)
-- [Day 15 - Setup SSL for NGINX](../week-03/day-15.md)
-- [Day 20 - Configure Nginx + PHP-FPM Using Unix Sock](../week-03/day-20.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: ⭐
-**Category**: DevOps
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
+}
 ```
 
 ---

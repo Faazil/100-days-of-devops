@@ -2,7 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members has finished development of one of the applications and it is ready for deployment. It is a guestbook application that will be used to manage entries for guests/visitors. As per discussion with the DevOps team, they have finalized the infrastructure that will be deployed on Kubernetes cluster. Below you can find more details about it.
+Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
+
+**Resource Configuration:**
+- Pod creation with resource specifications
+- Memory requests and limits (Mi units)
+- CPU requests and limits (millicores)
+- Prevent resource contention across workloads
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -10,18 +16,21 @@ Nautilus dev team members has finished development of one of the applications an
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-redis-master.yaml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-redis-slave.yaml
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-php-redis.yaml
 ```
 

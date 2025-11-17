@@ -2,21 +2,13 @@
 
 ## Task Overview
 
-We are working on an application that will be deployed on multiple containers within a pod on Kubernetes cluster. A requirement to share a volume among the containers to save some temporary data. The Nautilus DevOps team is developing a similar template to replicate the scenario. Below you can find more details about it.
+Launch pods in a Kubernetes cluster to run containerized workloads. Pods are the smallest deployable units that encapsulate one or more containers.
 
-- Create a pod named `volume-share-nautilus`.
-
-- For the first container, use image `fedora` with `latest` tag only and remember to mention the tag i.e `fedora:latest`, container should be named as `volume-container-nautilus-1`, and run a sleep command for it so that it remains in running state. Volume `volume-share` should be mounted at path `/tmp/news`.
-
-- For the second container, use image fedora with the latest tag only and remember to mention the tag i.e `fedora:latest`, container should be named as `volume-container-nautilus-2`, and again run a sleep command for it so that it remains in running state. Volume `volume-share` should be mounted at path `/tmp/demo`.
-
-- Volume name should be `volume-share` of type `emptyDir`.
-
-- After creating the pod, exec into the first container i.e `volume-container-nautilus-1`, and just for testing create a file `news.txt` with any content under the mounted path of first container i.e `/tmp/news`.
-
-- The file `news.txt` should be present under the mounted path `/tmp/demo` on the second container `volume-container-nautilus-2` as well, since they are using a shared volume.
-
-> Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
+**Pod Configuration:**
+- Define pod specifications
+- Configure container images
+- Set labels and metadata
+- Deploy and verify pod status
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -24,28 +16,33 @@ We are working on an application that will be deployed on multiple containers wi
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-pod.yml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 kubectl exec -it volume-share-nautilus -c volume-container-nautilus-1 /bin/sh
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 touch /tmp/news/news.txt
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```sh
 kubectl exec -it volume-share-nautilus -c volume-container-nautilus-2 /bin/sh
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Execute the command to complete this step.
+
+```sh
 ls /tmp/demo
 ```
 

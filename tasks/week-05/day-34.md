@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members was working on a git repository /opt/demo.git which is cloned under /usr/src/kodekloudrepos directory present on Storage server in Stratos DC. The team want to setup a hook on this repository, please find below more details:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- Merge the feature branch into the master branch`, but before pushing your changes complete below point.
-
-- Create a post-update hook in this git repository so that whenever any changes are pushed to the master branch, it creates a release tag with name release-2023-06-15, where 2023-06-15 is supposed to be the current date. For example if today is 20th June, 2023 then the release tag must be release-2023-06-20. Ensure you test the hook at least once and create a release tag for today's release.
-
-- Finally remember to push your changes.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,49 +16,57 @@ Nautilus dev team members was working on a git repository /opt/demo.git which is
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 sudo -i
     cd /usr/src/kodekloudrepos/demo
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Create or list Git branches.
+
+```sh
 git branch
     git switch master
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Merge changes from one branch into another.
+
+```sh
 git merge feature
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Make the script executable for all users.
+
+```sh
 cp /opt/demo.git/hooks/post-update.sample /opt/demo.git/hooks/post-update
     chmod +x /opt/demo.git/hooks/post-update
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Execute the command to complete this step.
+
+```sh
 vi /opt/demo.git/hooks/post-update
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Execute the command to complete this step.
+
+```shell
 day=$(date +"%Y-%m-%d")
     TAG="release-$day"
 
     git tag -a $TAG -m "Released at: $day"
 ```
 
-**Step 7:**
-```bash
+**Step 7:** Push local commits to remote repository.
+
+```sh
 git push
 ```
 
-**Step 8:**
-```bash
+**Step 8:** Execute the command to complete this step.
+
+```sh
 git fetch --tags
     git tag
 ```

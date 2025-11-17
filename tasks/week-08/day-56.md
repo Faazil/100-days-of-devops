@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Some of the Nautilus team developers are developing a static website and they want to deploy it on Kubernetes cluster. They want it to be highly available and scalable. Therefore, based on the requirements, the DevOps team has decided to create a deployment for it with multiple replicas. Below you can find more details about it:
+Deploy containerized applications using Kubernetes Deployment resources. Deployments manage replica sets and provide declarative updates for pods and containers.
 
-- Create a deployment using nginx image with latest tag only and remember to mention the tag i.e nginx:latest. Name it as nginx-deployment. The container should be named as nginx-container, Additionally, verify that replica counts are 3.
-
-- Create a NodePort type service named nginx-service. The nodePort should be 30011.
+**Deployment Specifications:**
+- Create Deployment manifest
+- Define replicas and container specs
+- Configure image and ports
+- Apply to cluster and verify status
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,13 +16,15 @@ Some of the Nautilus team developers are developing a static website and they wa
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-deployment.yml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Verify the resource was created and check its status.
+
+```sh
 kubectl get deployment.apps
     kubectl get pods
     kubectl get svc

@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members was working on a git repository `/usr/src/kodekloudrepos/ecommerce` present on Storage server in Stratos DC. This was just a test repository and one of the developers just pushed a couple of changes for testing, but now they want to clean this repository and the commit history/work tree, so they want to point back the HEAD and the branch itself to a commit with message `add data.txt file`. Find below more details:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- In `/usr/src/kodekloudrepos/ecommerce` git repository, reset the git commit history so that there are only two commits in the commit history i.e initial commit and add data.txt file.
-
-- Additionally, verify that to push your changes.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,19 +16,22 @@ Nautilus dev team members was working on a git repository `/usr/src/kodekloudrep
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 sudo -i
     cd /usr/src/kodekloudrepos/ecommerce
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 git log --oneline
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```shell
 [root@ststor01 ecommerce]# git log --oneline
     81e08fc (HEAD -> master, origin/master) Test Commit10
     686cb01 Test Commit9
@@ -42,125 +47,27 @@ git log --oneline
     848a423 initial commit
 ```
 
-**Step 5:**
-```bash
-4. Push the changes
+**Step 4:** Execute the command to complete this step.
+
+```ssh
+git reset --hard 90b2925
 ```
 
-**Step 6:**
-```bash
-## Good to Know?
+**Step 5:** Fetch and merge changes from remote repository.
 
-### Git Reset Types
+```shell
+root@ststor01 ecommerce]# git status
+    On branch master
+    Your branch is behind 'origin/master' by 10 commits, and can be fast-forwarded.
+    (use "git pull" to update your local branch)
 
-- **Soft**: `--soft` - Move HEAD, keep staging and working directory
-- **Mixed**: `--mixed` (default) - Move HEAD, reset staging, keep working
-- **Hard**: `--hard` - Reset everything to specified commit
-- **Keep**: `--keep` - Reset but keep uncommitted changes
+    nothing to commit, working tree clean
+```
 
-### Reset Dangers
+**Step 6:** Push local commits to remote repository.
 
-- **Data Loss**: Hard reset can permanently lose changes
-- **Shared History**: Never reset commits pushed to shared repositories
-- **Force Push**: Required after resetting pushed commits
-- **Team Impact**: Can break other developers' work
-
-### Safe Alternatives
-
-- **Revert**: Use for shared repositories
-- **New Branch**: Create branch before risky operations
-- **Backup**: Create backup branch before reset
-- **Stash**: Save work-in-progress before reset
-
-### Recovery Options
-
-- **Reflog**: `git reflog` shows recent HEAD movements
-- **Recovery**: `git reset --hard HEAD@{n}` to restore
-- **Time Limit**: Reflog entries expire after ~90 days
-- **Garbage Collection**: `git gc` can remove unreachable commits
-
----
-
-## ✅ Verification
-
-After completing the challenge, verify your solution by:
-
-1. **Testing the implementation**
-   - Run all commands from the solution
-   - Check for any error messages
-
-2. **Validating the results**
-   - Ensure all requirements are met
-   - Test edge cases if applicable
-
-3. **Clean up (if needed)**
-   - Remove temporary files
-   - Reset any test configurations
-
----
-
-## 📚 Learning Notes
-
-### Key Concepts
-
-This challenge covers the following concepts:
-- Practical application of Git skills
-- Real-world DevOps scenarios
-- Best practices for production environments
-
-### Common Pitfalls
-
-- ⚠️ **Permissions**: Ensure you have the necessary permissions to execute commands
-- ⚠️ **Syntax**: Double-check command syntax and flags
-- ⚠️ **Environment**: Verify you're working in the correct environment/server
-
-### Best Practices
-
-- ✅ Always verify changes before marking as complete
-- ✅ Test your solution in a safe environment first
-- ✅ Document any deviations from the standard approach
-- ✅ Keep security in mind for all configurations
-
----
-
-## 🔗 Related Challenges
-
-- **← Previous**: [Day 29 - Git Pull Request](./day-29.md)
-- **Next →**: [Day 31 - Git Stash](../week-05/day-31.md)
-
-### Similar Challenges (Git)
-- [Day 22 - Clone Git Repository](../week-04/day-22.md)
-- [Day 23 - Fork a repository](../week-04/day-23.md)
-- [Day 24 - Git Branch Create](../week-04/day-24.md)
-
----
-
-## 📖 Additional Resources
-
-- [KodeKloud Official Documentation](https://kodekloud.com)
-- [Official Technology Documentation](#)
-- [Community Discussions](#)
-
----
-
-## 🎓 Knowledge Check
-
-After completing this challenge, you should be able to:
-- [ ] Understand the problem statement clearly
-- [ ] Implement the solution independently
-- [ ] Verify the solution works correctly
-- [ ] Explain the concepts to others
-- [ ] Apply these skills to similar problems
-
----
-
-**Challenge Source**: KodeKloud 100 Days of DevOps
-**Difficulty**: ⭐
-**Category**: DevOps
-
----
-
-**Track your progress**: After completing this challenge, mark it as done:
+```sh
+git push --force
 ```
 
 ---

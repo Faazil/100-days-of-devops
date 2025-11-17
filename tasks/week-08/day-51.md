@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-An application currently running on the Kubernetes cluster employs the nginx web server. Nautilus dev team members has introduced some recent changes that need deployment. They've crafted an image nginx:1.18 with the latest updates.
+Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
 
-- Execute a rolling update for this application, integrating the nginx:1.18 image. The deployment is named nginx-deployment.
-
-- Ensure all pods are operational post-update.
-
-> Note: The kubectl utility on jump_host is set up to operate with the Kubernetes cluster
+**Resource Configuration:**
+- Pod creation with resource specifications
+- Memory requests and limits (Mi units)
+- CPU requests and limits (millicores)
+- Prevent resource contention across workloads
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,15 +16,17 @@ An application currently running on the Kubernetes cluster employs the nginx web
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Verify the resource was created and check its status.
+
+```sh
 kubectl get deployments.apps
     NAME               READY   UP-TO-DATE   AVAILABLE   AGE
     nginx-deployment   3/3     3            3           4m33s
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Verify the resource was created and check its status.
+
+```sh
 kubectl get pods
     NAME                               READY   STATUS    RESTARTS   AGE
     nginx-deployment-989f57c54-mnznk   1/1     Running   0          4m52s
@@ -32,13 +34,15 @@ kubectl get pods
     nginx-deployment-989f57c54-vgjd8   1/1     Running   0          4m52s
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Get detailed information about the resource.
+
+```sh
 kubectl describe pods nginx-deployment-989f57c54-mnznk
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```shell
 Name:             nginx-deployment-989f57c54-mnznk
     Namespace:        default
     Priority:         0
@@ -94,13 +98,15 @@ Name:             nginx-deployment-989f57c54-mnznk
     Normal  Started    9m57s  kubelet            Started container nginx-container
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Execute the command to complete this step.
+
+```sh
 kubectl set image deployments/nginx-deployment nginx-container=nginx:1.18
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Execute the command to complete this step.
+
+```sh
 kubectl rollout status deployments/nginx-deployment
 ```
 

@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Disable all app server SSH root access.
+Complete the secure ssh root access task according to the specifications provided in the KodeKloud Engineer platform.
 
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
-
----
+**Task Focus:**
+- Follow lab environment instructions
+- Execute configuration steps
+- Verify successful completion
+- Test functionality
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,62 +16,11 @@ Disable all app server SSH root access.
 
 ## Solution Steps
 
-**Step 1:**
-```bash
-ssh <your-username>@<server-name>
-```
+**Step 1:** Modify SSH configuration to disable root login.
 
-**Step 2:**
-```bash
+```sh
 sudo sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
-```
-
-**Step 3:**
-```bash
-sudo systemctl restart sshd
-```
-
-**Step 4:**
-```bash
-grep PermitRootLogin /etc/ssh/sshd_config
-```
-
-**Step 5:**
-```bash
-PermitRootLogin no
-```
-
-**Step 6:**
-```bash
-# Edit file manually if you prefer
-sudo vi /etc/ssh/sshd_config
-
-# Find this line:
-#PermitRootLogin yes
-
-# Change to:
-PermitRootLogin no
-
-# Save and exit, then test config
-sudo sshd -t
-
-# If no errors, restart
-sudo systemctl restart sshd
-```
-
-**Step 7:**
-```bash
-# Disable password authentication (use keys only)
-PasswordAuthentication no
-
-# Change default SSH port
-Port 2222
-
-# Limit users who can SSH
-AllowUsers user1 user2
-
-# Enable key-based authentication only
-PubkeyAuthentication yes
+    sudo systemctl restart sshd
 ```
 
 ---

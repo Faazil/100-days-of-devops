@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members has been working on a project repository /opt/demo.git. This repo is cloned at /usr/src/kodekloudrepos on storage server in Stratos DC. They recently shared the following requirements with DevOps team:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-> Create a new branch nautilus in /usr/src/kodekloudrepos/demo repo from master and copy the /tmp/index.html file (present on storage server itself) into the repo. Further, add/commit this file in the new branch and merge back that branch into master branch. Finally, push the changes to the origin for both of the branches.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,43 +16,50 @@ Nautilus dev team members has been working on a project repository /opt/demo.git
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Connect to the target server using SSH.
+
+```sh
 ssh user@storage-server
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Attempt to switch to the user and verify login is blocked.
+
+```sh
 sudo su
     cd /usr/src/kodekloudrepos/demo
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Switch to the specified branch.
+
+```sh
 # ensure current branch is master branch
     git branch
     # create a new branch
     git checkout -b nautilus
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```sh
 cp /tmp/index.html .
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Stage files for commit.
+
+```sh
 git add .
     git commit -m "added tmp file"
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Execute the command to complete this step.
+
+```sh
 git switch master
 ```
 
-**Step 7:**
-```bash
+**Step 7:** Merge changes from one branch into another.
+
+```sh
 git merge nautilus
     git push
 ```

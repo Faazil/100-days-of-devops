@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps teams is planning to set up a Grafana tool to collect and analyze analytics from some applications. They are planning to deploy it on Kubernetes cluster. Below you can find more details.
+Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
 
-1. Create a deployment named `grafana-deployment-datacenter` using any grafana image for Grafana app. Set other parameters as per your choice.
-
-2. Create NodePort type service with nodePort `32000` to expose the app.
-
-> You need not to make any configuration changes inside the Grafana app once deployed, just make sure you are able to access the Grafana login page.
+**Resource Configuration:**
+- Pod creation with resource specifications
+- Memory requests and limits (Mi units)
+- CPU requests and limits (millicores)
+- Prevent resource contention across workloads
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,13 +16,15 @@ The Nautilus DevOps teams is planning to set up a Grafana tool to collect and an
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-deployment.yaml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Verify the resource was created and check its status.
+
+```sh
 kubectl get deployments.apps
     kubectl get svc
 ```

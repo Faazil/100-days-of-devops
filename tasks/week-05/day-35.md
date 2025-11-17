@@ -2,10 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team aims to containerize various applications following a recent meeting with the application development team. They intend to conduct testing with the following steps:
+Create a Docker Compose configuration file to orchestrate multi-container applications. Docker Compose defines services, networks, and volumes in a single YAML file.
 
-- Install docker-ce and docker compose packages on App Server 2.
-- Initiate the docker service.
+**Compose Configuration:**
+- Define services and their configurations
+- Specify container images and build contexts
+- Configure ports, volumes, and networks
+- Enable multi-container application deployment
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -13,14 +16,16 @@ The Nautilus DevOps team aims to containerize various applications following a r
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cat /etc/os-release
     uname -a
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```shell
 [steve@stapp02 ~]$ cat /etc/os-release 
     NAME="CentOS Stream"
     VERSION="9"
@@ -38,14 +43,16 @@ cat /etc/os-release
     REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream"
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Enable service to start automatically on boot.
+
+```sh
 sudo systemctl enable docker.service
     sudo systemctl start docker.service
 ```

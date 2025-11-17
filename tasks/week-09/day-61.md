@@ -2,19 +2,13 @@
 
 ## Task Overview
 
-There are some applications that need to be deployed on Kubernetes cluster and these apps have some pre-requisites where some configurations need to be changed before deploying the app container. Some of these changes cannot be made inside the images so the DevOps team has come up with a solution to use init containers to perform these tasks during deployment. Below is a sample scenario that the team is going to test first.
+Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
 
-- Create a Deployment named as `ic-deploy-devops`.
-
-- Configure spec as `replicas` should be `1`, labels app should be `ic-devops`, template's metadata lables app should be the same `ic-devops`.
-
-- The initContainers should be named as `ic-msg-devops`, use image `debian` with latest tag and use command `'/bin/bash', '-c' and 'echo Init Done - Welcome to xFusionCorp Industries > /ic/media'`. The volume mount should be named as `ic-volume-devops` and mount path should be `/ic`.
-
-- Main container should be named as `ic-main-devops`, use image debian with latest tag and use command `'/bin/bash', '-c' and 'while true; do cat /ic/media; sleep 5; done'`. The volume mount should be named as `ic-volume-devops` and mount path should be `/ic`.
-
-- Volume to be named as `ic-volume-devops` and it should be an `emptyDir` type.
-
-> Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
+**Resource Configuration:**
+- Pod creation with resource specifications
+- Memory requests and limits (Mi units)
+- CPU requests and limits (millicores)
+- Prevent resource contention across workloads
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -22,13 +16,15 @@ There are some applications that need to be deployed on Kubernetes cluster and t
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-deployment.yaml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Verify the resource was created and check its status.
+
+```sh
 kubectl get deployments.apps
     kubectl get pods
 ```

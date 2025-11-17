@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members was working on a git repository `/usr/src/kodekloudrepos/ecommerce` present on Storage server in Stratos DC. One of the developers stashed some in-progress changes in this repository, but now they want to restore some of the stashed changes. Find below more details to accomplish this task:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- Look for the stashed changes under `/usr/src/kodekloudrepos/ecommerce` git repository, and restore the stash with stash@{1} identifier. Further, commit and push your changes to the origin.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,31 +16,36 @@ Nautilus dev team members was working on a git repository `/usr/src/kodekloudrep
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 sudo -i
     cd /usr/src/kodekloudrepos/ecommerce
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 git stash list
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```shell
 [root@ststor01 ecommerce]# git stash list
     stash@{0}: WIP on master: 7fe985d initial commit
     stash@{1}: WIP on master: 7fe985d initial commit
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```sh
 git stash apply stash@{1}
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Stage files for commit.
+
+```sh
 git add .
     git commit -m "Restored stash files"
     git push

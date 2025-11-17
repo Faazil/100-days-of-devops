@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Nautilus developers are actively working on one of the project repositories, `/usr/src/kodekloudrepos/media`. Recently, they decided to implement some new features in the application, and they want to maintain those new changes in a separate branch. Below are the requirements that have been shared with the DevOps team:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- On Storage server in Stratos DC create a new branch `xfusioncorp_media` from master branch in `/usr/src/kodekloudrepos/media` git repo.
-
-- Please do not try to make any changes in the code.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,24 +16,28 @@ Nautilus developers are actively working on one of the project repositories, `/u
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Attempt to switch to the user and verify login is blocked.
+
+```sh
 sudo su
     cd /usr/src/kodekloudrepos/media
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Create or list Git branches.
+
+```sh
 git branch
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 git switch master
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Switch to the specified branch.
+
+```sh
 git checkout -b xfusioncorp_media
 ```
 

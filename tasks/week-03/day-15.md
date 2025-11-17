@@ -2,15 +2,13 @@
 
 ## Task Overview
 
-The system admins team of xFusionCorp Industries needs to deploy a new application on App Server 3 within the Stratos DC. They have some pre-requites to get ready that server for application deployment. Prepare the server as per requirements shared below:
+Execute Git version control operations for source code management. Track changes, collaborate, and maintain project history.
 
-1. Install and configure `nginx` on `App Server 3`.
-
-2. On App Server 3 A self signed SSL certificate and key present at location `/tmp/nautilus.crt` and `/tmp/nautilus.key`. Move them to some appropriate location and deploy the same in Nginx.
-
-3. Create an `index.html` file with content `Welcome!` under Nginx document root.
-
-4. For final testing try to access the App Server 3 link (either hostname or IP) from jump host using curl command. For example `curl -Ik https://<app-server-ip>/`.
+**Git Operations:**
+- Configure Git settings
+- Perform repository operations
+- Manage commits and history
+- Collaborate with remotes
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -18,46 +16,61 @@ The system admins team of xFusionCorp Industries needs to deploy a new applicati
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Install packages using the package manager.
+
+```sh
 sudo yum install nginx -y
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 echo "Welcome!" | sudo tee /usr/share/nginx/html/index.html
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Restart the service to apply changes.
+
+```sh
 sudo systemctl restart nginx
     curl http://stapp03
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Create the required directory.
+
+```sh
 sudo mkdir -p /etc/certs
     sudo cp /tmp/nautilus.* /etc/certs
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Edit the configuration file to set required parameters.
+
+```sh
 sudo vi /etc/nginx/nginx.conf
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Execute the command to complete this step.
+
+```shell
 return 301 https://$host$request_uri;
 ```
 
-**Step 7:**
-```bash
-If you need to update anything else do respectively. Before restart the `ngninx` server make sure you are testin it using:
+**Step 7:** Execute the command to complete this step.
+
+```nginx
+ssl_certificate     /etc/certs/nautilus.crt;
+    ssl_certificate_key /etc/certs/nautilus.key;
 ```
 
-**Step 8:**
-```bash
-If it returns successful, you are ready to restart nginx:
+**Step 8:** Execute the command to complete this step.
+
+```sh
+sudo nginx -t
+```
+
+**Step 9:** Restart the service to apply changes.
+
+```sh
+sudo systemctl restart nginx
 ```
 
 ---

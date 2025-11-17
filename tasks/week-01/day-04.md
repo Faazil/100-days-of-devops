@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-In a bid to automate backup processes, the xFusionCorp Industries sysadmin team has developed a new bash script named `xfusioncorp.sh`. While the script has been distributed to all necessary servers, it lacks executable permissions on App Server 1 within the Stratos Datacenter.
+Execute Git version control operations for source code management. Track changes, collaborate, and maintain project history.
 
-Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script on App Server 1. Additionally, ensure that all users have the capability to execute it.
-
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
-
----
+**Git Operations:**
+- Configure Git settings
+- Perform repository operations
+- Manage commits and history
+- Collaborate with remotes
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,59 +16,53 @@ Your task is to grant executable permissions to the `/tmp/xfusioncorp.sh` script
 
 ## Solution Steps
 
-**Step 1:**
-```bash
-ssh <your-username>@<server-name>
+**Step 1:** Perform the initial setup or connection.
+
+```sh
+ls -la /tmp
 ```
 
-**Step 2:**
-```bash
-ls -la /tmp/xfusioncorp.sh
+**Step 2:** Execute the command to complete this step.
+
+```txt
+4 ---------- 1 root root   40 Jul 30 02:21 xfusioncorp.sh
 ```
 
-**Step 3:**
-```bash
----------- 1 root root 40 Nov 14 10:30 /tmp/xfusioncorp.sh
-```
+**Step 3:** Make the script executable for all users.
 
-**Step 4:**
-```bash
+```sh
 chmod 755 /tmp/xfusioncorp.sh
 ```
 
-**Step 5:**
-```bash
-ls -la /tmp/xfusioncorp.sh
+**Step 4:** Execute the command to complete this step.
+
+```sh
+ls -la /tmp
 ```
 
-**Step 6:**
-```bash
--rwxr-xr-x 1 root root 40 Nov 14 10:30 /tmp/xfusioncorp.sh
+**Step 5:** Execute the command to complete this step.
+
+```txt
+4 -rwxr-xr-x 1 root root   40 Jul 30 02:21 xfusioncorp.sh
 ```
 
-**Step 7:**
-```bash
-Owner  Group  Others
- 7      5      5
-rwx    r-x    r-x
+**Step 6:** Set appropriate file permissions.
 
-Numbers mean:
-4 = read (r)
-2 = write (w)
-1 = execute (x)
-
-Add them up:
-7 = 4+2+1 = rwx (all permissions)
-5 = 4+1 = r-x (read + execute)
-6 = 4+2 = rw- (read + write)
+```sh
+chmod u=rwx,g=rx,o=r test.sh
 ```
 
-**Step 8:**
-```bash
-chmod 755 script.sh   # Standard executable
-chmod 644 file.txt    # Standard file (no execute)
-chmod 600 secret.txt  # Private file (owner only)
-chmod 777 file.sh     # Full access (dangerous!)
+**Step 7:** Set appropriate file permissions.
+
+```sh
+chmod g+w test.sh     # Add write permission for group
+    chmod o-r test.sh     # Remove read permission for others
+```
+
+**Step 8:** Set appropriate file permissions.
+
+```sh
+chmod 754 test.sh
 ```
 
 ---

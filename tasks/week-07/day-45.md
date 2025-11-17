@@ -2,15 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is working to create new images per requirements shared by the development team. One of the team members is working to create a Dockerfile on App Server 1 in Stratos DC. While working on it she ran into issues in which the docker build is failing and displaying errors. Look into the issue and fix it to build an image as per details mentioned below:
+Build custom Docker images using Dockerfiles to package applications with their dependencies. Images serve as blueprints for creating containers.
 
-- The Dockerfile is placed on App Server 1 under /opt/docker directory.
-
-- Fix the issues with this file and make sure it is able to build the image.
-
-- Do not change base image, any other valid configuration within Dockerfile, or any of the data been used — for example, index.html.
-
-Note: Please note that once you click on FINISH button all existing images, the containers will be destroyed and new image will be built from your Dockerfile.
+**Image Creation:**
+- Write Dockerfile with build instructions
+- Define base image and dependencies
+- Configure application setup
+- Build and verify image
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -18,34 +16,51 @@ Note: Please note that once you click on FINISH button all existing images, the 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cat /opt/docker/Dockerfile
     ``
 ```
 
-**Step 2:**
+**Step 2:** Execute the command to complete this step.
+
 ```bash
 2. Let's try to Build Image
 ```
 
-**Step 4:**
+**Step 3:** Execute the command to complete this step.
+
 ```bash
 > It seems network timeout issue
 
 3. Let's Pull the base image First
 ```
 
-**Step 6:**
+**Step 4:** Execute the command to complete this step.
+
 ```bash
 > Image pulled successfully
 
 4. Let's try to build again
 ```
 
-**Step 8:**
+**Step 5:** Build Docker image from Dockerfile.
+
 ```bash
-> Now, we are getting certs file path issues. It's because the Dockerfile is trying to copy files from relative paths, but those files need to be in the Docker build context. Next, use the COPY instruction instead of RUN cp with absolute paths.
+> Now, we are getting certs file path issues. It's because the Dockerfile is trying to copy files from relative paths, but those files need to be in the Docker build context. We need to use the COPY instruction instead of RUN cp with absolute paths.
+```
+
+**Step 6:** Execute the command to complete this step.
+
+```bash
+5. We fixed Dockerfile, now let's build again
+```
+
+**Step 7:** Execute the command to complete this step.
+
+```bash
+6. We can verify using this command
 ```
 
 ---

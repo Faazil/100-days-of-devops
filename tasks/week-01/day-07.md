@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-The system admins team of xFusionCorp Industries has set up some scripts on jump host that run on regular intervals and perform operations on all app servers within the Stratos DC. To make these scripts work properly we need to make sure the thor user on jump host has password-less SSH access to all app servers through their respective sudo users (i.e tony for app server 1).
+Develop automation scripts for system administration tasks. Create bash scripts to streamline repetitive operations.
 
-Set up a password-less authentication from user thor on jump host to all app servers through their respective sudo users.
-
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
-
----
+**Script Development:**
+- Write bash script
+- Implement required logic
+- Set executable permissions
+- Test script functionality
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,71 +16,25 @@ Set up a password-less authentication from user thor on jump host to all app ser
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Generate SSH key pair for password-less authentication.
+
+```sh
 ssh-keygen -t rsa -b 2048
 ```
 
-**Step 2:**
-```bash
-Your identification has been saved in /home/thor/.ssh/id_rsa
-Your public key has been saved in /home/thor/.ssh/id_rsa.pub
+**Step 2:** Create the required directory.
+
+```sh
+mkdir -p .ssh
+    vi .ssh/authorized_keys
 ```
 
-**Step 3:**
-```bash
-ssh-copy-id <username>@<server-name>
-```
+**Step 3:** Connect to the target server using SSH.
 
-**Step 4:**
-```bash
-ssh-copy-id tony@stapp01
-ssh-copy-id steve@stapp02
-ssh-copy-id banner@stapp03
-```
+```sh
+#!/bin/sh
 
-**Step 5:**
-```bash
-Number of key(s) added: 1
-```
-
-**Step 6:**
-```bash
-ssh <username>@<server-name>
-```
-
-**Step 7:**
-```bash
-# 1. View your public key
-cat ~/.ssh/id_rsa.pub
-
-# 2. SSH to remote server (with password)
-ssh user@server
-
-# 3. Create .ssh directory if needed
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
-
-# 4. Add public key to authorized_keys
-nano ~/.ssh/authorized_keys
-# Paste your public key
-chmod 600 ~/.ssh/authorized_keys
-
-# 5. Exit and test
-exit
-ssh user@server  # Should work without password
-```
-
-**Step 8:**
-```bash
-# RSA (traditional, widely supported)
-ssh-keygen -t rsa -b 4096
-
-# Ed25519 (modern, faster, smaller)
-ssh-keygen -t ed25519
-
-# ECDSA (another option)
-ssh-keygen -t ecdsa -b 521
+ssh-copy-id user@host
 ```
 
 ---

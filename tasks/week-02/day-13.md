@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-We have one of our websites up and running on our Nautilus infrastructure in Stratos DC. Our security team has raised a concern that right now Apache’s port i.e `6200` is open for all since there is no firewall installed on these hosts. So we have decided to add some security layer for these hosts and after discussions and recommendations we have come up with the following requirements:
+Install and configure web server software for hosting applications. Set up HTTP service with custom port and configuration.
 
-1. Install `iptables` and all its dependencies on each app host.
-2. Block incoming port `6200` on all apps for everyone except for `LBR` host.
-3. Ensure the rules remain, even after system reboot.
+**Web Server Setup:**
+- Install web server package
+- Configure server settings
+- Adjust ports and document root
+- Start and enable service
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,16 +16,18 @@ We have one of our websites up and running on our Nautilus infrastructure in Str
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Install packages using the package manager.
+
+```sh
 sudo yum install -y iptables iptables-services
     sudo iptables -A INPUT -p tcp --dport 6200 -s 172.16.238.14 -j ACCEPT
     sudo iptables -A INPUT -p tcp --dport 6200 -j REJECT
     sudo service iptables save
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```shell
 iptables v1.8.10 (legacy)
 
 Usage: iptables -[ACD] chain rule-specification [options]

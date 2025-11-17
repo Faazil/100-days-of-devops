@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-The monitoring system detected an issue within the Stratos DC. An application server is experiencing problems, as its Apache service cannot be accessed on port 3000 (which is the Apache port). Either the service stopped running, firewall rules are blocking access, or another factor is preventing connectivity.
+Execute Git version control operations for source code management. Track changes, collaborate, and maintain project history.
 
-- Utilize commands such as telnet, netstat, etc. for troubleshooting and resolution. Additionally, verify that Apache is reachable from the jump host while maintaining security configurations.
-
-- After resolving, validate the same using command `curl http://stapp01:3000` command executed from the jump server.
+**Git Operations:**
+- Configure Git settings
+- Perform repository operations
+- Manage commits and history
+- Collaborate with remotes
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,8 +16,9 @@ The monitoring system detected an issue within the Stratos DC. An application se
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Check the service status to verify it's running.
+
+```shell
 tony@stapp01 ~]$ sudo systemctl status httpd
     ● httpd.service - The Apache HTTP Server
     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset
@@ -35,13 +38,15 @@ tony@stapp01 ~]$ sudo systemctl status httpd
     top -
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 sudo netstat -tlnup
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```txt
 Active Internet connections (only servers)
     Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
     tcp        0      0 127.0.0.11:36025        0.0.0.0:*               LISTEN      -                   
@@ -51,32 +56,76 @@ Active Internet connections (only servers)
     udp        0      0 127.0.0.11:56145        0.0.0.0:*                           -
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```sh
 cd /etc/mail
     cp sendmail.mc sendmail.mc.bak
     vi sendmail.mc
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Execute the command to complete this step.
+
+```sh
 DAEMON_OPTIONS(`Port=3000,Addr=127.0.0.1, Name=MTA')dnl
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Restart the service to apply changes.
+
+```sh
 sudo systemctl restart sendmail
 ```
 
-**Step 7:**
-```bash
+**Step 7:** Check the service status to verify it's running.
+
+```sh
 sudo netstat -tlnup
     sudo systemctl status httpd sendmail
 ```
 
-**Step 8:**
-```bash
+**Step 8:** Test the web server by making HTTP request.
+
+```sh
 curl http://localhost:3000
+```
+
+**Step 9:** Test the web server by making HTTP request.
+
+```sh
+curl http://stapp01:3000
+```
+
+**Step 10:** Execute the command to complete this step.
+
+```sh
+sudo iptables -L -n
+```
+
+**Step 11:** Execute the command to complete this step.
+
+```bash
+sudo iptables -L -n
+    Chain INPUT (policy ACCEPT)
+    target     prot opt source               destination         
+    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED
+    ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0           
+    ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           
+    ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            state NEW tcp dpt:22
+    REJECT     all  --  0.0.0.0/0            0.0.0.0/0            reject-with icmp-host-prohibited
+
+    Chain FORWARD (policy ACCEPT)
+    target     prot opt source               destination         
+    REJECT     all  --  0.0.0.0/0            0.0.0.0/0            reject-with icmp-host-prohibited
+
+    Chain OUTPUT (policy ACCEPT)
+    target     prot opt source               destination         
+    # Warning: iptables-legacy tables present, use iptables-legacy to see them
+```
+
+**Step 12:** Execute the command to complete this step.
+
+```sh
+sudo iptables -I INPUT 4 -p tcp --dport 3000 -j ACCEPT
 ```
 
 ---

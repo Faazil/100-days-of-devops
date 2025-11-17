@@ -2,26 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members observed some performance issues with one of the application that is deployed in Kubernetes cluster. After looking into number of factors, the team has suggested to use some in-memory caching utility for DB service. After number of discussions, the decision was made to utilize Redis. Initially they would like to deploy Redis on kubernetes cluster for testing and later they will move it to production. Please find below more details about the task:
+Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
 
-- Create a redis deployment with following parameters:
-
-- Create a config map called `my-redis-config` having maxmemory `2mb` in `redis-config`.
-
-- Name of the deployment should be `redis-deployment`, it should use `redis:alpine` image and container name should be `redis-container`. Additionally, verify that it has only `1 replica`.
-
-- The container should request for `1 CPU`.
-
-Mount 2 volumes:
-
-a. An Empty directory volume called `data` at path `/redis-master-data`.
-
-b. A configmap volume called `redis-config` at path `/redis-master`.
-
-c. The container should expose the port `6379`.
-
-Finally, `redis-deployment` should be in an up and running state.
-Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
+**Resource Configuration:**
+- Pod creation with resource specifications
+- Memory requests and limits (Mi units)
+- CPU requests and limits (millicores)
+- Prevent resource contention across workloads
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -29,13 +16,15 @@ Note: The kubectl utility on jump_host has been configured to work with the kube
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f k3s-deployment.yaml
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Verify the resource was created and check its status.
+
+```sh
 kubectl get pods
 ```
 

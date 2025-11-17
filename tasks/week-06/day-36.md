@@ -2,9 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is conducting application deployment tests on selected application servers. They require a nginx container deployment on Application Server 1. fulfill this objective with the following instructions:
+Build custom Docker images using Dockerfiles to package applications with their dependencies. Images serve as blueprints for creating containers.
 
-On Application Server 1 create a container named nginx_1 using the nginx image with the alpine tag. Ensure container is in a running state.
+**Image Creation:**
+- Write Dockerfile with build instructions
+- Define base image and dependencies
+- Configure application setup
+- Build and verify image
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -12,8 +16,9 @@ On Application Server 1 create a container named nginx_1 using the nginx image w
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Start a new container from the image.
+
+```sh
 sudo docker run -d --name nginx_1 -p 80:80 nginx:alpine
 ```
 

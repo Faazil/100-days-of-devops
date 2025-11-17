@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-The xFusionCorp development team added updates to the project that is maintained under /opt/beta.git repo and cloned under /usr/src/kodekloudrepos/beta. Recently some changes were made on Git server that is hosted on Storage server in Stratos DC. The DevOps team added some new Git remotes, so we need to update remote on /usr/src/kodekloudrepos/beta repository as per details mentioned below:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-- In `/usr/src/kodekloudrepos/beta` repo add a new remote `dev_beta` and point it to `/opt/xfusioncorp_beta.git` repository.
-- A file `/tmp/index.html` on same server; copy this file to the repo and `add/commit` to `master branch`.
-- Finally `push master branch` to this new `remote origin`.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,33 +16,38 @@ The xFusionCorp development team added updates to the project that is maintained
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Attempt to switch to the user and verify login is blocked.
+
+```sh
 sudo su
     cd /usr/src/kodekloudrepos/beta
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Create or list Git branches.
+
+```sh
 git remote -v
     git branch
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 git remote add dev_beta /opt/xfusioncorp_beta.git
     git remote -v
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Stage files for commit.
+
+```sh
 cp /tmp/index.html .
     git add .
     git commit -m "added tmp file"
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Push local commits to remote repository.
+
+```sh
 git push dev_beta master
 ```
 

@@ -2,17 +2,13 @@
 
 ## Task Overview
 
-The DevOps team at xFusionCorp Industries is initiating the setup of CI/CD pipelines and has decided to utilize Jenkins as their server. Execute the task according to the provided requirements:
+Configure Jenkins pipeline for automated build and deployment workflows. Pipelines define CI/CD processes as code.
 
-1. Install Jenkins on the jenkins server using the yum utility only, and start its service.
-    - If you face a timeout issue while starting the Jenkins service, refer to [this](https://www.jenkins.io/doc/book/system-administration/systemd-services/#starting-services).
-2. Jenkin's admin user name should be `theadmin`, password should be `Adm!n321`, full name should be `John` and email should be `john@jenkins.stratos.xfusioncorp.com`.
-
-Note:
-
-1. To access the jenkins server, connect from the jump host using the `root` user with the password `S3curePass`.
-
-2. After Jenkins server installation, click the Jenkins button on the top bar to access the Jenkins UI and follow on-screen instructions to create an admin user.
+**Pipeline Configuration:**
+- Create pipeline job in Jenkins
+- Define pipeline stages
+- Configure build and deployment steps
+- Integrate with version control
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -20,13 +16,15 @@ Note:
 
 ## Solution Steps
 
-**Step 1:**
+**Step 1:** Connect to the target server using SSH.
+
 ```bash
 ssh root@jenkins
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```shell
 cat /etc/os-release 
     NAME="CentOS Stream"
     VERSION="9"
@@ -44,14 +42,16 @@ cat /etc/os-release
     REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream"
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Install packages using the package manager.
+
+```sh
 yum update -y
     yum install -y wget
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Install packages using the package manager.
+
+```sh
 sudo wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/redhat-stable/jenkins.repo
     sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
@@ -62,13 +62,15 @@ sudo wget -O /etc/yum.repos.d/jenkins.repo \
     sudo systemctl daemon-reload
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Enable service to start automatically on boot.
+
+```sh
 sudo systemctl enable --now jenkins
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Execute the command to complete this step.
+
+```sh
 cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 

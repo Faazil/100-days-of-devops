@@ -2,13 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team is planning to host an application on a nginx-based container. There are number of tickets already been created for similar tasks. One of the tickets has been assigned to set up a nginx container on Application Server 2 within the Stratos DC. Please perform the task as per details mentioned below:
+Build custom Docker images using Dockerfiles to package applications with their dependencies. Images serve as blueprints for creating containers.
 
-- Pull `nginx:stable` docker image on Application Server 2.
-
-- Create a container named `cluster` using the image you pulled.
-
-- Map host port `5002` to container port `80`. Please keep the container in running state.
+**Image Creation:**
+- Write Dockerfile with build instructions
+- Define base image and dependencies
+- Configure application setup
+- Build and verify image
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,18 +16,21 @@ The Nautilus DevOps team is planning to host an application on a nginx-based con
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Download the Docker image from registry.
+
+```sh
 docker pull nginx:stable
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Start a new container from the image.
+
+```sh
 docker run -d --name cluster -p 5002:80 nginx:stable
 ```
 
-**Step 3:**
-```bash
+**Step 3:** List running containers to verify deployment.
+
+```sh
 docker ps
 ```
 

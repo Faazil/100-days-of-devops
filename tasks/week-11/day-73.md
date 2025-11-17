@@ -2,21 +2,13 @@
 
 ## Task Overview
 
-The devops team of xFusionCorp Industries is working on to setup centralised logging management system to maintain and analyse server logs easily. Since it will take some time to implement, they wanted to gather some server logs on a regular basis. At least one of the app servers is having issues with the Apache server. The team needs Apache logs so that they can identify and troubleshoot the issues easily if they arise. So they decided to create a Jenkins job to collect logs from the server. Please create/configure a Jenkins job as per details mentioned below:
+Install and configure Jenkins plugins to extend functionality. Plugins add capabilities for build tools, version control, and deployment targets.
 
-Click on the Jenkins button on the top bar to access the Jenkins UI. Login using username `admin` and password `Adm!n321`
-
-1. Create a Jenkins jobs named `copy-logs`.
-
-2. Configure it to periodically build `every 7 minutes` to copy the Apache logs (both access_log and error_logs) from App Server 2 (from default logs location) to location `/usr/src/itadmin` on Storage Server.
-
-Note:
-
-1. You might need to install some plugins and restart Jenkins service. So, we recommend clicking on Restart Jenkins when installation is complete and no jobs are running on plugin installation/update page i.e update centre. Also, Jenkins UI sometimes gets stuck when Jenkins service restarts in the back end. In this case please make sure to refresh the UI page.
-
-2. Please make sure to define you cron expression like this `*/10 * * * *` (this is just an example to run job every 10 minutes).
-
-3. For these kind of scenarios requiring changes to be done in a web UI, please take screenshots so that you can share it with us for review in case your task is marked incomplete. You may also consider using a screen recording software such as loom.com to record and share your work.
+**Plugin Management:**
+- Access Jenkins plugin manager
+- Search and select required plugins
+- Install plugins
+- Restart Jenkins if needed
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -24,8 +16,9 @@ Note:
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Connect to the target server using SSH.
+
+```sh
 echo "app-1-pass" | sudo -S yum install -y sshpass
     echo "app-1-pass" | sudo -S sshpass -p "storage-server-pass" scp -o StrictHostKeyChecking=no -r /var/log/httpd/* natasha@ststor01:/usr/src/itadmin
 ```

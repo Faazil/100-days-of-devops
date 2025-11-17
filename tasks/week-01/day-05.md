@@ -2,16 +2,13 @@
 
 ## Task Overview
 
-Following a security audit, the xFusionCorp Industries security team has opted to enhance application and server security with SELinux. To initiate testing, the following requirements have been established for App server 2 in the Stratos Datacenter:
+Configure SELinux security framework on Linux systems. Manage mandatory access control policies for enhanced security.
 
-- Install the required SELinux packages
-- Permanently disable SELinux for the time being (it will be re-enabled after necessary configuration changes)
-- No need to reboot the server (a scheduled maintenance reboot is planned for tonight)
-- Disregard the current status via command line; the final status after reboot should be disabled
-
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
-
----
+**SELinux Configuration:**
+- Install SELinux packages
+- Set enforcement mode
+- Configure persistent settings
+- Verify configuration
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -19,48 +16,22 @@ Following a security audit, the xFusionCorp Industries security team has opted t
 
 ## Solution Steps
 
-**Step 1:**
-```bash
-ssh <your-username>@<server-name>
+**Step 1:** Install SELinux packages using the package manager.
+
+```sh
+sudo dnf install selinux-policy selinux-policy-targeted policycoreutils policycoreutils-python-utils
 ```
 
-**Step 2:**
-```bash
-sudo dnf install selinux-policy selinux-policy-targeted policycoreutils policycoreutils-python-utils -y
+**Step 2:** Edit the configuration file to set required parameters.
+
+```sh
+vi /etc/selinux/config
 ```
 
-**Step 3:**
-```bash
-sudo vi /etc/selinux/config
-```
+**Step 3:** Execute the command to complete this step.
 
-**Step 4:**
-```bash
-SELINUX=enforcing
-```
-
-**Step 5:**
-```bash
+```nano
 SELINUX=disabled
-```
-
-**Step 6:**
-```bash
-cat /etc/selinux/config | grep SELINUX=
-```
-
-**Step 7:**
-```bash
-SELINUX=disabled
-```
-
-**Step 8:**
-```bash
-# Using nano (easier for beginners)
-sudo nano /etc/selinux/config
-
-# Using sed (one-liner)
-sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 ```
 
 ---

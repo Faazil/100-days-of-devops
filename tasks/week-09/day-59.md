@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Last week, the Nautilus DevOps team deployed a redis app on Kubernetes cluster, which was working fine so far. This morning one of the team members was making some changes in this existing setup, but he made some mistakes and the app went down. Next, fix this as soon as possible. Please take a look.
+Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
 
-- The deployment name is `redis-deployment`. The pods are not in running state right now, so please look into the issue and fix the same.
-
-> Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
+**Resource Configuration:**
+- Pod creation with resource specifications
+- Memory requests and limits (Mi units)
+- CPU requests and limits (millicores)
+- Prevent resource contention across workloads
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,13 +16,15 @@ Last week, the Nautilus DevOps team deployed a redis app on Kubernetes cluster, 
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Get detailed information about the resource.
+
+```sh
 kubectl describe pod redis-deployment-pod-name
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Get detailed information about the resource.
+
+```shell
 thor@jumphost ~$ kubectl describe pod redis-deployment-6fd9d5fcb-k9n65
     Name:             redis-deployment-6fd9d5fcb-k9n65
     Namespace:        default
@@ -86,39 +90,52 @@ thor@jumphost ~$ kubectl describe pod redis-deployment-6fd9d5fcb-k9n65
     Warning  FailedMount  59s (x9 over 3m7s)  kubelet            MountVolume.SetUp failed for volume "config" : configmap "redis-cofig" not found
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Verify the resource was created and check its status.
+
+```sh
 kubectl get cm
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Verify the resource was created and check its status.
+
+```shell
 thor@jumphost ~$ kubectl get cm
     NAME               DATA   AGE
     kube-root-ca.crt   1      27m
     redis-config       2      8m16s
 ```
 
-**Step 5:**
-```bash
+**Step 5:** Verify the resource was created and check its status.
+
+```sh
 kubectl get deployment.apps redis-deployment -o yaml > redis-deployment.yaml
 ```
 
-**Step 6:**
-```bash
+**Step 6:** Apply the configuration to the Kubernetes cluster.
+
+```sh
 kubectl apply -f redis-deployment.yaml
 ```
 
-**Step 7:**
-```bash
+**Step 7:** Verify the resource was created and check its status.
+
+```sh
 kubectl get pods
 ```
 
-**Step 8:**
-```bash
+**Step 8:** Verify the resource was created and check its status.
+
+```shell
 thor@jumphost ~$ kubectl get pods
     NAME                                READY   STATUS              RESTARTS   AGE
     redis-deployment-5bcd4c7d64-rmcxj   0/1     ImagePullBackOff    0          4m9s
+```
+
+**Step 9:** Apply the configuration to the Kubernetes cluster.
+
+```sh
+kubectl delete deployments.apps redis-deployment
+    kubectl apply -f redis-deployment
 ```
 
 ---

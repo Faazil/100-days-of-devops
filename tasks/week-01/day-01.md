@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Set up a system user without login shell access for the company on the designated server. This configuration is required for system accounts and automation workflows which operate without direct user access capabilities.
+Configure a system user account with shell access disabled. This type of account serves automation workflows and service operations that don't need interactive terminal sessions.
 
-> **Lab Environment**: Complete this challenge on [KodeKloud Engineer](https://engineer.kodekloud.com/practice) platform with pre-configured lab infrastructure.
-
----
+**Technical Specifications:**
+- User account: service/system user type
+- Shell assignment: /usr/sbin/nologin (prevents interactive login)
+- Home directory: automatically created
+- Access level: restricted (no shell access)
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,46 +16,41 @@ Set up a system user without login shell access for the company on the designate
 
 ## Solution Steps
 
-**Step 1:**
-```bash
-ssh <your-username>@<server-name>
+**Step 1:** Connect to the target server using SSH.
+
+```sh
+ssh user@app-server-ip or ssh user@server-name
 ```
 
-**Step 2:**
-```bash
-sudo useradd -m -s /usr/sbin/nologin <username>
+**Step 2:** Create a system user with non-interactive shell access disabled.
+
+```sh
+sudo useradd -m -s /usr/sbin/nologin user-name
 ```
 
-**Step 3:**
-```bash
-cat /etc/passwd | grep <username>
+**Step 3:** Verify the user was created and check its configuration.
+
+```sh
+cat /etc/passwd
 ```
 
-**Step 4:**
-```bash
-kareem:x:1003:1004::/home/kareem:/usr/sbin/nologin
+**Step 4:** Attempt to switch to the user and verify login is blocked.
+
+```sh
+sudo su user-name
 ```
 
-**Step 5:**
-```bash
-sudo su - <username>
-```
+**Step 5:** Verify the user was created and check its configuration.
 
-**Step 6:**
 ```bash
-This account is currently not available.
-```
-
-**Step 7:**
-```bash
-# View user ID and groups
-id <username>
-
 # List all users with nologin shell
 grep nologin /etc/passwd
 
-# View home directory permissions
-ls -ld /home/<username>
+# Check user details
+id username
+
+# Remove user if needed
+sudo userdel -r username
 ```
 
 ---

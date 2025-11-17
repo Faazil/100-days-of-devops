@@ -2,23 +2,13 @@
 
 ## Task Overview
 
-The Nautilus DevOps team had a discussion about, how they can train different team members to use Ansible for different automation tasks. There are numerous ways to perform a particular task using Ansible, but we want to utilize each aspect that Ansible offers. The team wants to utilise Ansible's conditionals to perform the following task:
+Develop Ansible playbooks to automate configuration management tasks. Playbooks define desired system states using YAML syntax.
 
-An inventory file is already placed under /home/thor/ansible directory on jump host, with all the Stratos DC app servers included.
-
-Create a playbook /home/thor/ansible/playbook.yml and make sure to use Ansible's when conditionals statements to perform the below given tasks.
-
-1. Copy `blog.txt` file present under `/usr/src/itadmin` directory on jump host to `App Server 1` under `/opt/itadmin` directory. Its user and group owner must be user tony and its permissions must be 0655 .
-
-2. Copy `story.txt` file present under `/usr/src/itadmin` directory on jump host to `App Server 2` under `/opt/itadmin` directory. Its user and group owner must be user steve and its permissions must be 0655 .
-
-3. Copy `media.txt` file present under `/usr/src/itadmin` directory on jump host to `App Server 3` under `/opt/itadmin` directory. Its user and group owner must be user banner and its permissions must be 0655.
-
-> NOTE:
-
-- You may use `ansible_nodename` variable from gathered facts with when condition. Additionally, please make sure you are running the play for all hosts i.e use - hosts: all.
-
-- Validation will try to run the playbook using command ansible-playbook -i inventory playbook.yml, so please make sure the playbook works this way without passing any extra arguments.
+**Playbook Development:**
+- Write playbook with tasks
+- Define hosts and variables
+- Configure modules and parameters
+- Execute and verify playbook
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -26,25 +16,29 @@ Create a playbook /home/thor/ansible/playbook.yml and make sure to use Ansible's
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cd ansible
     ls -la
     cat inventory
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 touch playbook.yml
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the Ansible playbook to configure hosts.
+
+```sh
 ansible-playbook -i inventory playbook.yml
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Execute the command to complete this step.
+
+```sh
 ls -la /opt/itadmin
 ```
 

@@ -2,11 +2,13 @@
 
 ## Task Overview
 
-Nautilus dev team members has been working on a project repository /opt/games.git. This repo is cloned at /usr/src/kodekloudrepos on storage server in Stratos DC. They recently shared the following requirements with DevOps team:
+Manage Git branches for parallel development workflows. Branches enable isolated feature development and experimentation.
 
-> One of the developers is working on feature branch and their work is still in progress, however there are some changes which have been pushed into the master branch, the developer now wants to rebase the feature branch with the master branch without loosing any data from the feature branch, also they don't want to add any merge commit by simply merging the master branch into the feature branch. Accomplish this task as per requirements mentioned.
-
-- Also remember to push your changes once done.
+**Branch Operations:**
+- Create new branches
+- Switch between branches
+- Merge or rebase branches
+- Manage branch lifecycle
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -14,24 +16,28 @@ Nautilus dev team members has been working on a project repository /opt/games.gi
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 sudo -i
     cd /usr/src/kodekloudrepos/games
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Create or list Git branches.
+
+```sh
 git branch
 ```
 
-**Step 3:**
-```bash
+**Step 3:** Execute the command to complete this step.
+
+```sh
 git rebase master
 ```
 
-**Step 4:**
-```bash
+**Step 4:** Push local commits to remote repository.
+
+```sh
 git push --force --set-upstream origin feature
 ```
 

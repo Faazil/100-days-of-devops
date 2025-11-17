@@ -2,17 +2,13 @@
 
 ## Task Overview
 
-One of the Nautilus DevOps team members is working on to develop a role for httpd installation and configuration. Work is almost completed, however A requirement to add a jinja2 template for index.html file. Additionally, the relevant task needs to be added inside the role. The inventory file ~/ansible/inventory is already present on jump host that can be used. fulfill this objective as per details mentioned below:
+Develop Ansible playbooks to automate configuration management tasks. Playbooks define desired system states using YAML syntax.
 
-- Update ~/ansible/playbook.yml playbook to run the `httpd` role on App Server 2.
-
-- Create a jinja2 template `index.html.j2` under `/home/thor/ansible/role/httpd/templates/` directory and add a line `This file was created using Ansible on <respective server>` (for example This file was created using Ansible on stapp01 in case of App Server 1). Also please make sure not to hard code the server name inside the template. Instead, use `inventory_hostname` variable to fetch the correct value.
-
-- Add a task inside `/home/thor/ansible/role/httpd/tasks/main.yml` to copy this template on App Server 2 under `/var/www/html/index.html`. Additionally, verify that that `/var/www/html/index.html` file's permissions are `0777`.
-
-- The user/group owner of `/var/www/html/index.html` file must be respective sudo user of the server (for example tony in case of stapp01).
-
-> Note: Validation will try to run the playbook using command ansible-playbook -i inventory playbook.yml so please make sure the playbook works this way without passing any extra arguments.
+**Playbook Development:**
+- Write playbook with tasks
+- Define hosts and variables
+- Configure modules and parameters
+- Execute and verify playbook
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -20,8 +16,9 @@ One of the Nautilus DevOps team members is working on to develop a role for http
 
 ## Solution Steps
 
-**Step 1:**
-```bash
+**Step 1:** Perform the initial setup or connection.
+
+```sh
 cd ansible
     ls
     cat inventory
@@ -29,41 +26,82 @@ cd ansible
     ls role
 ```
 
-**Step 2:**
-```bash
+**Step 2:** Execute the command to complete this step.
+
+```sh
 vi role/httpd/templates/index.html.j2
 ```
 
-**Step 3:**
-```bash
-2. Update `main.yml` of httpd role
+**Step 3:** Execute the command to complete this step.
+
+```j2
+<p> This file was created using Ansible on {{ inventory_hostname }} </p>
 ```
 
-**Step 4:**
-```bash
-> add these lines at the below:
+**Step 4:** Execute the command to complete this step.
+
+```sh
+vi role/httpd/tasks/main.yml
 ```
 
-**Step 5:**
-```bash
-> Or you can replace all contents with this [YAML file](../files/ansible_playbook_jinja2_template_092.yml)
+**Step 5:** Configure the resource with required specifications.
 
-3. Add target hosts in `playbook.yml`
+```yaml
+- name: Copy index.html template
+      ansible.builtin.template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        mode: '0777'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
 ```
 
-**Step 6:**
-```bash
-> `playbook.yml` file should be look like this:
+**Step 6:** Configure the resource with required specifications.
+
+```yaml
+hosts: all
 ```
 
-**Step 7:**
-```bash
-4. Run the playbook command:
+**Step 7:** Configure the resource with required specifications.
+
+```yaml
+---
+    - hosts: all 
+      become: yes
+      become_user: root
+      roles:
+        - role/httpd
 ```
 
-**Step 8:**
-```bash
-5. verify with curl
+**Step 8:** Execute the Ansible playbook to configure hosts.
+
+```sh
+ansible-playbook -i inventory playbook.yml
+```
+
+**Step 9:** Test the web server by making HTTP request.
+
+```sh
+curl http://stapp01
+    curl http://stapp02
+    curl http://stapp03
+```
+
+**Step 10:** Execute the command to complete this step.
+
+```sh
+ls -la /var/www/html
+```
+
+**Step 11:** Execute the command to complete this step.
+
+```sh
+[tony@stapp01 ~]$ ls -la /var/www/html
+    total 12
+    drwxr-xr-x 2 root root 4096 Oct 25 02:47 .
+    drwxr-xr-x 4 root root 4096 Oct 25 02:46 ..
+    -rwxrwxrwx 1 tony tony   57 Oct 25 02:47 index.html
+    [tony@stapp01 ~]$
 ```
 
 ---
