@@ -2,13 +2,14 @@
 
 ## Task Overview
 
-Configure resource constraints for Kubernetes pods to prevent performance degradation. Define CPU and memory limits to ensure fair resource distribution and stable cluster operations.
+Perform a rolling update to deploy a new application version with zero downtime. Rolling updates gradually replace old pods with new ones, ensuring the application remains available throughout the update process.
 
-**Resource Configuration:**
-- Pod creation with resource specifications
-- Memory requests and limits (Mi units)
-- CPU requests and limits (millicores)
-- Prevent resource contention across workloads
+**Technical Specifications:**
+- Deployment: nginx-deployment (existing)
+- Current image: nginx:1.16
+- Target image: nginx:1.18
+- Update strategy: RollingUpdate (gradual pod replacement)
+- Requirement: Zero downtime, all pods operational after update
 
 **Lab:** [KodeKloud Engineer Platform](https://engineer.kodekloud.com/practice)
 
@@ -16,99 +17,115 @@ Configure resource constraints for Kubernetes pods to prevent performance degrad
 
 ## Solution Steps
 
-**Step 1:** Verify the resource was created and check its status.
+**Step 1:** Verify existing deployment status
 
 ```sh
 kubectl get deployments.apps
-    NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-    nginx-deployment   3/3     3            3           4m33s
 ```
 
-**Step 2:** Verify the resource was created and check its status.
+```
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           4m33s
+```
+
+List all deployments in the current namespace to confirm the nginx-deployment exists and check its current state. The output shows the deployment name, ready replicas (3/3 means 3 out of 3 desired replicas are ready), up-to-date replicas (reflecting latest pod template), available replicas (ready to serve traffic), and deployment age. The "READY" column showing "3/3" indicates all replica pods are currently running and healthy, confirming the deployment is in a stable state before performing the update.
+
+**Step 2:** List running pods managed by the deployment
 
 ```sh
 kubectl get pods
-    NAME                               READY   STATUS    RESTARTS   AGE
-    nginx-deployment-989f57c54-mnznk   1/1     Running   0          4m52s
-    nginx-deployment-989f57c54-sqf5h   1/1     Running   0          4m52s
-    nginx-deployment-989f57c54-vgjd8   1/1     Running   0          4m52s
 ```
 
-**Step 3:** Get detailed information about the resource.
+```
+NAME                               READY   STATUS    RESTARTS   AGE
+nginx-deployment-989f57c54-mnznk   1/1     Running   0          4m52s
+nginx-deployment-989f57c54-sqf5h   1/1     Running   0          4m52s
+nginx-deployment-989f57c54-vgjd8   1/1     Running   0          4m52s
+```
+
+Display all pods to see the individual pod instances created by the deployment. Each pod name includes the deployment name, ReplicaSet hash (989f57c54), and a unique suffix. The "READY" column shows "1/1" meaning one container is running out of one total container per pod. The "STATUS" shows all pods are "Running", and "RESTARTS" shows no crashes have occurred. All three pods share the same ReplicaSet hash, indicating they were created from the same pod template version.
+
+**Step 3:** Inspect current pod configuration and image version
 
 ```sh
-kubectl describe pods nginx-deployment-989f57c54-mnznk
+kubectl describe pod nginx-deployment-989f57c54-mnznk
 ```
 
-**Step 4:** Execute the command to complete this step.
+Display detailed information about a specific pod to verify the current configuration, especially the container image version. The describe output includes pod metadata (name, namespace, labels), scheduling information (node assignment), container specifications, and event history. In the "Containers" section, look for the "Image" field which shows `nginx:1.16` - this is the current version that needs to be updated. The "Events" section at the bottom shows the pod lifecycle, including when it was scheduled, when the image was pulled, and when the container started. This verification step confirms what version is currently running before performing the update.
 
-```shell
-Name:             nginx-deployment-989f57c54-mnznk
-    Namespace:        default
-    Priority:         0
-    Service Account:  default
-    Node:             kodekloud-control-plane/172.17.0.2
-    Start Time:       Mon, 15 Sep 2025 10:38:31 +0000
-    Labels:           app=nginx-app
-                    pod-template-hash=989f57c54
-    Annotations:      <none>
-    Status:           Running
-    IP:               10.244.0.6
-    IPs:
-    IP:           10.244.0.6
-    Controlled By:  ReplicaSet/nginx-deployment-989f57c54
-    Containers:
-    nginx-container:
-        Container ID:   containerd://5928ff11805390e2ac2b10bbaee9a5dcb540d6c534d162ca49c975c270280d11
-        Image:          nginx:1.16
-        Image ID:       docker.io/library/nginx@sha256:d20aa6d1cae56fd17cd458f4807e0de462caf2336f0b70b5eeb69fcaaf30dd9c
-        Port:           <none>
-        Host Port:      <none>
-        State:          Running
-        Started:      Mon, 15 Sep 2025 10:38:38 +0000
-        Ready:          True
-        Restart Count:  0
-        Environment:    <none>
-        Mounts:
-        /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-v2jf9 (ro)
-    Conditions:
-    Type              Status
-    Initialized       True 
-    Ready             True 
-    ContainersReady   True 
-    PodScheduled      True 
-    Volumes:
-    kube-api-access-v2jf9:
-        Type:                    Projected (a volume that contains injected data from multiple sources)
-        TokenExpirationSeconds:  3607
-        ConfigMapName:           kube-root-ca.crt
-        ConfigMapOptional:       <nil>
-        DownwardAPI:             true
-    QoS Class:                   BestEffort
-    Node-Selectors:              <none>
-    Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
-                                node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
-    Events:
-    Type    Reason     Age    From               Message
-    ----    ------     ----   ----               -------
-    Normal  Scheduled  10m    default-scheduler  Successfully assigned default/nginx-deployment-989f57c54-mnznk to kodekloud-control-plane
-    Normal  Pulling    10m    kubelet            Pulling image "nginx:1.16"
-    Normal  Pulled     9m57s  kubelet            Successfully pulled image "nginx:1.16" in 5.385304195s (5.385392439s including waiting)
-    Normal  Created    9m57s  kubelet            Created container nginx-container
-    Normal  Started    9m57s  kubelet            Started container nginx-container
-```
-
-**Step 5:** Execute the command to complete this step.
+**Step 4:** Update the deployment image to nginx:1.18
 
 ```sh
-kubectl set image deployments/nginx-deployment nginx-container=nginx:1.18
+kubectl set image deployment/nginx-deployment nginx-container=nginx:1.18
 ```
 
-**Step 6:** Execute the command to complete this step.
+Update the container image in the deployment using the `kubectl set image` command. The syntax is `deployment/deployment-name container-name=new-image:tag`. This command modifies the deployment's pod template to use the new image version. Kubernetes immediately begins a rolling update: it creates new pods with nginx:1.18 while gradually terminating old pods with nginx:1.16. The update respects the deployment's update strategy settings (maxSurge and maxUnavailable) to ensure continuous availability. The command returns immediately, but the actual rollout continues in the background as Kubernetes orchestrates the pod replacement process.
+
+**Step 5:** Monitor the rollout progress and completion
 
 ```sh
-kubectl rollout status deployments/nginx-deployment
+kubectl rollout status deployment/nginx-deployment
 ```
+
+Monitor the rolling update progress in real-time using `kubectl rollout status`. This command tracks the deployment update and displays messages as new pods are created and old pods are terminated. The output shows progression like "Waiting for deployment spec update to be observed...", "Waiting for deployment nginx-deployment rollout to finish: 1 out of 3 new replicas have been updated...", and finally "deployment nginx-deployment successfully rolled out" when complete. The command blocks until the rollout finishes or fails, making it perfect for automation scripts. Behind the scenes, Kubernetes is creating a new ReplicaSet with the nginx:1.18 image while scaling down the old ReplicaSet, ensuring the specified number of available pods is maintained throughout.
+
+**Step 6:** Verify the update completed successfully (optional)
+
+```sh
+# Check deployment status
+kubectl get deployments
+
+# Verify all pods are running the new image
+kubectl get pods
+
+# Inspect a pod to confirm new image version
+kubectl describe pod <new-pod-name> | grep Image:
+```
+
+Verify the update was successful by checking the deployment status and pod states. The `kubectl get deployments` command should show all replicas ready and up-to-date. The `kubectl get pods` command will display new pod names (with a different ReplicaSet hash) indicating they were created from the updated pod template. Use `kubectl describe pod` and grep for the Image field to confirm the pods are running nginx:1.18. You can also check the rollout history with `kubectl rollout history deployment/nginx-deployment` to see all revision numbers and change causes, providing a complete audit trail of deployment updates.
+
+---
+
+## Key Concepts
+
+**Rolling Update Strategy:**
+- **Zero Downtime**: Updates occur without service interruption by maintaining available pods during transition
+- **Gradual Replacement**: Old pods are replaced incrementally, not all at once
+- **Automatic Management**: Kubernetes handles pod creation, health checking, and old pod termination
+- **Rollback Capability**: Failed updates can be automatically or manually rolled back to previous versions
+
+**Update Configuration Parameters:**
+- **maxUnavailable**: Maximum number or percentage of pods that can be unavailable during update (default: 25%)
+- **maxSurge**: Maximum number or percentage of pods that can be created above desired count (default: 25%)
+- **minReadySeconds**: Minimum time a pod should be ready without crashes before being considered available
+- **progressDeadlineSeconds**: Maximum time for deployment to make progress before being considered failed (default: 600s)
+
+**ReplicaSet Management:**
+- **New ReplicaSet**: Created with updated pod template, scaled up during rollout
+- **Old ReplicaSet**: Scaled down as new pods become ready, kept for rollback capability
+- **Revision History**: Controlled by `revisionHistoryLimit` (default: 10 ReplicaSets retained)
+- **Hash Suffix**: ReplicaSet names include pod template hash for uniqueness
+
+**Health Checks During Updates:**
+- **Readiness Probes**: Determine when new pods are ready to receive traffic
+- **Liveness Probes**: Detect and restart unhealthy containers during and after update
+- **Update Pausing**: Update automatically pauses if new pods fail health checks
+- **Traffic Shifting**: Service endpoints updated to route traffic only to ready pods
+
+**Rollout Commands:**
+- `kubectl set image`: Update container image in deployment
+- `kubectl rollout status`: Monitor update progress in real-time
+- `kubectl rollout history`: View deployment revision history
+- `kubectl rollout undo`: Rollback to previous revision
+- `kubectl rollout pause/resume`: Manually control update progression
+
+**Best Practices:**
+- Always configure readiness probes to ensure traffic only routes to healthy pods
+- Test updates in staging environment before production rollout
+- Monitor application metrics during updates to detect issues early
+- Use `--record` flag to annotate rollout history with change descriptions
+- Set appropriate resource limits to handle temporary pod count increase during rollout
+- Consider using progressive delivery tools (Argo Rollouts, Flagger) for advanced strategies like canary or blue-green deployments
 
 ---
 
