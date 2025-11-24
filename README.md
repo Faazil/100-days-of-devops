@@ -1,4 +1,4 @@
-# 100 Days of DevOps
+# 200 Days of DevOps
 
 **Step-by-step solutions for KodeKloud's 100 Days of DevOps challenge**
 
